@@ -1,3 +1,4 @@
+import ReturnButton from "@/components/_components/return-button";
 import SignOutButton from "@/components/auth/sign-out";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
@@ -16,7 +17,10 @@ export default async function page() {
     <div className="">
       <h1 className="font-bold text-3xl">Profile</h1>
 
-        <SignOutButton/>
+      <div className="flex items-center gap-5">
+        <SignOutButton />
+        <ReturnButton href="/" label="Home" />
+      </div>
 
       <pre className="text-sm overflow-clip">
         {JSON.stringify(session, null, 2)}

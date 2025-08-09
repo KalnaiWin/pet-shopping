@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { signUp } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
 
 export default function RegisterForm() {
   const [valueName, setValueName] = useState("");
@@ -20,6 +21,9 @@ export default function RegisterForm() {
   const [isFocusedPassword, setIsFocusedPassword] = useState(false);
 
   const [showPassword, setShowPassword] = useState(false);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   async function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault();
@@ -39,12 +43,19 @@ export default function RegisterForm() {
         password,
       },
       {
-        onRequest: () => {},
-        onResponse: () => {},
+        onRequest: () => {
+          setIsLoading(true);
+        },
+        onResponse: () => {
+          setIsLoading(false);
+        },
         onError: (ctx) => {
           toast.error(ctx.error.message);
         },
-        onSuccess: () => {},
+        onSuccess: () => {
+          toast.success("Sign in completed.")
+          router.push("/profile");
+        },
       }
     );
   }
@@ -204,7 +215,11 @@ export default function RegisterForm() {
           Login
         </Link>
       </div>
-      <Button className="w-full cursor-pointer" type="submit">
+      <Button
+        className="w-full cursor-pointer"
+        type="submit"
+        disabled={isLoading}
+      >
         Sign In
       </Button>
       <div className="relative w-full h-0.5 bg-black opacity-20 mt-5">

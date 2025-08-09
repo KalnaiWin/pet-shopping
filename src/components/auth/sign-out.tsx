@@ -14,6 +14,7 @@ export default function SignOutButton() {
             fetchOptions: {
                 onError: (ctx) => {toast.error(ctx.error.message);},
                 onSuccess: () => {
+                    toast.success("You've logged out.");
                     router.push("/auth/login");
                 }
             }

@@ -22,6 +22,8 @@ export default function LoginForm() {
 
   const [showPassword, setShowPassword] = useState(false);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   async function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault();
     const formData = new FormData(evt.target as HTMLFormElement);
@@ -37,12 +39,13 @@ export default function LoginForm() {
         password,
       },
       {
-        onRequest: () => {},
-        onResponse: () => {},
+        onRequest: () => {setIsLoading(true)},
+        onResponse: () => {setIsLoading(false)},
         onError: (ctx) => {
           toast.error(ctx.error.message);
         },
         onSuccess: () => {
+          toast.success("Login Successfully.")
           router.push("/profile")
         },
       }
@@ -172,7 +175,7 @@ export default function LoginForm() {
           Create account
         </Link>
       </div>
-      <Button className="w-full cursor-pointer" type="submit">
+      <Button className="w-full cursor-pointer" type="submit" disabled={isLoading}>
         Login In
       </Button>
       <div className="relative w-full h-0.5 bg-black opacity-20 mt-5">
