@@ -9,6 +9,7 @@ import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { signUp } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import { signUpAction } from "@/actions/auth/sign-up.action";
 
 export default function RegisterForm() {
   const [valueName, setValueName] = useState("");
@@ -27,37 +28,21 @@ export default function RegisterForm() {
 
   async function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault();
+
+    setIsLoading(true);
+
     const formData = new FormData(evt.target as HTMLFormElement);
 
-    const name = String(formData.get("name"));
-    if (!name) return toast.error("Your name is empty !");
-    const email = String(formData.get("email"));
-    if (!email) return toast.error("Your email is empty !");
-    const password = String(formData.get("password"));
-    if (!password) return toast.error("Your password is empty !");
+    const { error } = await signUpAction(formData);
 
-    await signUp.email(
-      {
-        name,
-        email,
-        password,
-      },
-      {
-        onRequest: () => {
-          setIsLoading(true);
-        },
-        onResponse: () => {
-          setIsLoading(false);
-        },
-        onError: (ctx) => {
-          toast.error(ctx.error.message);
-        },
-        onSuccess: () => {
-          toast.success("Sign in completed.")
-          router.push("/profile");
-        },
-      }
-    );
+    if (error) {
+      toast.error(error);
+      setIsLoading(false);
+    } else {
+      toast.success("Sign in completed.");
+      router.push("/auth/login");
+    }
+
   }
 
   return (

@@ -9,6 +9,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { toast } from "sonner";
 import { signIn } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import { signInAction } from "@/actions/auth/sign-in.action";
 
 export default function LoginForm() {
 
@@ -26,30 +27,20 @@ export default function LoginForm() {
 
   async function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault();
-    const formData = new FormData(evt.target as HTMLFormElement);
-
-    const email = String(formData.get("email"));
-    if (!email) return toast.error("Your email is empty !");
-    const password = String(formData.get("password"));
-    if (!password) return toast.error("Your password is empty !");
-
-    await signIn.email(
-      {
-        email,
-        password,
-      },
-      {
-        onRequest: () => {setIsLoading(true)},
-        onResponse: () => {setIsLoading(false)},
-        onError: (ctx) => {
-          toast.error(ctx.error.message);
-        },
-        onSuccess: () => {
-          toast.success("Login Successfully.")
-          router.push("/profile")
-        },
-      }
-    );
+    
+        setIsLoading(true);
+    
+        const formData = new FormData(evt.target as HTMLFormElement);
+    
+        const { error } = await signInAction(formData);
+    
+        if (error) {
+          toast.error(error);
+          setIsLoading(false);
+        } else {
+          toast.success("Login successfully.");
+          router.push("/profile");
+        }
   }
 
   return (

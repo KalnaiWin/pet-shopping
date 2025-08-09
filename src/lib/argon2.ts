@@ -12,8 +12,8 @@ export async function hashPassword(password: string) {
     return result;
 }
 
-export async function verifyPassword(data: { password: string, hash: string }) {
-    const { password, hash } = data;
-    const result = verify(password, hash, opts);
-    return result;
+export async function verifyPassword(data: { password: string; hash: string }) {
+  const { password, hash } = data;
+  const result = await verify(hash, password, opts); // be carefull 
+  return result;
 }
