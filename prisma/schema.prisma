@@ -37,12 +37,18 @@ model User {
   email         String  @unique
   image         String?
   emailVerified Boolean
+  role          Role    @default(USER)
 
   sessions Session[]
   accounts Account[]
   posts    Post[]
 
   @@map("users")
+}
+
+enum Role {
+  USER
+  ADMIN
 }
 
 model Session {

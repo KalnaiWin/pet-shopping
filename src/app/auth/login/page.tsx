@@ -4,7 +4,7 @@ import React from "react";
 
 export default function page() {
   return (
-    <div className="w-full h-screen flex justify-center items-center">
+    <div className="w-full h-screen flex justify-center items-center md:bg-none bg-[#e5adff]">
       <div className="absolute top-0 object-cover w-full h-screen hidden md:block">
         <img src="/images/auth.png" alt="Authentication" />
       </div>

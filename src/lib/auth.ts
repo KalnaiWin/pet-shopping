@@ -44,6 +44,14 @@ export const auth = betterAuth({
       }
     }),
   },
+  user: {
+    additionalFields: {
+      role: {
+        type: ["USER", "ADMIN"],
+        input: false, // dont store it in sign up.action
+      }
+    }
+  },
   session: {
     expiresIn: 30 * 24 * 60 * 60 * 12,
   },
