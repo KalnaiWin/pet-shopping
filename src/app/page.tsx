@@ -1,9 +1,11 @@
-import Image from "next/image";
+import { GetStartedButton } from "@/components/_components/get-started-button";
 
 export default function Home() {
   return (
-    <div>
-      
+    <div className="w-full h-screen flex flex-col justify-center items-center">
+      <div>
+        <GetStartedButton />
+      </div>
     </div>
   );
 }

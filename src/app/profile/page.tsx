@@ -2,6 +2,7 @@ import ReturnButton from "@/components/_components/return-button";
 import SignOutButton from "@/components/auth/sign-out";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 import React from "react";
 
 export default async function page() {
@@ -10,7 +11,7 @@ export default async function page() {
   });
 
   if (!session) {
-    return <p className="text-destructive">Unauthorized</p>;
+    redirect("/auth/login");
   }
 
   return (
