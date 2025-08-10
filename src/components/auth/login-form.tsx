@@ -7,7 +7,6 @@ import { Button } from "../ui/button";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { toast } from "sonner";
-import { signIn } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import { signInAction } from "@/actions/auth/sign-in.action";
 

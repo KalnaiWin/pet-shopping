@@ -1,6 +1,7 @@
 "use server";
 
 import { auth } from "@/lib/auth";
+import { APIError } from "better-auth/api";
 
 export async function signUpAction(formData: FormData) {
   const name = String(formData.get("name"));
@@ -20,7 +21,7 @@ export async function signUpAction(formData: FormData) {
     });
     return { error: null };
   } catch (error) {
-    if (error instanceof Error) {
+    if (error instanceof APIError) {
       return { error: "Have something went wrong while registering !" };
     } else {
       return { error: "Internal Server Error" };
