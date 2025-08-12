@@ -129,7 +129,7 @@ export default async function Page({ searchParams }: PageProps) {
                   <TableCell>
                     {user.role !== "ADMIN"
                       ? user.email
-                      : maskAfterAt(user.email)}
+                      : "***************" }
                   </TableCell>
                   <TableCell>
                     {new Date(user.createdAt).toLocaleDateString("en-US", {

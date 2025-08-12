@@ -6,7 +6,12 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function validGmail() {
-  const gmails = ["gmail.com"];
+  const gmails = [
+    "gmail.com",
+    "vhs8f78wh.com",
+    "vsudgh8w833.com",
+    "sjgnks9787.com",
+  ];
 
   if (process.env.NODE_ENV === "development") {
     gmails.push("example.com");
@@ -16,20 +21,20 @@ export function validGmail() {
 }
 
 export function normailizeName(name: string) {
-  return name       
-        .trim()
-        .replace(/\s+/g, " ") // delete space
-        .replace(/[^a-zA-Z\s;-]/g, "") // delete keys are not word
-        .replace(/\b\w/g, (char) => char.toUpperCase()); // uppercase each first letter of word
+  return name
+    .trim()
+    .replace(/\s+/g, " ") // delete space
+    .replace(/[^a-zA-Z\s;-]/g, "") // delete keys are not word
+    .replace(/\b\w/g, (char) => char.toUpperCase()); // uppercase each first letter of word
 }
 
 export function maskAfterAt(input: string) {
   const atIndex = input.indexOf("@");
-  
+
   if (atIndex === -1) return input;
-  
+
   const beforeAt = input.slice(0, atIndex + 1);
   const afterAt = input.slice(atIndex + 1).replace(/./g, "*");
-  
+
   return beforeAt + afterAt;
 }

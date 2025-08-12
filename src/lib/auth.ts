@@ -5,6 +5,8 @@ import { hashPassword, verifyPassword } from "./argon2";
 import { nextCookies } from "better-auth/next-js";
 import { createAuthMiddleware, APIError } from "better-auth/api";
 import { normailizeName, validGmail } from "./utils";
+import { Role } from "@/generated/prisma";
+import { admin } from "better-auth/plugins/admin";
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
@@ -44,13 +46,30 @@ export const auth = betterAuth({
       }
     }),
   },
+  databaseHooks: {
+    user: {
+      create: {
+        before: async (user) => {
+          const adminEmails =
+            process.env.ADMIN_EMAILS?.split(";").map((email) =>
+              email.toLowerCase()
+            ) ?? []; // Convert admin emails to lowercase too
+
+          if (adminEmails.includes(user.email.toLowerCase())) {
+            return { data: { ...user, role: Role.ADMIN } };
+          }
+          return { data: user };
+        },
+      },
+    },
+  },
   user: {
     additionalFields: {
       role: {
-        type: ["USER", "ADMIN"],
+        type: ["USER", "ADMIN"] as Array<Role>,
         input: false, // dont store it in sign up.action
-      }
-    }
+      },
+    },
   },
   session: {
     expiresIn: 30 * 24 * 60 * 60 * 12,
@@ -60,5 +79,11 @@ export const auth = betterAuth({
       generateId: false,
     },
   },
-  plugins: [nextCookies()], // store info from sign-in support for login
+  plugins: [
+    nextCookies(),
+    // admin({
+    //   defaultRole: Role.USER,
+    //   adminRoles: [Role.ADMIN],
+    // }),
+  ], // store info from sign-in support for login
 });
