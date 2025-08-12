@@ -22,7 +22,7 @@ export function Pagination({ currentPage, totalPages }: PaginationProps) {
       <button
         onClick={() => changePage(currentPage - 1)}
         disabled={currentPage <= 1}
-        className="px-3 py-1 border rounded disabled:opacity-50"
+        className="px-3 py-1 border rounded disabled:opacity-50 bg-blue-500 text-white cursor-pointer"
       >
         Prev
       </button>
@@ -34,7 +34,7 @@ export function Pagination({ currentPage, totalPages }: PaginationProps) {
       <button
         onClick={() => changePage(currentPage + 1)}
         disabled={currentPage >= totalPages}
-        className="px-3 py-1 border rounded disabled:opacity-50"
+        className="px-3 py-1 border rounded disabled:opacity-50 bg-blue-500 text-white cursor-pointer"
       >
         Next
       </button>

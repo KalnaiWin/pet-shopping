@@ -16,6 +16,9 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { Pagination } from "@/components/_components/pagination";
+import DeleteAccountButton, {
+  AdminAccount,
+} from "@/components/admin/account/delete-account-button";
 
 interface PageProps {
   searchParams?: {
@@ -146,15 +149,12 @@ export default async function Page({ searchParams }: PageProps) {
                       {user.role}
                     </div>
                   </TableCell>
-                  <TableCell>
-                    <div className="bg-red-500 hover:bg-red-400 w-fit p-2 rounded-xl cursor-pointer">
-                      <Image
-                        src={"/assets/trash.png"}
-                        alt="Trash"
-                        width={30}
-                        height={30}
-                      />
-                    </div>
+                  <TableCell className="pl-6">
+                    {user.role !== "USER" ? (
+                      <AdminAccount />
+                    ) : (
+                      <DeleteAccountButton userId={user.id} />
+                    )}
                   </TableCell>
                 </TableRow>
               ))}
