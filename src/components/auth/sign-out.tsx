@@ -22,6 +22,6 @@ export default function SignOutButton() {
     }
 
   return (
-    <Button onClick={handleClick} size={"sm"} variant={"destructive"}>Sign Out</Button>
+    <Button onClick={handleClick} size={"sm"} className="w-full cursor-pointer" variant={"destructive"}>Sign Out</Button>
   )
 }
