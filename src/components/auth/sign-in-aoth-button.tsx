@@ -43,7 +43,7 @@ export default function SignInOathButton({
   }
 
   const action = signUp ? "Up" : "In";
-  const providerName = provider ? "Google" : "Github";
+  const providerName = provider === "google" ? "Google" : "Github";
 
   return (
     <Button onClick={handleClick} disabled={isLoading} className="">
