@@ -7,12 +7,21 @@ import { createAuthMiddleware, APIError } from "better-auth/api";
 import { normailizeName, validGmail } from "./utils";
 import { Role } from "@/generated/prisma";
 import { admin } from "better-auth/plugins/admin";
-import { ac, roles } from "@/lib/permission"
+import { ac, roles } from "@/lib/permission";
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
     provider: "postgresql",
   }),
+  socialProviders: {
+    google: {
+      clientId: process.env.GOOLE_CLIENT_ID as string,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET_KEY as string,
+    },
+    // github: {
+
+    // }
+  },
   emailAndPassword: {
     enabled: true,
     minPasswordLength: 6,

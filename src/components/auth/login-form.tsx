@@ -9,6 +9,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { signInAction } from "@/actions/auth/sign-in.action";
+import SignInOathButton from "./sign-in-aoth-button";
 
 export default function LoginForm() {
 
@@ -168,10 +169,13 @@ export default function LoginForm() {
       <Button className="w-full cursor-pointer" type="submit" disabled={isLoading}>
         Login In
       </Button>
-      <div className="relative w-full h-0.5 bg-black opacity-20 mt-5">
+      <div className="relative w-full h-[2px] bg-black opacity-20 my-3">
         <p className="absolute -top-3 left-40 bg-white px-2">Or</p>
       </div>
-      <div></div>
+      <div className="flex flex-col gap-3 w-full">
+        <SignInOathButton provider="google" signUp={false} />
+        <SignInOathButton provider="github" signUp={false} />
+      </div>
     </form>
   );
 }

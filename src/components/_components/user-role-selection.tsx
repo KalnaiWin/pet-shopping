@@ -59,6 +59,7 @@ export default function UserRoleSelection({
     <select
       onChange={handleChange}
       value={role}
+      // cant change yourself or any admin if they are older than you
       disabled={
         userDate.getTime() > adminDate.getTime() || isLoading || userId === self
       }

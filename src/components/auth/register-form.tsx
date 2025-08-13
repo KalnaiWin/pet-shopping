@@ -10,6 +10,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { signUp } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import { signUpAction } from "@/actions/auth/sign-up.action";
+import SignInOathButton from "./sign-in-aoth-button";
 
 export default function RegisterForm() {
   const [valueName, setValueName] = useState("");
@@ -42,7 +43,6 @@ export default function RegisterForm() {
       toast.success("Sign in completed.");
       router.push("/auth/login");
     }
-
   }
 
   return (
@@ -207,10 +207,13 @@ export default function RegisterForm() {
       >
         Sign In
       </Button>
-      <div className="relative w-full h-0.5 bg-black opacity-20 mt-5">
+      <div className="relative w-full h-[2px] bg-black opacity-20 my-3">
         <p className="absolute -top-3 left-40 bg-white px-2">Or</p>
       </div>
-      <div></div>
+      <div className="flex flex-col gap-3 w-full">
+        <SignInOathButton provider="google" signUp />
+        <SignInOathButton provider="github" signUp />
+      </div>
     </form>
   );
 }
