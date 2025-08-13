@@ -8,6 +8,7 @@ import { normailizeName, validGmail } from "./utils";
 import { Role } from "@/generated/prisma";
 import { admin } from "better-auth/plugins/admin";
 import { ac, roles } from "@/lib/permission";
+import { SendEmailAction } from "@/actions/auth/send-email.action";
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
@@ -21,7 +22,7 @@ export const auth = betterAuth({
     github: {
       clientId: process.env.GITHUB_CLIENT_ID as string,
       clientSecret: process.env.GITHUB_CLIENT_SECRET_KEY as string,
-    }
+    },
   },
   emailAndPassword: {
     enabled: true,
@@ -30,6 +31,25 @@ export const auth = betterAuth({
     password: {
       hash: hashPassword,
       verify: verifyPassword,
+    },
+    requireEmailVerification: true,
+  },
+  emailVerification: {
+    sendOnSignUp: true,
+    expiresIn: 60 * 60, // 1 hour
+    autoSignInAfterVerification: true,
+    sendVerificationEmail: async ({ user, url }) => {
+      const link = new URL(url);
+      link.searchParams.set("callbackURL", "/auth/verify");
+
+      await SendEmailAction({
+        to: user.email,
+        subject: "Verify Your Email Address",
+        meta: {
+          description: "Please verify your email to allow logging in",
+          link: String(link),
+        },
+      });
     },
   },
   hooks: {
@@ -85,10 +105,11 @@ export const auth = betterAuth({
   session: {
     expiresIn: 30 * 24 * 60 * 60 * 12,
   },
-  account: { // not allow user sign in many ways just one way
+  account: {
+    // not allow user sign in many ways just one way
     accountLinking: {
       enabled: false,
-    }
+    },
   },
   advanced: {
     database: {

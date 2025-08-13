@@ -40,8 +40,8 @@ export default function RegisterForm() {
       toast.error(error);
       setIsLoading(false);
     } else {
-      toast.success("Sign in completed.");
-      router.push("/auth/login");
+      toast.success("Sign in completed. Verify your email to log in");
+      router.push("/auth/register/success");
     }
   }
 
