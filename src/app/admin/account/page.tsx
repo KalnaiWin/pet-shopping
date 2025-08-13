@@ -19,6 +19,7 @@ import { Pagination } from "@/components/_components/pagination";
 import DeleteAccountButton, {
   AdminAccount,
 } from "@/components/admin/account/delete-account-button";
+import UserRoleSelection from "@/components/_components/user-role-selection";
 
 interface PageProps {
   searchParams?: {
@@ -62,7 +63,8 @@ export default async function Page({ searchParams }: PageProps) {
       }
     : {};
 
-  const currentPage = parseInt(searchParams?.page || "1", 10);
+  const currentPage = parseInt(searchParams?.page || "1", 10); // parseInt(..., 10) converts that string to an integer.
+
   const pageSize = 10;
 
   const totalCount = await prisma.user.count({
@@ -75,7 +77,7 @@ export default async function Page({ searchParams }: PageProps) {
     where: whereClause,
     orderBy,
     skip: (currentPage - 1) * pageSize,
-    take: pageSize,
+    take: pageSize, // it will take the 10 user of a page
   });
 
   const totalPages = Math.ceil(totalCount / pageSize);
@@ -129,7 +131,7 @@ export default async function Page({ searchParams }: PageProps) {
                   <TableCell>
                     {user.role !== "ADMIN"
                       ? user.email
-                      : "***************" }
+                      : <p className="text-bold opacity-40 text-red-600 cursor-not-allowed">HIDDEN</p> }
                   </TableCell>
                   <TableCell>
                     {new Date(user.createdAt).toLocaleDateString("en-US", {
@@ -142,11 +144,11 @@ export default async function Page({ searchParams }: PageProps) {
                     <div
                       className={`${
                         user.role === "ADMIN"
-                          ? "bg-red-300 text-red-800"
+                          ? "bg-blue-300 text-blue-800"
                           : "bg-green-300 text-green-800"
-                      } rounded-2xl w-fit p-2 font-bold`}
+                      } rounded-md w-fit p-1 font-bold`}
                     >
-                      {user.role}
+                      <UserRoleSelection userId={user.id} role={user.role} userDate={user.createdAt} adminDate={session.user.createdAt} self={session.user.id}/>
                     </div>
                   </TableCell>
                   <TableCell className="pl-6">

@@ -7,6 +7,7 @@ import { createAuthMiddleware, APIError } from "better-auth/api";
 import { normailizeName, validGmail } from "./utils";
 import { Role } from "@/generated/prisma";
 import { admin } from "better-auth/plugins/admin";
+import { ac, roles } from "@/lib/permission"
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
@@ -81,9 +82,11 @@ export const auth = betterAuth({
   },
   plugins: [
     nextCookies(),
-    // admin({
-    //   defaultRole: Role.USER,
-    //   adminRoles: [Role.ADMIN],
-    // }),
+    admin({
+      defaultRole: Role.USER,
+      adminRoles: [Role.ADMIN],
+      ac,
+      roles,
+    }),
   ], // store info from sign-in support for login
 });

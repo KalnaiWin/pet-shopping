@@ -34,10 +34,13 @@ model User {
   updatedAt DateTime
 
   name          String
-  email         String  @unique
+  email         String    @unique
   image         String?
   emailVerified Boolean
-  role          Role    @default(USER)
+  role          Role      @default(USER)
+  banned        Boolean?
+  banReason     String?
+  banExpires    DateTime?
 
   sessions Session[]
   accounts Account[]
@@ -59,10 +62,12 @@ model Session {
   expiresAt DateTime
   token     String   @unique
 
-  ipAddress String?
-  userAgent String?
-  userId    String
-  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  ipAddress      String?
+  userAgent      String?
+  impersonatedBy String?
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("sessions")
 }
