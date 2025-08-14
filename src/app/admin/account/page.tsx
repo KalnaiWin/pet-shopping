@@ -118,10 +118,16 @@ export default async function Page({ searchParams }: PageProps) {
                     <p>{user.id.slice(0, 8)}</p>
                   </TableCell>
                   <TableCell className="flex items-center gap-2 mt-2">
-                    <Image
+                    {/* <img
                       src={
                         user.image?.trim() ? user.image : "/assets/default.png"
                       }
+                      alt="User Logo"
+                      width={30}
+                      height={30}
+                    /> */}
+                    <img
+                      src={"/assets/default.png"}
                       alt="User Logo"
                       width={30}
                       height={30}
@@ -129,9 +135,13 @@ export default async function Page({ searchParams }: PageProps) {
                     <p>{user.name}</p>
                   </TableCell>
                   <TableCell>
-                    {user.role !== "ADMIN"
-                      ? user.email
-                      : <p className="text-bold opacity-40 text-red-600 cursor-not-allowed">HIDDEN</p> }
+                    {user.role !== "ADMIN" ? (
+                      user.email
+                    ) : (
+                      <p className="text-bold opacity-40 text-red-600 cursor-not-allowed">
+                        HIDDEN
+                      </p>
+                    )}
                   </TableCell>
                   <TableCell>
                     {new Date(user.createdAt).toLocaleDateString("en-US", {
@@ -148,7 +158,13 @@ export default async function Page({ searchParams }: PageProps) {
                           : "bg-green-300 text-green-800"
                       } rounded-md w-fit p-1 font-bold`}
                     >
-                      <UserRoleSelection userId={user.id} role={user.role} userDate={user.createdAt} adminDate={session.user.createdAt} self={session.user.id}/>
+                      <UserRoleSelection
+                        userId={user.id}
+                        role={user.role}
+                        userDate={user.createdAt}
+                        adminDate={session.user.createdAt}
+                        self={session.user.id}
+                      />
                     </div>
                   </TableCell>
                   <TableCell className="pl-6">

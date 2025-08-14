@@ -101,11 +101,10 @@ export default function LoginForm() {
       </div>
       <div className="w-full relative mt-10">
         <div className="flex items-center gap-2 absolute right-0 -top-6">
-          <p className="font-light italic text-sm">Forget your password ?</p>
+          <Label htmlFor="forgetpassword" className="font-light italic text-sm">Forget your password ?</Label>
           <Link
             href={"/auth/forget-password"}
-            className="text-sm hover:underline text-[#FF00F2]"
-          >
+            className="text-sm hover:underline text-[#FF00F2]" >
             Click here
           </Link>
         </div>
