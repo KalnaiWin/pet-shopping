@@ -114,6 +114,10 @@ export const auth = betterAuth({
   },
   session: {
     expiresIn: 30 * 24 * 60 * 60 * 12,
+    cookieCache: {
+      enabled: true,
+      maxAge: 5 * 60,
+    },
   },
   account: {
     // not allow user sign in many ways just one way

@@ -10,9 +10,10 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { signInAction } from "@/actions/auth/sign-in.action";
 import SignInOathButton from "./sign-in-aoth-button";
+import { useSession } from "@/lib/auth-client";
 
 export default function LoginForm() {
-
+  const { data: session, refetch } = useSession();
   const router = useRouter();
 
   const [valueEmail, setValueEmail] = useState("");
@@ -27,20 +28,22 @@ export default function LoginForm() {
 
   async function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault();
-    
-        setIsLoading(true);
-    
-        const formData = new FormData(evt.target as HTMLFormElement);
-    
-        const { error } = await signInAction(formData);
-    
-        if (error) {
-          toast.error(error);
-          setIsLoading(false);
-        } else {
-          toast.success("Login successfully.");
-          router.push("/profile");
-        }
+
+    setIsLoading(true);
+
+    const formData = new FormData(evt.target as HTMLFormElement);
+
+    const { error } = await signInAction(formData);
+
+    if (error) {
+      toast.error(error);
+      setIsLoading(false);
+    } else {
+      toast.success("Login successfully.");
+      setIsLoading(false);
+      await refetch();
+      router.push("/");
+    }
   }
 
   return (
@@ -101,10 +104,13 @@ export default function LoginForm() {
       </div>
       <div className="w-full relative mt-10">
         <div className="flex items-center gap-2 absolute right-0 -top-6">
-          <Label htmlFor="forgetpassword" className="font-light italic text-sm">Forget your password ?</Label>
+          <Label htmlFor="forgetpassword" className="font-light italic text-sm">
+            Forget your password ?
+          </Label>
           <Link
             href={"/auth/forget-password"}
-            className="text-sm hover:underline text-[#FF00F2]" >
+            className="text-sm hover:underline text-[#FF00F2]"
+          >
             Click here
           </Link>
         </div>
@@ -165,7 +171,11 @@ export default function LoginForm() {
           Create account
         </Link>
       </div>
-      <Button className="w-full cursor-pointer" type="submit" disabled={isLoading}>
+      <Button
+        className="w-full cursor-pointer"
+        type="submit"
+        disabled={isLoading}
+      >
         Login In
       </Button>
       <div className="relative w-full h-[2px] bg-black opacity-20 my-3">

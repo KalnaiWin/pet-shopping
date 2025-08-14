@@ -1,11 +1,9 @@
-import { GetStartedButton } from "@/components/_components/get-started-button";
+import HomePage from "@/components/home/home-page";
 
 export default function Home() {
   return (
-    <div className="w-full h-screen flex flex-col justify-center items-center">
-      <div>
-        <GetStartedButton />
-      </div>
+    <div className="w-full h-screen">
+      <HomePage/>
     </div>
   );
 }

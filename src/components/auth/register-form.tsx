@@ -7,7 +7,6 @@ import { Button } from "../ui/button";
 import { toast } from "sonner";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
-import { signUp } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import { signUpAction } from "@/actions/auth/sign-up.action";
 import SignInOathButton from "./sign-in-aoth-button";

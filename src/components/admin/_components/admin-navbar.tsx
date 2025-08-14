@@ -50,10 +50,10 @@ export default function AdminNavbar({
   return (
     <div className="w-full flex flex-col items-start justify-between h-full">
       <div>
-        <div className="flex items-center gap-2">
+        <Link href={"/"} className="flex items-center gap-2">
           <img src="/images/logo.png" alt="Logo" />
           <p className="text-3xl font-bold">Tiddy Pet</p>
-        </div>
+        </Link>
         <div className="mt-10 space-y-2 w-full">
           {NavBarItems.map((item, idx) => (
             <Link
