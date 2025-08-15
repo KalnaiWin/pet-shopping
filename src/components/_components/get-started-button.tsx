@@ -15,14 +15,18 @@ export const GetStartedButton = () => {
     );
   }
 
-  const href = session ? "/profile" : "/auth/login";
+  const href = session ? "/product" : "/auth/login";
+
+  const action = href === "/product" ? "Shopping Now" : "Get Started";
 
   return (
-    <div className="flex flex-col justify-center items-center">
-      <Button size={"lg"} asChild>
-        <Link href={href}>Get Started</Link>
+    <div className="flex flex-col items-start gap-5 w-full">
+      <Button size={"lg"} className="bg-[#FF7FBF]" asChild>
+        <Link href={href}>{action}</Link>
       </Button>
-      {session && <p>It's nice to see you back, {session.user.name}! 👋</p>}
+      { 
+        session && <div className="font-semibold">It's nice to see you back, <span className={`${session.user.role === "ADMIN" ? "text-blue-500" : "text-green-500"}`}>{session.user.name}</span> ! 👋</div>
+      }
     </div>
   );
 };
