@@ -46,3 +46,7 @@ export const getInitials = (name: string) => {
     .join("")
     .toUpperCase();
 };
+
+export const slug = (label: string) => {
+  return label.toLocaleLowerCase().replace(/\s+/g, "-");
+};

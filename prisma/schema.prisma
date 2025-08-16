@@ -104,3 +104,59 @@ model Verification {
 
   @@map("verifications")
 }
+
+model Products {
+  id          String         @id @default(uuid())
+  name        String
+  detail      String
+  description String
+  price       Int
+  delivery    Json // store array of timestamps
+  images      String[]
+  discount    Int
+  category    Category
+  brand       Brands
+  stock       ProductStock[] // Relation to stock records
+  createdAt   DateTime?
+  updatedAt   DateTime?
+
+  @@map("products")
+}
+
+model ProductStock {
+  id        String   @id @default(uuid())
+  quantity  Int
+  productId String
+  product   Products @relation(fields: [productId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+enum Brands {
+  Moochie
+  Vemedim
+  AllCare
+  Meowcat
+  Orgo
+  CATCHY
+  BioPharmachemie
+  Ecopets
+  Ganador
+  DrKyan
+  Minino
+  Wanpy
+  Hanvet
+  MODERNPETGEL
+  oliveessence
+}
+
+enum Category {
+  PATE
+  Seed
+  ToiletSand
+  Vitamin
+  Toys
+  Milk
+  HygieneBeauty
+  Other
+  Discount
+}

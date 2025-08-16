@@ -8,33 +8,24 @@ import { Button } from "../ui/button";
 
 export default function NavBar() {
   const pathname = usePathname();
-
-  const allowed = pathname === "/" || pathname.startsWith("/blog") || pathname.startsWith("/product") || pathname.startsWith("/contact");
-
-  if (!allowed) return null;
-
   const { data: session, isPending } = useSession();
   const router = useRouter();
+
+  const allowed =
+    pathname === "/" ||
+    pathname.startsWith("/blog") ||
+    pathname.startsWith("/product") ||
+    pathname.startsWith("/contact");
+
+  if (!allowed) return null;
 
   const isAdmin = session?.user.role === "ADMIN";
 
   const navBarItems = [
-    {
-      href: "/",
-      label: "Home",
-    },
-    {
-      href: "/blog",
-      label: "Blog",
-    },
-    {
-      href: "/product",
-      label: "Product",
-    },
-    {
-      href: "/contact",
-      label: "Contact",
-    },
+    { href: "/", label: "Home" },
+    { href: "/blog", label: "Blog" },
+    { href: "/product", label: "Product" },
+    { href: "/contact", label: "Contact" },
   ];
 
   return (
@@ -58,18 +49,14 @@ export default function NavBar() {
           ))}
         </div>
         <div className="flex items-center gap-5">
-          <div>
-            {isAdmin ? (
-              <Link
-                href={"/admin/dashboard"}
-                className="p-2 bg-black text-white rounded-sm font-semibold text-sm"
-              >
-                Admin Dashboard
-              </Link>
-            ) : (
-              ""
-            )}
-          </div>
+          {isAdmin && (
+            <Link
+              href={"/admin/dashboard"}
+              className="p-2 bg-black text-white rounded-sm font-semibold text-sm"
+            >
+              Admin Dashboard
+            </Link>
+          )}
           <div>
             {isPending ? null : session?.user ? (
               <UserMenu user={session.user} />

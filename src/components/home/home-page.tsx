@@ -10,7 +10,7 @@ export default function HomePage() {
           <div className="absolute top-5 left-0 w-[200px] h-[100px] rounded-br-[400px] rounded-tr-[80px] blur-[150px] bg-[#FBE6FF]"></div>
           <img
             src="/images/home.png"
-            alt=""
+            alt="HomePage"
             width={1400}
             height={900}
             className="object-cover"

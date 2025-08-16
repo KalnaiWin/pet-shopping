@@ -61,7 +61,7 @@ export default function UserRoleSelection({
       value={role}
       // cant change yourself or any admin if they are older than you
       disabled={
-        userDate.getTime() > adminDate.getTime() || isLoading || userId === self
+        (userDate.getTime() < adminDate.getTime() && role === "ADMIN") || isLoading || userId === self
       }
       className="text-md font-semibold disabled:cursor-not-allowed disabled:opacity-50"
     >
