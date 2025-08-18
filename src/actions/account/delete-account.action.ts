@@ -6,7 +6,6 @@ import { revalidatePath } from "next/cache";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-import { use } from "react";
 
 export async function DeleteAccountAction({ userId }: { userId: string }) {
   const session = await auth.api.getSession({

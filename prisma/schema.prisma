@@ -105,31 +105,34 @@ model Verification {
   @@map("verifications")
 }
 
+model Banner {
+  id          String @id @default(uuid())
+  title       String
+  imageString String
+
+  createdAt DateTime @default(now())
+}
+
 model Products {
   id          String         @id @default(uuid())
   name        String
-  detail      String
   description String
-  price       Int
+  price       BigInt
   delivery    Json // store array of timestamps
   images      String[]
-  discount    Int
+  discount    BigInt
   category    Category
   brand       Brands
-  stock       ProductStock[] // Relation to stock records
-  createdAt   DateTime?
-  updatedAt   DateTime?
+  stock       BigInt
+  origin      String
+  expired     String
+  status      Boolean
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("products")
 }
 
-model ProductStock {
-  id        String   @id @default(uuid())
-  quantity  Int
-  productId String
-  product   Products @relation(fields: [productId], references: [id])
-  createdAt DateTime @default(now())
-}
 
 enum Brands {
   Moochie

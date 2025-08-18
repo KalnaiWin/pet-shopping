@@ -1,12 +1,44 @@
+import DeleteProduct from "@/components/admin/product/delete-product";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { auth } from "@/lib/auth";
-import { MoreHorizontalIcon, PlusCircleIcon, UserIcon } from "lucide-react";
+import { prisma } from "@/lib/prisma";
+import { MoreHorizontalIcon, PlusCircleIcon } from "lucide-react";
 import { headers } from "next/headers";
+import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+
+async function getData() {
+  const data = await prisma.products.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+  return data;
+}
 
 export default async function page() {
   const session = await auth.api.getSession({
@@ -16,14 +48,15 @@ export default async function page() {
   if (!session?.user) redirect("/auth/login");
 
   if (session.user.role !== "ADMIN") redirect("/");
-  
+
+  const data = await getData();
 
   return (
     <>
       <div className="flex items-center justify-end">
         <Button className="flex items-center gap-x-2" asChild>
           <Link href={"/admin/product/create"}>
-            <PlusCircleIcon/>
+            <PlusCircleIcon />
             <span>Add Products</span>
           </Link>
         </Button>
@@ -31,7 +64,9 @@ export default async function page() {
       <Card className="mt-5">
         <CardHeader>
           <CardTitle>Manage Products</CardTitle>
-          <CardDescription>Manage all products, view, create and deit any time you want.</CardDescription>
+          <CardDescription>
+            Manage all products, view, create and deit any time you want.
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <Table>
@@ -46,34 +81,54 @@ export default async function page() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              <TableRow>
-                <TableCell>
-                  <UserIcon className="h-12 w-12"/>
-                </TableCell>
-                <TableCell>PATE</TableCell>
-                <TableCell>18.000 VND</TableCell>
-                <TableCell>Available</TableCell>
-                <TableCell>Aug, 16 2025</TableCell>
-                <TableCell className="text-end">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button size={"icon"} variant={"ghost"}>
-                        <MoreHorizontalIcon className="h-4 w-4"/>
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                      <DropdownMenuLabel>Action</DropdownMenuLabel>
-                      <DropdownMenuSeparator/>
-                      <DropdownMenuItem>Edit</DropdownMenuItem>
-                      <DropdownMenuItem>Delete</DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </TableCell>
-              </TableRow>
+              {data.map((item) => (
+                <TableRow key={item.id}>
+                  <TableCell>
+                    <Image
+                      src={item.images[0]}
+                      width={64}
+                      height={64}
+                      alt="Image Products"
+                      className="rounded-md object-cover h-16 w-16"
+                    />
+                  </TableCell>
+                  <TableCell className="font-semibold">{item.name}</TableCell>
+                  <TableCell>{item.price.toLocaleString()} VND</TableCell>
+                  <TableCell className="font-medium">
+                    {item.status ? (
+                      <p className="text-blue-500">Available ( {item.stock} ) </p>
+                    ) : (
+                      <p className="text-red-500">Out of Stock</p>
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    {new Intl.DateTimeFormat("en-US").format(item.createdAt)}
+                  </TableCell>
+                  <TableCell className="text-end">
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button size={"icon"} variant={"ghost"}>
+                          <MoreHorizontalIcon className="h-4 w-4" />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent>
+                        <DropdownMenuLabel>Action</DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem asChild>
+                          <Link href={`/admin/product/${item.id}`}>Edit</Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem asChild>
+                          <DeleteProduct productId={item.id} />
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </TableCell>
+                </TableRow>
+              ))}
             </TableBody>
           </Table>
         </CardContent>
       </Card>
     </>
-  )
+  );
 }

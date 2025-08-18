@@ -29,20 +29,58 @@ import { Switch } from "@/components/ui/switch";
 import Image from "next/image";
 import { XIcon } from "lucide-react";
 import SubmitButton from "@/components/_components/submit-button";
-import { CreateProductAction } from "@/actions/product/action";
+import { EditProductAction } from "@/actions/product/action";
 
-{
-  /* npm install uploadthing @uploadthing/react */
+type Category =
+  | "PATE"
+  | "Seed"
+  | "ToiletSand"
+  | "Vitamin"
+  | "Toys"
+  | "Milk"
+  | "HygieneBeauty"
+  | "Other"
+  | "Discount";
+
+type Brand =
+  | "Moochie"
+  | "Vemedim"
+  | "AllCare"
+  | "Meowcat"
+  | "Orgo"
+  | "CATCHY"
+  | "BioPharmachemie"
+  | "Ecopets"
+  | "Ganador"
+  | "DrKyan"
+  | "Minino"
+  | "Wanpy"
+  | "Hanvet"
+  | "MODERNPETGEL"
+  | "oliveessence";
+
+interface iAppProps {
+  data: {
+    id: string;
+    name: string;
+    description: string;
+    price: number;
+    discount: number;
+    status: boolean;
+    images: string[];
+    delivery: string[];
+    stock: number;
+    category: Category;
+    brand: Brand;
+    origin: string;
+    expired: string;
+  };
 }
 
-{
-  /* if got error here check the next.config.ts and npm install effect@3.16.8 */
-}
+export default function EditForm({ data }: iAppProps) {
+  const [images, setImages] = useState<string[]>(data.images);
 
-export default function page() {
-  const [images, setImages] = useState<string[]>([]);
-
-  const [lastResult, action] = useActionState(CreateProductAction, undefined);
+  const [lastResult, action] = useActionState(EditProductAction, undefined);
   const [form, fields] = useForm({
     lastResult,
     onValidate({ formData }) {
@@ -63,16 +101,15 @@ export default function page() {
       onSubmit={form.onSubmit}
       action={action}
     >
+      <Input type="hidden" name="productId" value={data.id} />
       <div className="flex items-center justify-between">
-        <ReturnButton href={"/admin/product"} label="Manage Products" />
-        <h1 className="text-2xl font-bold">Create a new product</h1>
+        <ReturnButton href={"/admin/product"} label="Edit Products" />
+        <h1 className="text-2xl font-bold">Edit product</h1>
       </div>
       <Card className="mt-5 rounded-sm">
         <CardHeader>
           <CardTitle>Products Title</CardTitle>
-          <CardDescription>
-            Add a new product that you want to the market.
-          </CardDescription>
+          <CardDescription>Edit products following your ideas.</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="flex flex-col gap-6">
@@ -81,7 +118,7 @@ export default function page() {
               <Input
                 type="text"
                 key={fields.name.key}
-                defaultValue={fields.name.initialValue}
+                defaultValue={data.name}
                 name="name"
                 className="w-full"
                 placeholder="Product Name"
@@ -92,7 +129,7 @@ export default function page() {
               <Label>Description</Label>
               <Textarea
                 key={fields.description.key}
-                defaultValue={fields.description.initialValue}
+                defaultValue={data.description}
                 name="description"
                 className="w-full"
                 placeholder="Product Description . . ."
@@ -104,7 +141,7 @@ export default function page() {
                 <Label>Price</Label>
                 <Input
                   key={fields.price.key}
-                  defaultValue={fields.price.initialValue}
+                  defaultValue={data.price}
                   name="price"
                   type="number"
                   placeholder="1,000 VND"
@@ -115,7 +152,7 @@ export default function page() {
                 <Label>Discount</Label>
                 <Input
                   key={fields.discount.key}
-                  defaultValue={fields.discount.initialValue}
+                  defaultValue={data.discount}
                   name="discount"
                   type="number"
                   placeholder="10 % "
@@ -128,7 +165,7 @@ export default function page() {
               <Label>Stock Quantity</Label>
               <Input
                 key={fields.stock?.key}
-                defaultValue={fields.stock?.initialValue}
+                defaultValue={data.stock}
                 name="stock"
                 type="number"
                 placeholder="Enter stock quantity"
@@ -141,7 +178,7 @@ export default function page() {
               <Switch
                 key={fields.status.key}
                 name="status"
-                defaultChecked={fields.status.initialValue === "true"}
+                defaultChecked={data.status}
               />
               <p className="text-red-500">{fields.status.errors}</p>
             </div>
@@ -150,7 +187,7 @@ export default function page() {
                 <Label>Delivery Time</Label>
                 <Input
                   key={fields.delivery.key}
-                  defaultValue={fields.delivery.defaultValue ?? ""}
+                  defaultValue={data.delivery}
                   name="delivery"
                   placeholder="From ... To ..."
                 />
@@ -160,7 +197,7 @@ export default function page() {
                 <Label>Origin</Label>
                 <Input
                   key={fields.origin.key}
-                  defaultValue={fields.origin.initialValue}
+                  defaultValue={data.origin}
                   name="origin"
                   placeholder="Where . . ."
                 />
@@ -170,7 +207,7 @@ export default function page() {
                 <Label>Expire</Label>
                 <Input
                   key={fields.expired.key}
-                  defaultValue={fields.expired.initialValue}
+                  defaultValue={data.expired}
                   name="expired"
                   placeholder="Time expired"
                 />
@@ -184,7 +221,7 @@ export default function page() {
                 <Select
                   key={fields.brand.key}
                   name="brand"
-                  defaultValue={fields.brand.initialValue}
+                  defaultValue={data.brand}
                 >
                   <SelectTrigger>
                     <SelectValue placeholder="Select brand" />
@@ -217,7 +254,7 @@ export default function page() {
                 <Select
                   key={fields.category.key}
                   name="category"
-                  defaultValue={fields.category.initialValue}
+                  defaultValue={data.category}
                 >
                   <SelectTrigger>
                     <SelectValue placeholder="Select category" />
@@ -247,7 +284,7 @@ export default function page() {
                 value={JSON.stringify(images)}
                 key={fields.images.key}
                 name="images"
-                defaultValue={fields.images.initialValue as any}
+                // defaultValue={fields.images.initialValue as any}
               />
               {images.length > 0 ? (
                 <div className="flex gap-5">
@@ -292,7 +329,7 @@ export default function page() {
           </div>
         </CardContent>
         <CardFooter>
-          <SubmitButton text="Create Product" />
+          <SubmitButton text="Update Product" />
         </CardFooter>
       </Card>
     </form>
