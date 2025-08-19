@@ -20,6 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { CATEGORIES } from "@/lib/types/define";
 import { bannerSchema } from "@/lib/zodSchema";
 import { UploadDropzone } from "@/utils/uploadthing";
 import { useForm } from "@conform-to/react";
@@ -28,7 +29,6 @@ import Image from "next/image";
 import React, { useActionState, useState } from "react";
 
 export default function page() {
-  
   const [image, setImage] = useState<string | undefined>(undefined);
   const [lastResult, action] = useActionState(CreateBannerAction, undefined);
   const [form, fields] = useForm({
@@ -66,17 +66,11 @@ export default function page() {
                   <SelectValue placeholder="Select title category banner" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="ProductsForCat">Products For Cat</SelectItem>
-                  <SelectItem value="Insects">Insects</SelectItem>
-                  <SelectItem value="Mushroom">Mushroom</SelectItem>
-                  <SelectItem value="VitaminNutrition">VitaminNutrition</SelectItem>
-                  <SelectItem value="Toys">Toys</SelectItem>
-                  <SelectItem value="Milk">Milk</SelectItem>
-                  <SelectItem value="HygieneBeauty">
-                    Hygiene & Beauty
-                  </SelectItem>
-                  <SelectItem value="Other">Other</SelectItem>
-                  <SelectItem value="Discount">Discount</SelectItem>
+                  {CATEGORIES.map((c) => (
+                    <SelectItem key={c.value} value={c.value}>
+                      {c.label}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
               <p className="text-red-500">{fields.title.errors}</p>

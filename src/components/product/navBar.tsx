@@ -1,42 +1,12 @@
 "use client";
 
+import { CATEGORIES } from "@/lib/types/define";
 import { slug } from "@/lib/utils";
 import { Menu } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const navBarItems = [
-  {
-    label: "All Products",
-  },
-  {
-    label: "Products for cat",
-  },
-  {
-    label: "Insects",
-  },
-  {
-    label: "Mushroom",
-  },
-  {
-    label: "Vitamin & Nutrition",
-  },
-  {
-    label: "Toys",
-  },
-  {
-    label: "Pet Milk",
-  },
-  {
-    label: "Hygiene & Beauty",
-  },
-  {
-    label: "Others",
-  },
-  {
-    label: "Discount",
-  },
-];
+const navBarItems = [{ value: "all", label: "All Products" }, ...CATEGORIES];
 
 export default function NavBarProduct() {
   const pathname = usePathname();
@@ -49,18 +19,17 @@ export default function NavBarProduct() {
       </div>
       <div className="w-full bg-[#646565] h-0.5 mt-5"></div>
       <div className="flex flex-col gap-10 my-5">
-        {navBarItems.map((item, idx) => {
+        {navBarItems.map((item) => {
           const href =
-            item.label === "All Products"
-              ? "/product"
-              : `/product/${slug(item.label)}`;
+            item.value === "all" ? "/product" : `/product/${slug(item.value)}`;
           const isActive =
-            item.label === "All Products"
+            item.value === "all"
               ? pathname === "/product"
               : pathname.startsWith(href);
+
           return (
             <Link
-              key={idx}
+              key={item.value}
               href={href}
               className={`transition-all ${
                 isActive
