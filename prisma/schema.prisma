@@ -106,15 +106,16 @@ model Verification {
 }
 
 model Banner {
-  id          String @id @default(uuid())
+  id          String   @id @default(uuid())
   title       Category
   imageString String
 
   createdAt DateTime @default(now())
+  order     Int      
 }
 
 model Products {
-  id          String         @id @default(uuid())
+  id          String   @id @default(uuid())
   name        String
   description String
   price       BigInt
@@ -127,12 +128,11 @@ model Products {
   origin      String
   expired     String
   status      Boolean
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   @@map("products")
 }
-
 
 enum Brands {
   Moochie

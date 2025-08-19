@@ -149,11 +149,13 @@ export async function CreateBannerAction(
     return submission.reply();
   }
 
+  const count = await prisma.banner.count() + 1;
 
   await prisma.banner.create({
     data: {
       title: submission.value.title,
       imageString: submission.value.imageString,
+      order: count,
     },
   });
 

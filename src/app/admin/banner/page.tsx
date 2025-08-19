@@ -1,7 +1,6 @@
-import DeleteBanner from "@/components/admin/product/delete-banner";
+import BannerForm from "@/components/product/banner-form";
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
@@ -18,39 +17,17 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import {
-  MinusCircleIcon,
-  MoreHorizontalIcon,
-  PlusCircleIcon,
-} from "lucide-react";
+import { MinusCircleIcon, PlusCircleIcon } from "lucide-react";
 import { headers } from "next/headers";
-import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+//  npm install @dnd-kit/core @dnd-kit/sortable @dnd-kit/modifiers for Drag or Move
 
 async function getData() {
   const data = await prisma.banner.findMany({
-    orderBy: {
-      createdAt: "desc",
-    },
+    orderBy: { order: "asc" }, 
   });
   return data;
 }
@@ -112,47 +89,7 @@ export default async function page() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow className="opacity-50">
-                <TableHead className="">Image</TableHead>
-                <TableHead>Name</TableHead>
-                <TableHead className="text-end">Action</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {data.map((item) => (
-                <TableRow key={item.id}>
-                  <TableCell>
-                    <Image
-                      src={item.imageString}
-                      alt="Image"
-                      width={100}
-                      height={100}
-                      className="rounded-md object-cover"
-                    />
-                  </TableCell>
-                  <TableCell>{item.title}</TableCell>
-                  <TableCell className="text-end">
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button size={"icon"} variant={"ghost"}>
-                          <MoreHorizontalIcon className="h-4 w-4" />
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent>
-                        <DropdownMenuLabel>Action</DropdownMenuLabel>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem asChild>
-                          <DeleteBanner bannerId={item.id} />
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+          <BannerForm data={data} />
         </CardContent>
       </Card>
     </>

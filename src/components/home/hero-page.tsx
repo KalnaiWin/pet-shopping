@@ -5,7 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 export async function HeroPage() {
-  const allProductsBanner = await prisma.banner.findMany({});
+  const allProductsBanner = await prisma.banner.findMany({
+    orderBy: { order: "asc" },
+  });
 
   return (
     <div className="w-full px-25 py-10 my-5">
@@ -22,7 +24,7 @@ export async function HeroPage() {
           <ResizablePanel defaultSize={50}>
             <ResizablePanelGroup direction="vertical">
               <ResizablePanel defaultSize={40} className="mb-2 shadow-md">
-                {allProductsBanner[0] && (
+                {allProductsBanner[0] ? (
                   <Link
                     href={`/product/${slug(allProductsBanner[0].title)}`}
                     className="flex h-full items-center justify-center rounded-sm relative"
@@ -49,10 +51,12 @@ export async function HeroPage() {
                       </div>
                     </div>
                   </Link>
+                ) : (
+                  <div>Empty</div>
                 )}
               </ResizablePanel>
               <ResizablePanel defaultSize={60} className="mt-2 shadow-md">
-                {allProductsBanner[1] && (
+                {allProductsBanner[1] ? (
                   <Link
                     href={`/product/${slug(allProductsBanner[1].title)}`}
                     className="flex h-full items-center justify-center rounded-sm relative"
@@ -79,6 +83,8 @@ export async function HeroPage() {
                       </div>
                     </div>
                   </Link>
+                ) : (
+                  <div>Empty</div>
                 )}
               </ResizablePanel>
             </ResizablePanelGroup>
@@ -86,7 +92,7 @@ export async function HeroPage() {
 
           {/* Center column */}
           <ResizablePanel defaultSize={60} className="shadow-md mx-5">
-            {allProductsBanner[2] && (
+            {allProductsBanner[2] ? (
               <Link
                 href={`/product/${slug(allProductsBanner[2].title)}`}
                 className="flex h-full items-center justify-center rounded-sm relative"
@@ -113,6 +119,8 @@ export async function HeroPage() {
                   </div>
                 </div>
               </Link>
+            ) : (
+              <div>Empty</div>
             )}
           </ResizablePanel>
 
@@ -120,7 +128,7 @@ export async function HeroPage() {
           <ResizablePanel defaultSize={50}>
             <ResizablePanelGroup direction="vertical">
               <ResizablePanel defaultSize={60} className="mb-2 shadow-md">
-                {allProductsBanner[3] && (
+                {allProductsBanner[3] ? (
                   <Link
                     href={`/product/${slug(allProductsBanner[3].title)}`}
                     className="flex h-full items-center justify-center rounded-sm relative"
@@ -147,10 +155,12 @@ export async function HeroPage() {
                       </div>
                     </div>
                   </Link>
+                ) : (
+                  <div>Empty</div>
                 )}
               </ResizablePanel>
               <ResizablePanel defaultSize={40} className="mt-2 shadow-md">
-                {allProductsBanner[4] && (
+                {allProductsBanner[4] ? (
                   <Link
                     href={`/product/${slug(allProductsBanner[4].title)}`}
                     className="flex h-full items-center justify-center rounded-sm relative"
@@ -177,6 +187,8 @@ export async function HeroPage() {
                       </div>
                     </div>
                   </Link>
+                ) : (
+                  <div>Empty</div>
                 )}
               </ResizablePanel>
             </ResizablePanelGroup>
