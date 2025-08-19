@@ -1,3 +1,15 @@
+import DeleteBanner from "@/components/admin/product/delete-banner";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -24,19 +36,26 @@ import {
 } from "@/components/ui/table";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { MoreHorizontalIcon, PlusCircleIcon, User2 } from "lucide-react";
+import {
+  MinusCircleIcon,
+  MoreHorizontalIcon,
+  PlusCircleIcon,
+} from "lucide-react";
 import { headers } from "next/headers";
+import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
 async function getData() {
-  const data = await prisma.products.findMany({
+  const data = await prisma.banner.findMany({
     orderBy: {
       createdAt: "desc",
     },
   });
   return data;
 }
+
+const countBanner = await prisma.banner.count();
 
 export default async function page() {
   const session = await auth.api.getSession({
@@ -52,12 +71,38 @@ export default async function page() {
   return (
     <>
       <div className="flex items-center justify-end">
-        <Button className="flex items-center gap-x-2" asChild>
-          <Link href={"/admin/banner/create"}>
-            <PlusCircleIcon />
-            <span>Add Banner</span>
-          </Link>
-        </Button>
+        {countBanner < 5 ? (
+          <Button className="flex items-center gap-x-2" asChild>
+            <Link href={"/admin/banner/create"}>
+              <PlusCircleIcon />
+              <span>Add Banner</span>
+            </Link>
+          </Button>
+        ) : (
+          <Button className="flex items-center gap-x-2" disabled asChild>
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button className="">
+                  <MinusCircleIcon />
+                  <span>You have reach the limit is 5</span>
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle className="text-red-500">
+                    You have reach the limit is 5
+                  </AlertDialogTitle>
+                  <AlertDialogDescription>
+                    You have to delete at least one to add a new one banner.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Got it</AlertDialogCancel>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+          </Button>
+        )}
       </div>
       <Card className="mt-5">
         <CardHeader>
@@ -76,31 +121,36 @@ export default async function page() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              <TableRow>
+              {data.map((item) => (
+                <TableRow key={item.id}>
                   <TableCell>
-                    <User2/>
+                    <Image
+                      src={item.imageString}
+                      alt="Image"
+                      width={100}
+                      height={100}
+                      className="rounded-md object-cover"
+                    />
                   </TableCell>
-                  <TableCell>Name</TableCell>
+                  <TableCell>{item.title}</TableCell>
                   <TableCell className="text-end">
                     <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
-                            <Button size={"icon"} variant={"ghost"}>
-                              <MoreHorizontalIcon className="h-4 w-4" />
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent>
-                            <DropdownMenuLabel>Action</DropdownMenuLabel>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuItem asChild>
-                                <p>Edit</p>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem asChild>
-                              <p>Delete</p>
-                            </DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button size={"icon"} variant={"ghost"}>
+                          <MoreHorizontalIcon className="h-4 w-4" />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent>
+                        <DropdownMenuLabel>Action</DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem asChild>
+                          <DeleteBanner bannerId={item.id} />
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
                   </TableCell>
-              </TableRow>
+                </TableRow>
+              ))}
             </TableBody>
           </Table>
         </CardContent>

@@ -4,7 +4,7 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { parseWithZod } from "@conform-to/zod";
-import { productsSchema } from "@/lib/zodSchema";
+import { bannerSchema, productsSchema } from "@/lib/zodSchema";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
@@ -12,7 +12,10 @@ import { isRedirectError } from "next/dist/client/components/redirect-error";
 // npm i zod
 // npm install @conform-to/react @conform-to/zod zod
 
-export async function CreateProductAction(prevState: unknown, formData: FormData) {
+export async function CreateProductAction(
+  prevState: unknown,
+  formData: FormData
+) {
   // console.log("Server action triggered!");
 
   const session = await auth.api.getSession({
@@ -59,7 +62,10 @@ export async function CreateProductAction(prevState: unknown, formData: FormData
   redirect("/admin/product");
 }
 
-export async function EditProductAction(prevState: unknown, formData: FormData) {
+export async function EditProductAction(
+  prevState: unknown,
+  formData: FormData
+) {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
@@ -121,4 +127,54 @@ export async function DeleteProductAction(formData: FormData) {
   });
 
   redirect("/admin/product");
+}
+
+export async function CreateBannerAction(
+  prevState: unknown,
+  formData: FormData
+) {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session || session.user.role !== "ADMIN") {
+    return redirect("/");
+  }
+
+  const submission = parseWithZod(formData, {
+    schema: bannerSchema,
+  });
+
+  if (submission.status !== "success") {
+    return submission.reply();
+  }
+
+
+  await prisma.banner.create({
+    data: {
+      title: submission.value.title,
+      imageString: submission.value.imageString,
+    },
+  });
+
+  redirect("/admin/banner");
+}
+
+export async function DeleteBannerAction(formData: FormData) {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session || session.user.role !== "ADMIN") {
+    return redirect("/");
+  }
+  const bannerId = formData.get("bannerId") as string;
+
+  await prisma.banner.delete({
+    where: {
+      id: bannerId,
+    },
+  });
+
+  redirect("/admin/banner");
 }

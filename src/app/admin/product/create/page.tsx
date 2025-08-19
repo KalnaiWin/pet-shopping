@@ -223,10 +223,14 @@ export default function page() {
                     <SelectValue placeholder="Select category" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="PATE">PATE</SelectItem>
-                    <SelectItem value="Seed">Seed</SelectItem>
-                    <SelectItem value="ToiletSand">Toilet Sand</SelectItem>
-                    <SelectItem value="Vitamin">Vitamin</SelectItem>
+                    <SelectItem value="ProductsForCat">
+                      Products For Cat
+                    </SelectItem>
+                    <SelectItem value="Insects">Insects</SelectItem>
+                    <SelectItem value="Mushroom">Mushroom</SelectItem>
+                    <SelectItem value="VitaminNutrition">
+                      VitaminNutrition
+                    </SelectItem>
                     <SelectItem value="Toys">Toys</SelectItem>
                     <SelectItem value="Milk">Milk</SelectItem>
                     <SelectItem value="HygieneBeauty">

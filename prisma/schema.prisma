@@ -107,7 +107,7 @@ model Verification {
 
 model Banner {
   id          String @id @default(uuid())
-  title       String
+  title       Category
   imageString String
 
   createdAt DateTime @default(now())
@@ -153,10 +153,10 @@ enum Brands {
 }
 
 enum Category {
-  PATE
-  Seed
-  ToiletSand
-  Vitamin
+  ProductsForCat
+  Insects
+  Mushroom
+  VitaminNutrition
   Toys
   Milk
   HygieneBeauty
