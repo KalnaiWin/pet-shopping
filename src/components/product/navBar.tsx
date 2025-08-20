@@ -21,7 +21,7 @@ export default function NavBarProduct() {
       <div className="flex flex-col gap-10 my-5">
         {navBarItems.map((item) => {
           const href =
-            item.value === "all" ? "/product" : `/product/${slug(item.value)}`;
+            item.value === "all" ? "/product" : `/product/category/${slug(item.value)}`;
           const isActive =
             item.value === "all"
               ? pathname === "/product"

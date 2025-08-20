@@ -9,3 +9,4 @@ export const CATEGORIES = [
   { value: "Other", label: "Others" },
   { value: "Discount", label: "Discount" },
 ] as const;
+

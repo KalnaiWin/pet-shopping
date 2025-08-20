@@ -7,8 +7,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { prisma } from "@/lib/prisma";
-import { maskAfterAt } from "@/lib/utils";
-import Image from "next/image";
 import { Prisma } from "@/generated/prisma";
 import EmailFilterForm from "@/components/admin/account/filter-email";
 import { SortDatetime } from "@/components/admin/account/sort-datetime";
@@ -22,12 +20,12 @@ import DeleteAccountButton, {
 import UserRoleSelection from "@/components/_components/user-role-selection";
 
 interface PageProps {
-  searchParams?: {
+  searchParams?: Promise<{
     email?: string;
     sortBy?: string;
     sortOrder?: "asc" | "desc";
     page?: string;
-  };
+  }>;
 }
 
 export default async function Page({ searchParams }: PageProps) {
@@ -37,21 +35,24 @@ export default async function Page({ searchParams }: PageProps) {
 
   if (session?.user.role !== "ADMIN") redirect("/");
 
-  const emailFilter = searchParams?.email || "";
+  // Await searchParams once and use the resolved values everywhere
+  const resolvedSearchParams = await searchParams;
+  const { page, email, sortBy, sortOrder } = resolvedSearchParams ?? {};
 
-  const sortBy = searchParams?.sortBy || "createdAt";
-  const sortOrder = (searchParams?.sortOrder as "asc" | "desc") || "desc";
+  const emailFilter = email || "";
+  const sortByField = sortBy || "createdAt";
+  const sortOrderField = (sortOrder as "asc" | "desc") || "desc";
 
   let orderBy: Prisma.UserOrderByWithRelationInput = { name: "asc" }; // default
 
-  if (sortBy === "createdAt") {
-    orderBy = { createdAt: sortOrder };
-  } else if (sortBy === "name") {
-    orderBy = { name: sortOrder };
-  } else if (sortBy === "email") {
-    orderBy = { email: sortOrder };
-  } else if (sortBy === "role") {
-    orderBy = { role: sortOrder };
+  if (sortByField === "createdAt") {
+    orderBy = { createdAt: sortOrderField };
+  } else if (sortByField === "name") {
+    orderBy = { name: sortOrderField };
+  } else if (sortByField === "email") {
+    orderBy = { email: sortOrderField };
+  } else if (sortByField === "role") {
+    orderBy = { role: sortOrderField };
   }
 
   const whereClause: Prisma.UserWhereInput = emailFilter
@@ -63,7 +64,7 @@ export default async function Page({ searchParams }: PageProps) {
       }
     : {};
 
-  const currentPage = parseInt(searchParams?.page || "1", 10); // parseInt(..., 10) converts that string to an integer.
+  const currentPage = parseInt(page ?? "1", 10); // parseInt(..., 10) converts that string to an integer.
 
   const pageSize = 10;
 
@@ -87,7 +88,10 @@ export default async function Page({ searchParams }: PageProps) {
       <h1 className="font-bold text-3xl mt-4">Manage accounts' user</h1>
       <p className="opacity-50 pt-3">Filter, sort, access detail user</p>
       <div className="mt-6">
-        <EmailFilterForm initialValue={emailFilter} />
+        <div className="flex items-center justify-between">
+          <EmailFilterForm initialValue={emailFilter} />
+          <div className="font-bold">Total users: {totalCount}</div>
+        </div>
         <div className="mt-5">
           <Table>
             <TableHeader>
@@ -97,8 +101,8 @@ export default async function Page({ searchParams }: PageProps) {
                 <TableHead>EMAIL</TableHead>
                 <SortDatetime
                   column="createdAt"
-                  currentSort={sortBy}
-                  currentOrder={sortOrder}
+                  currentSort={sortByField}
+                  currentOrder={sortOrderField}
                 >
                   JOINED
                 </SortDatetime>

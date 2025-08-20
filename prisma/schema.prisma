@@ -150,6 +150,7 @@ enum Brands {
   Hanvet
   MODERNPETGEL
   oliveessence
+  Empty
 }
 
 enum Category {

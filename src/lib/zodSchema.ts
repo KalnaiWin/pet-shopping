@@ -56,6 +56,7 @@ export const productsSchema = z.object({
     "Hanvet",
     "MODERNPETGEL",
     "oliveessence",
+    "Empty"
   ]),
   origin: z.string(),
   expired: z.string(),

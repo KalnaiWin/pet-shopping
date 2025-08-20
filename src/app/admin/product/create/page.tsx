@@ -207,6 +207,7 @@ export default function page() {
                     <SelectItem value="Hanvet">Hanvet</SelectItem>
                     <SelectItem value="MODERNPETGEL">MORDEN PET GEL</SelectItem>
                     <SelectItem value="oliveessence">olive essence</SelectItem>
+                    <SelectItem value="Empty">Empty</SelectItem>
                   </SelectContent>
                 </Select>
                 <p className="text-red-500">{fields.brand.errors}</p>

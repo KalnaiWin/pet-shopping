@@ -26,7 +26,7 @@ export async function HeroPage() {
               <ResizablePanel defaultSize={40} className="mb-2 shadow-md">
                 {allProductsBanner[0] ? (
                   <Link
-                    href={`/product/${slug(allProductsBanner[0].title)}`}
+                    href={`/product/category/${slug(allProductsBanner[0].title)}`}
                     className="flex h-full items-center justify-center rounded-sm relative"
                   >
                     <Image
@@ -58,7 +58,7 @@ export async function HeroPage() {
               <ResizablePanel defaultSize={60} className="mt-2 shadow-md">
                 {allProductsBanner[1] ? (
                   <Link
-                    href={`/product/${slug(allProductsBanner[1].title)}`}
+                    href={`/product/category/${slug(allProductsBanner[1].title)}`}
                     className="flex h-full items-center justify-center rounded-sm relative"
                   >
                     <Image
@@ -94,7 +94,7 @@ export async function HeroPage() {
           <ResizablePanel defaultSize={60} className="shadow-md mx-5">
             {allProductsBanner[2] ? (
               <Link
-                href={`/product/${slug(allProductsBanner[2].title)}`}
+                href={`/product/category/${slug(allProductsBanner[2].title)}`}
                 className="flex h-full items-center justify-center rounded-sm relative"
               >
                 <Image
@@ -130,7 +130,7 @@ export async function HeroPage() {
               <ResizablePanel defaultSize={60} className="mb-2 shadow-md">
                 {allProductsBanner[3] ? (
                   <Link
-                    href={`/product/${slug(allProductsBanner[3].title)}`}
+                    href={`/product/category/${slug(allProductsBanner[3].title)}`}
                     className="flex h-full items-center justify-center rounded-sm relative"
                   >
                     <Image
@@ -162,7 +162,7 @@ export async function HeroPage() {
               <ResizablePanel defaultSize={40} className="mt-2 shadow-md">
                 {allProductsBanner[4] ? (
                   <Link
-                    href={`/product/${slug(allProductsBanner[4].title)}`}
+                    href={`/product/category/${slug(allProductsBanner[4].title)}`}
                     className="flex h-full items-center justify-center rounded-sm relative"
                   >
                     <Image

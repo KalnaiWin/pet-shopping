@@ -32,10 +32,10 @@ import SubmitButton from "@/components/_components/submit-button";
 import { EditProductAction } from "@/actions/product/action";
 
 type Category =
-  | "PATE"
-  | "Seed"
-  | "ToiletSand"
-  | "Vitamin"
+  | "ProductsForCat"
+  | "Insects"
+  | "Mushroom"
+  | "VitaminNutrition"
   | "Toys"
   | "Milk"
   | "HygieneBeauty"
@@ -57,7 +57,8 @@ type Brand =
   | "Wanpy"
   | "Hanvet"
   | "MODERNPETGEL"
-  | "oliveessence";
+  | "oliveessence"
+  | "Empty"
 
 interface iAppProps {
   data: {
