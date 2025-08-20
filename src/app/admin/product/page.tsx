@@ -1,3 +1,4 @@
+import { Pagination } from "@/components/_components/pagination";
 import DeleteProduct from "@/components/admin/product/delete-product";
 import { Button } from "@/components/ui/button";
 import {
@@ -31,16 +32,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-async function getData() {
-  const data = await prisma.products.findMany({
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
-  return data;
+interface PageProps {
+  searchParams: Promise<{ page?: string }>;
 }
 
-export default async function page() {
+export default async function page({ searchParams }: PageProps) {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
@@ -49,10 +45,26 @@ export default async function page() {
 
   if (session.user.role !== "ADMIN") redirect("/");
 
-  const data = await getData();
+
+  // Await searchParams before accessing its properties
+  const resolvedSearchParams = await searchParams;
+  const { page } = resolvedSearchParams ?? {};
+  const currentPage = parseInt(page ?? "1", 10); // parseInt(..., 10) converts that string to an integer.
+
+  const pageSize = 10;
+
+  const totalCount = await prisma.products.count({});
+
+  const allProducts = await prisma.products.findMany({
+    orderBy: { createdAt: "desc" },
+    skip: (currentPage - 1) * pageSize,
+    take: pageSize,
+  });
+
+  const totalPages = Math.ceil(totalCount / pageSize);
 
   return (
-    <>
+    <div className="w-full">
       <div className="flex items-center justify-end">
         <Button className="flex items-center gap-x-2" asChild>
           <Link href={"/admin/product/create"}>
@@ -81,7 +93,7 @@ export default async function page() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {data.map((item) => (
+              {allProducts.map((item) => (
                 <TableRow key={item.id}>
                   <TableCell>
                     <Image
@@ -96,7 +108,9 @@ export default async function page() {
                   <TableCell>{item.price.toLocaleString()} VND</TableCell>
                   <TableCell className="font-medium">
                     {item.status ? (
-                      <p className="text-blue-500">Available ( {item.stock} ) </p>
+                      <p className="text-blue-500">
+                        Available ( {item.stock} ){" "}
+                      </p>
                     ) : (
                       <p className="text-red-500">Out of Stock</p>
                     )}
@@ -129,6 +143,9 @@ export default async function page() {
           </Table>
         </CardContent>
       </Card>
-    </>
+      <div className="flex justify-center">
+        <Pagination currentPage={currentPage} totalPages={totalPages} />
+      </div>
+    </div>
   );
 }
