@@ -1,3 +1,5 @@
+import { Category } from "@/generated/prisma";
+
 export const CATEGORIES = [
   { value: "ProductsForCat", label: "Products for cat" },
   { value: "Insects", label: "Insects" },
@@ -10,3 +12,14 @@ export const CATEGORIES = [
   { value: "Discount", label: "Discount" },
 ] as const;
 
+export const categoryMap: Record<string, Category> = {
+  ProductsForCat: Category.ProductsForCat,
+  Insects: Category.Insects,
+  Mushroom: Category.Mushroom,
+  VitaminNutrition: Category.VitaminNutrition,
+  Toys: Category.Toys,
+  Milk: Category.Milk,
+  HygieneBeauty: Category.HygieneBeauty,
+  Other: Category.Other,
+  Discount: Category.Discount,
+};

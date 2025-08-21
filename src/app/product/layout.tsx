@@ -24,7 +24,7 @@ export default async function AdminLayout({
           <NavBarProduct />
         </div>
 
-        <main className="flex-1 p-6 bg-gray-100 rounded-sm">{children}</main>
+        <main className="flex-1 p-6 rounded-sm">{children}</main>
       </div>
     </div>
   );

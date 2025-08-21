@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { prisma } from "./prisma";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -52,34 +53,67 @@ export const slug = (label: string) => {
 };
 
 export const badges = (name: string) => {
-  if(name === "Moochie" ) return "bg-[#fff700]";
-  else if(name === "Vemedim") return "bg-[#59ff00]";
-  else if(name === "AllCare") return "bg-[#ff0000]";
-  else if(name === "Meowcat") return "bg-[#d4d4d4] ";
-  else if(name === "Orgo") return "bg-[#456789]";
-  else if(name === "CATCHY") return "bg-[#9b0000]";
-  else if(name === "BioPharmachemie") return "bg-[#00bbff]";
-  else if(name === "Ecopets") return "bg-[#00ff2a]";
-  else if(name === "Ganador") return "bg-[#e1c300]";
-  else if(name === "DrKyan") return "bg-[#fbff00]";
-  else if(name === "Minino") return "bg-[#d78100]";
-  else if(name === "Wanpy") return "bg-[#ff4800]";
-  else if(name === "Hanvet") return "bg-[#ff91f0]";
-  else if(name === "MODERNPETGEL") return "bg-[#00ffae]";
-  else if(name === "oliveessence") return "bg-[#00801a]";
+  if (name === "Moochie") return "bg-[#fff700]";
+  else if (name === "Vemedim") return "bg-[#59ff00]";
+  else if (name === "AllCare") return "bg-[#ff0000]";
+  else if (name === "Meowcat") return "bg-[#d4d4d4] ";
+  else if (name === "Orgo") return "bg-[#456789]";
+  else if (name === "CATCHY") return "bg-[#9b0000]";
+  else if (name === "BioPharmachemie") return "bg-[#00bbff]";
+  else if (name === "Ecopets") return "bg-[#00ff2a]";
+  else if (name === "Ganador") return "bg-[#e1c300]";
+  else if (name === "DrKyan") return "bg-[#fbff00]";
+  else if (name === "Minino") return "bg-[#d78100]";
+  else if (name === "Wanpy") return "bg-[#ff4800]";
+  else if (name === "Hanvet") return "bg-[#ff91f0]";
+  else if (name === "MODERNPETGEL") return "bg-[#00ffae]";
+  else if (name === "oliveessence") return "bg-[#00801a]";
   else return "";
-}
+};
 
 export const badgesCategory = (name: string) => {
-  if(name === "ProductsForCat" ) return "bg-[#ffdca6]";
-  else if(name === "Insects") return "bg-[#5bae23]";
-  else if(name === "Mushroom") return "bg-[#ff6a00]";
-  else if(name === "VitaminNutrition") return "bg-[#00f2ff]";
+  if (name === "ProductsForCat") return "bg-[#ffdca6]";
+  else if (name === "Insects") return "bg-[#5bae23]";
+  else if (name === "Mushroom") return "bg-[#ff6a00]";
+  else if (name === "VitaminNutrition") return "bg-[#00f2ff]";
   // else if(name === "Toys") return "bg-#ffb8f8]";
-  else if(name === "Milk") return "bg-[#d2e9ff] ";
-  else if(name === "HygieneBeauty") return "bg-[#001aff]";
-  else if(name === "Other") return "bg-[#464646]";
-  else if(name === "Discount") return "bg-[#c40000]";
-  else return "bg-[#917343]"
-}
+  else if (name === "Milk") return "bg-[#d2e9ff] ";
+  else if (name === "HygieneBeauty") return "bg-[#001aff]";
+  else if (name === "Other") return "bg-[#464646]";
+  else if (name === "Discount") return "bg-[#c40000]";
+  else return "bg-[#917343]";
+};
 
+export const getDataCategory = (category: string) => {
+  switch (category) {
+    case "productsforcat": {
+      return "ProductsForCat";
+    }
+    case "insects": {
+      return "Insects";
+    }
+    case "mushroom": {
+      return "Mushroom";
+    }
+    case "vitaminnutrition": {
+      return "VitaminNutrition";
+    }
+    case "toys": {
+      return "Toys";
+    }
+    case "milk": {
+      return "Milk";
+    }
+    case "hygienebeauty": {
+      return "HygieneBeauty";
+    }
+    case "other": {
+      return "Other";
+    }
+    case "discount": {
+      return "Discount";
+    }
+    default:
+      return "UNKNOWN";
+  }
+};

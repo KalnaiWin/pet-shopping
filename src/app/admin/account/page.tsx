@@ -18,6 +18,7 @@ import DeleteAccountButton, {
   AdminAccount,
 } from "@/components/admin/account/delete-account-button";
 import UserRoleSelection from "@/components/_components/user-role-selection";
+import { Users2 } from "lucide-react";
 
 interface PageProps {
   searchParams?: Promise<{
@@ -90,7 +91,11 @@ export default async function Page({ searchParams }: PageProps) {
       <div className="mt-6">
         <div className="flex items-center justify-between">
           <EmailFilterForm initialValue={emailFilter} />
-          <div className="font-bold">Total users: {totalCount}</div>
+          <div className="font-bold flex gap-2">
+            {" "}
+            <Users2 /> Total users:{" "}
+            <span className="text-red-500">{totalCount}</span>
+          </div>
         </div>
         <div className="mt-5">
           <Table>

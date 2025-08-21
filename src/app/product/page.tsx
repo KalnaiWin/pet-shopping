@@ -29,8 +29,8 @@ export default async function page({ searchParams }: PageProps) {
   const totalPages = Math.ceil(totalCount / pageSize);
 
   return (
-    <div className="w-full h-screen">
-      <div className="grid grid-cols-4 w-full space-y-3">
+    <div className="w-full ml-8">
+      <div className="grid grid-cols-4 w-full gap-2">
         {allProducts.map((product) => {
           const price =
             Number(product.price) -
@@ -54,7 +54,7 @@ export default async function page({ searchParams }: PageProps) {
                   <p className="text-sm font-bold line-clamp-1">
                     {product.name}
                   </p>
-                  <div className="flex gap-3">
+                  <div className="flex gap-3 line-clamp-1">
                     <Link href={`/product/brand/${product.brand}`}>
                       <Badge className={`${badges(product.brand)}`}>
                         {product.brand}
