@@ -117,3 +117,38 @@ export const getDataCategory = (category: string) => {
       return "UNKNOWN";
   }
 };
+
+export const getDataBrand = (category: string) => {
+  switch (category) {
+    case "productsforcat": {
+      return "ProductsForCat";
+    }
+    case "insects": {
+      return "Insects";
+    }
+    case "mushroom": {
+      return "Mushroom";
+    }
+    case "vitaminnutrition": {
+      return "VitaminNutrition";
+    }
+    case "toys": {
+      return "Toys";
+    }
+    case "milk": {
+      return "Milk";
+    }
+    case "hygienebeauty": {
+      return "HygieneBeauty";
+    }
+    case "other": {
+      return "Other";
+    }
+    case "discount": {
+      return "Discount";
+    }
+    default:
+      return "UNKNOWN";
+  }
+};
+
