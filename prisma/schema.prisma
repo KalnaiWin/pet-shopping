@@ -111,7 +111,7 @@ model Banner {
   imageString String
 
   createdAt DateTime @default(now())
-  order     Int      
+  order     Int
 }
 
 model Products {
@@ -119,7 +119,7 @@ model Products {
   name        String
   description String
   price       BigInt
-  delivery    Json // store array of timestamps
+  delivery    String
   images      String[]
   discount    BigInt
   category    Category

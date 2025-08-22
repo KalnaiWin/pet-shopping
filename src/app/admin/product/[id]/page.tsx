@@ -18,7 +18,7 @@ async function getData(productId: string) {
     ...data,
     price: Number(data.price),       // bigint → number
     discount: Number(data.discount), // bigint → number
-    delivery: data.delivery as string[],
+    // delivery: data.delivery ,
     stock: Number(data.stock), 
   };
 }

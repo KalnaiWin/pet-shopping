@@ -11,6 +11,10 @@ const navBarItems = [{ value: "all", label: "All Products" }, ...CATEGORIES];
 export default function NavBarProduct() {
   const pathname = usePathname();
 
+  const isDetailPage = /^\/product\/[^\/]+$/.test(pathname);
+
+  if (isDetailPage) return null;
+
   return (
     <div className="flex flex-col w-full">
       <div className="flex items-center gap-3 mt-5">
@@ -21,7 +25,9 @@ export default function NavBarProduct() {
       <div className="flex flex-col gap-10 my-5">
         {navBarItems.map((item) => {
           const href =
-            item.value === "all" ? "/product" : `/product/category/${slug(item.value)}`;
+            item.value === "all"
+              ? "/product"
+              : `/product/category/${slug(item.value)}`;
           const isActive =
             item.value === "all"
               ? pathname === "/product"

@@ -17,7 +17,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -123,7 +122,7 @@ export default async function page({ searchParams }: PageProps) {
                       className="rounded-md object-cover h-16 w-16"
                     />
                   </TableCell>
-                  <TableCell className="font-semibold">{item.name}</TableCell>
+                  <TableCell className="font-semibold max-w-[200px] truncate">{item.name}</TableCell>
                   <TableCell>{item.price.toLocaleString()} VND</TableCell>
                   <TableCell className="font-medium">
                     {item.status === true ? (

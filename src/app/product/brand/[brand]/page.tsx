@@ -29,7 +29,6 @@ export default async function Page({ searchParams, params }: PageProps) {
   const { page } = resolvedSearchParams ?? {};
   const { brand } = resolvedParams;
 
-
   const currentPage = parseInt(page ?? "1", 10);
   const pageSize = 12;
 
@@ -45,7 +44,7 @@ export default async function Page({ searchParams, params }: PageProps) {
 
   const allProducts = await prisma.products.findMany({
     where: { brand: brandsEnum },
-    orderBy: { createdAt: "asc" },
+    orderBy: { createdAt: "desc" },
     skip: (currentPage - 1) * pageSize,
     take: pageSize,
   });
@@ -60,7 +59,7 @@ export default async function Page({ searchParams, params }: PageProps) {
         </div>
       ) : (
         <div className="w-full">
-          <div className="grid grid-cols-4 w-full ml-8">
+          <div className="grid grid-cols-4 w-full ml-3.5">
             {allProducts.map((product) => {
               const price =
                 Number(product.price) -
@@ -68,7 +67,7 @@ export default async function Page({ searchParams, params }: PageProps) {
               return (
                 <div
                   key={product.id}
-                  className="border-2 shadow-md w-19/20 rounded-sm h-[320px]"
+                  className="border-2 shadow-md w-19/20 rounded-sm h-[340px]"
                 >
                   <Link href={`/product/${product.id}`} className="">
                     <Image

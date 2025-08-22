@@ -69,7 +69,7 @@ interface iAppProps {
     discount: number;
     status: boolean;
     images: string[];
-    delivery: string[];
+    delivery: string;
     stock: number;
     category: Category;
     brand: Brand;

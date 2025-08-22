@@ -45,7 +45,7 @@ export async function CreateProductAction(
       name: submission.value.name,
       description: submission.value.description,
       price: submission.value.price,
-      delivery: submission.value.delivery ?? [],
+      delivery: submission.value.delivery,
       status: submission.value.status,
       images: flattenUrls,
       discount: submission.value.discount ?? 0,
@@ -95,7 +95,7 @@ export async function EditProductAction(
       name: submission.value.name,
       description: submission.value.description,
       price: submission.value.price,
-      delivery: submission.value.delivery ?? [],
+      delivery: submission.value.delivery,
       status: submission.value.status,
       images: flattenUrls,
       discount: submission.value.discount ?? 0,
@@ -149,7 +149,7 @@ export async function CreateBannerAction(
     return submission.reply();
   }
 
-  const count = await prisma.banner.count() + 1;
+  const count = (await prisma.banner.count()) + 1;
 
   await prisma.banner.create({
     data: {

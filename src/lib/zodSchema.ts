@@ -20,10 +20,7 @@ export const productsSchema = z.object({
     .pipe(z.array(z.string()).min(1, "There must be at least one image")),
 
   // delivery as a single string
-  delivery: z
-    .string()
-    .optional()
-    .transform((val) => (val ? [val] : [])),
+  delivery: z.string(),
 
   stock: z.coerce.number().min(1, "Price must be at least 1"),
   category: z.enum([

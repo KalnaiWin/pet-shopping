@@ -21,7 +21,7 @@ export default async function page({ searchParams }: PageProps) {
   const totalCount = await prisma.products.count({});
 
   const allProducts = await prisma.products.findMany({
-    orderBy: { createdAt: "asc" },
+    orderBy: { createdAt: "desc" },
     skip: (currentPage - 1) * pageSize,
     take: pageSize,
   });
@@ -29,7 +29,7 @@ export default async function page({ searchParams }: PageProps) {
   const totalPages = Math.ceil(totalCount / pageSize);
 
   return (
-    <div className="w-full ml-8">
+    <div className="w-full ml-2">
       <div className="grid grid-cols-4 w-full gap-2">
         {allProducts.map((product) => {
           const price =
@@ -38,7 +38,7 @@ export default async function page({ searchParams }: PageProps) {
           return (
             <div
               key={product.id}
-              className="border-2 shadow-md w-19/20 rounded-sm h-[320px]"
+              className="border-2 shadow-md w-19/20 rounded-sm h-[340px]"
             >
               <Link href={`/product/${product.id}`} className="">
                 <Image

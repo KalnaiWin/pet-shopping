@@ -3,13 +3,18 @@
 import PixelTransition from "../animation/PixelTransition/PixelTransition";
 
 interface PixelTextProps {
-    text: string;
-    image: string;
-    width: string;
-    height: string
+  text: string;
+  image: string;
+  width: string;
+  height: string;
 }
 
-export default function PixelText( {text, image, width, height} : PixelTextProps ) {
+export default function PixelText({
+  text,
+  image,
+  width,
+  height,
+}: PixelTextProps) {
   return (
     <div className="w-full">
       <PixelTransition
