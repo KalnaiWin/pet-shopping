@@ -5,10 +5,7 @@ export const productsSchema = z.object({
   description: z.string().min(1, "Description is required"),
   price: z.coerce.number().min(1, "Price must be at least 1"),
   discount: z.coerce.number().min(0).optional(),
-  status: z
-    .string()
-    .transform((val) => val === "on")
-    .pipe(z.boolean()),
+  status: z.boolean().default(false),
 
   // handle JSON string from hidden input
   images: z
@@ -56,7 +53,7 @@ export const productsSchema = z.object({
     "Hanvet",
     "MODERNPETGEL",
     "oliveessence",
-    "Empty"
+    "Empty",
   ]),
   origin: z.string(),
   expired: z.string(),

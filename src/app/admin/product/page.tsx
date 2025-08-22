@@ -1,5 +1,6 @@
 import { Pagination } from "@/components/_components/pagination";
 import DeleteProduct from "@/components/admin/product/delete-product";
+import ProductNamelFilterForm from "@/components/admin/product/filter-name";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -16,6 +17,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -24,6 +26,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Prisma } from "@/generated/prisma";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { MoreHorizontalIcon, PlusCircleIcon } from "lucide-react";
@@ -33,7 +36,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 interface PageProps {
-  searchParams: Promise<{ page?: string }>;
+  searchParams: Promise<{ page?: string; productName: string }>;
 }
 
 export default async function page({ searchParams }: PageProps) {
@@ -45,17 +48,28 @@ export default async function page({ searchParams }: PageProps) {
 
   if (session.user.role !== "ADMIN") redirect("/");
 
-
   // Await searchParams before accessing its properties
   const resolvedSearchParams = await searchParams;
-  const { page } = resolvedSearchParams ?? {};
+  const { page, productName } = resolvedSearchParams ?? {};
   const currentPage = parseInt(page ?? "1", 10); // parseInt(..., 10) converts that string to an integer.
 
   const pageSize = 10;
 
   const totalCount = await prisma.products.count({});
 
+  const productNameFilter = productName || "";
+
+  const whereClause: Prisma.ProductsWhereInput = productNameFilter
+    ? {
+        name: {
+          contains: productNameFilter, // contains tạo tìm kiếm "chứa" (tương đương %term%)
+          mode: Prisma.QueryMode.insensitive, // yêu cầu tìm không phân biệt hoa thường
+        },
+      }
+    : {};
+
   const allProducts = await prisma.products.findMany({
+    where: whereClause,
     orderBy: { createdAt: "desc" },
     skip: (currentPage - 1) * pageSize,
     take: pageSize,
@@ -74,11 +88,16 @@ export default async function page({ searchParams }: PageProps) {
         </Button>
       </div>
       <Card className="mt-5">
-        <CardHeader>
-          <CardTitle>Manage Products</CardTitle>
-          <CardDescription>
-            Manage all products, view, create and deit any time you want.
-          </CardDescription>
+        <CardHeader className="flex w-full justify-between items-center">
+          <div>
+            <CardTitle>Manage Products</CardTitle>
+            <CardDescription>
+              Manage all products, view, create and deit any time you want.
+            </CardDescription>
+          </div>
+          <div className="w-1/3">
+            <ProductNamelFilterForm initialValue={productNameFilter}/>
+          </div>
         </CardHeader>
         <CardContent>
           <Table>
@@ -107,7 +126,7 @@ export default async function page({ searchParams }: PageProps) {
                   <TableCell className="font-semibold">{item.name}</TableCell>
                   <TableCell>{item.price.toLocaleString()} VND</TableCell>
                   <TableCell className="font-medium">
-                    {item.status ? (
+                    {item.status === true ? (
                       <p className="text-blue-500">
                         Available ( {item.stock} ){" "}
                       </p>
