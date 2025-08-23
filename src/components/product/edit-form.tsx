@@ -58,7 +58,7 @@ type Brand =
   | "Hanvet"
   | "MODERNPETGEL"
   | "oliveessence"
-  | "Empty"
+  | "Empty";
 
 interface iAppProps {
   data: {
@@ -66,6 +66,7 @@ interface iAppProps {
     name: string;
     description: string;
     price: number;
+    maxPrice: number;
     discount: number;
     status: boolean;
     images: string[];
@@ -148,6 +149,17 @@ export default function EditForm({ data }: iAppProps) {
                   placeholder="1,000 VND"
                 />
                 <p className="text-red-500">{fields.price.errors}</p>
+              </div>
+              <div className="flex flex-col gap-3 w-3/5">
+                <Label>to Price</Label>
+                <Input
+                  key={fields.maxPrice.key}
+                  defaultValue={data.maxPrice}
+                  name="maxPrice"
+                  type="number"
+                  placeholder="1,000 VND"
+                />
+                <p className="text-red-500">{fields.maxPrice.errors}</p>
               </div>
               <div className="flex flex-col gap-3 w-2/5">
                 <Label>Discount</Label>

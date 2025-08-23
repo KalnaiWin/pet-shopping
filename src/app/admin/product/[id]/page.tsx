@@ -17,6 +17,7 @@ async function getData(productId: string) {
   return {
     ...data,
     price: Number(data.price),       // bigint → number
+    maxPrice: Number(data.price),       // bigint → number
     discount: Number(data.discount), // bigint → number
     // delivery: data.delivery ,
     stock: Number(data.stock), 

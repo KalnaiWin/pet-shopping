@@ -101,7 +101,7 @@ export default function page() {
             </div>
             <div className="flex gap-10">
               <div className="flex flex-col gap-3 w-3/5">
-                <Label>Price</Label>
+                <Label>Price from</Label>
                 <Input
                   key={fields.price.key}
                   defaultValue={fields.price.initialValue}
@@ -110,6 +110,17 @@ export default function page() {
                   placeholder="1,000 VND"
                 />
                 <p className="text-red-500">{fields.price.errors}</p>
+              </div>
+              <div className="flex flex-col gap-3 w-3/5">
+                <Label>to Price</Label>
+                <Input
+                  key={fields.maxPrice.key}
+                  defaultValue={fields.maxPrice.initialValue}
+                  name="maxPrice"
+                  type="number"
+                  placeholder="1,000 VND"
+                />
+                <p className="text-red-500">{fields.maxPrice.errors}</p>
               </div>
               <div className="flex flex-col gap-3 w-2/5">
                 <Label>Discount</Label>

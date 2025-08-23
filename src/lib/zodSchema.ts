@@ -4,6 +4,7 @@ export const productsSchema = z.object({
   name: z.string().min(1, "Name is required"),
   description: z.string().min(1, "Description is required"),
   price: z.coerce.number().min(1, "Price must be at least 1"),
+  maxPrice: z.coerce.number().min(1, "Price must be at least 1"),
   discount: z.coerce.number().min(0).optional(),
   status: z.boolean().default(false),
 

@@ -119,6 +119,7 @@ model Products {
   name        String
   description String
   price       BigInt
+  maxPrice    BigInt
   delivery    String
   images      String[]
   discount    BigInt

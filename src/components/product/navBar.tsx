@@ -16,12 +16,12 @@ export default function NavBarProduct() {
   if (isDetailPage) return null;
 
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col w-full mx-30">
       <div className="flex items-center gap-3 mt-5">
         <Menu />
         <p>Category</p>
       </div>
-      <div className="w-full bg-[#646565] h-0.5 mt-5"></div>
+      <div className="w-2/3 bg-[#646565] h-0.5 mt-5"></div>
       <div className="flex flex-col gap-10 my-5">
         {navBarItems.map((item) => {
           const href =

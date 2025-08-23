@@ -1,6 +1,19 @@
+import ToggleButton from "@/components/_components/toogle-show-button";
+import QuantityButton from "@/components/admin/product/quantity-button";
+import ProductImagesSelector from "@/components/product/product-images.-selector";
+import { Button } from "@/components/ui/button";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { prisma } from "@/lib/prisma";
-import { Truck } from "lucide-react";
+import { slug } from "@/lib/utils";
+import { ShoppingBag, ShoppingCart, Truck } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import React from "react";
 
@@ -17,10 +30,16 @@ export default async function Page({ params }: PageProps) {
       id: true,
       name: true,
       description: true,
+      category: true,
+      brand: true,
       price: true,
+      maxPrice: true,
       images: true,
+      expired: true,
       discount: true,
       delivery: true,
+      stock: true,
+      origin: true,
     },
   });
 
@@ -30,34 +49,26 @@ export default async function Page({ params }: PageProps) {
 
   const arrayImages = product.images;
 
+  const discountPrice =
+    Number(product.price) -
+    Math.ceil((Number(product.price) * Number(product.discount)) / 100);
+  const discountMaxPrice =
+    Number(product.maxPrice) -
+    Math.ceil((Number(product.maxPrice) * Number(product.discount)) / 100);
+
   return (
-    <div className="w-full">
+    <div className="w-full pr-10">
       <div className="w-full">
-        <div className="flex w-full gap-5 bg-amber-50">
+        {/* PRODUCT INFO */}
+        <div className="flex w-full gap-10 bg-white p-2 shadow-md my-10">
           <div>
-            <div className="">
-              <Image
-                src={product.images[0]}
-                alt="Product Image"
-                width={900}
-                height={900}
-                className="object-cover"
-              />
-            </div>
-            <div className="flex">
-              {arrayImages.map((image, idx) => (
-                <Image
-                  key={idx}
-                  src={image}
-                  alt="Image Produt"
-                  width={100}
-                  height={100}
-                />
-              ))}
-            </div>
+            <ProductImagesSelector
+              product={product}
+              arrayImages={arrayImages}
+            />
           </div>
           <div className="w-full">
-            <h1 className="text-2xl font-bold">{product.name}</h1>
+            <h1 className="text-2xl font-bold my-4">{product.name}</h1>
             <div className="flex w-full gap-5">
               <div>
                 <span className="underline text-gray-500">5.0</span> ⭐⭐⭐⭐⭐
@@ -69,8 +80,45 @@ export default async function Page({ params }: PageProps) {
                 <span className="underline text-gray-500">Sold</span> 83
               </div>
             </div>
-            <div className="p-2 bg-gray-100">
-              {product.price.toLocaleString()} VND
+            <div className="py-5 px-8 bg-[#f8f8f8] my-4 flex gap-5 items-end">
+              <div className="text-3xl font-bold flex gap-3">
+                <div className="relative">
+                  <span className="absolute top-0 -left-3 underline text-[20px]">
+                    đ
+                  </span>{" "}
+                  {discountPrice.toLocaleString()}
+                </div>
+                <div>
+                  -
+                </div>
+                <div className="relative ml-3">
+                  <span className="absolute top-0 -left-3 underline text-[20px]">
+                    đ
+                  </span>{" "}
+                  {discountMaxPrice.toLocaleString()}
+                </div>
+              </div>
+              <div className="font-semibold py-1 px-2 rounded-sm opacity-50 relative">
+                <div className="absolute w-full bg-gray-900 h-0.5 top-4 left-0"></div>
+                <div className="flex gap-3 items-center">
+                  <div className="relative">
+                    <span className="absolute top-0.5 -left-1.5 underline text-[10px]">
+                      đ
+                    </span>
+                    {product.price.toLocaleString()}
+                  </div>
+
+                  <div className="relative ml-3">
+                    <span className="absolute top-0.5 -left-1.5 underline text-[10px]">
+                      đ
+                    </span>
+                    {product.maxPrice.toLocaleString()}
+                  </div>
+                </div>
+              </div>
+              <div className="bg-[#ff5100] text-white font-semibold py-1 px-2 rounded-sm">
+                -{product.discount}%
+              </div>
             </div>
             <div className="flex gap-5">
               <div>
@@ -79,8 +127,8 @@ export default async function Page({ params }: PageProps) {
               </div>
               <div className="flex gap-2">
                 <div>
-                  <div>{product.delivery}</div>
-                  <div className="flex items-start gap-1 text-red-500">
+                  <div className="">Take from {product.delivery}</div>
+                  <div className="flex items-start gap-1 text-red-500 my-3">
                     <p className="text-md">Ship Fee 0</p>
                     <div className="text-sm underline">đ</div>
                   </div>
@@ -90,9 +138,101 @@ export default async function Page({ params }: PageProps) {
                 </div>
               </div>
             </div>
+            <div className="my-10 flex items-center gap-5">
+              <p>Amount</p>
+              <div>
+                <QuantityButton />
+              </div>
+            </div>
+            <div className="flex transition-all gap-5">
+              {/* Buy */}
+              <Button className="p-7 text-2xl text-[#ff5100] font-light border border-[#ff5100] bg-[#ffd2bd] hover:bg-[#ffe8dd]">
+                <span className="text-[#ff5100]">
+                  <ShoppingCart />
+                </span>
+                Buy Now
+              </Button>
+              {/* Ad to cart */}
+              <Button className="p-7 text-2xl bg-[#ff5100] font-light hover:bg-[#ae3700]">
+                <span>
+                  <ShoppingBag />
+                </span>{" "}
+                Add to Cart
+              </Button>
+            </div>
           </div>
         </div>
-        <div className="bg-amber-400 mt-50">frbs</div>
+        {/* DETAIL */}
+        <div className="flex flex-col my-10 mx-20">
+          <p className="text-3xl font-bold py-5 px-4 bg-[#f8f8f8]">
+            Detail Product
+          </p>
+          <Table className="border-separate mt-5">
+            <TableBody>
+              <TableRow>
+                <TableCell className="border border-r-0 border-b-0 p-5">
+                  Category
+                </TableCell>
+                <TableCell className="border border-l-0 border-b-0 p-5">
+                  <Link
+                    href={`/product/category/${slug(product.category)}`}
+                    className="text-blue-500"
+                  >
+                    {product.category}
+                  </Link>
+                </TableCell>
+              </TableRow>
+              <TableRow className="">
+                <TableCell className="border border-r-0 border-b-0 p-5">
+                  Total in Warehouse
+                </TableCell>
+                <TableCell className="border border-l-0 border-b-0 p-5">
+                  {product.stock}
+                </TableCell>
+              </TableRow>
+              <TableRow className="">
+                <TableCell className="border border-r-0 border-b-0 p-5">
+                  Brand
+                </TableCell>
+                <TableCell className="border border-l-0 border-b-0 p-5">
+                  <Link
+                    href={`/product/brand/${product.brand}`}
+                    className="text-blue-500"
+                  >
+                    {product.brand}
+                  </Link>
+                </TableCell>
+              </TableRow>
+              <TableRow className="">
+                <TableCell className="border border-r-0 border-b-0 p-5">
+                  Origin
+                </TableCell>
+                <TableCell className="border border-l-0 border-b-0 p-5">
+                  {product.origin}
+                </TableCell>
+              </TableRow>
+              <TableRow className="">
+                {product.expired !== "null" && (
+                  <>
+                    <TableCell className="border border-r-0 border-b-0 p-5">
+                      Expired
+                    </TableCell>
+                    <TableCell className="border border-l-0 border-b-0 p-5">
+                      {product.expired}
+                    </TableCell>
+                  </>
+                )}
+              </TableRow>
+            </TableBody>
+          </Table>
+        </div>
+        {/* DESCRIPTION */}
+        <div className="mx-20 my-10">
+          <ToggleButton
+            text={product.description}
+            title="Description Product"
+          />
+        </div>
       </div>
     </div>
   );
