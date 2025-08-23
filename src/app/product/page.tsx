@@ -33,8 +33,8 @@ export default async function page({ searchParams }: PageProps) {
       <div className="grid grid-cols-4 w-full gap-2">
         {allProducts.map((product) => {
           const price =
-            Number(product.price) -
-            (Number(product.price) * Number(product.discount)) / 100;
+            Number(product.maxPrice) -
+            (Number(product.maxPrice) * Number(product.discount)) / 100;
           return (
             <div
               key={product.id}

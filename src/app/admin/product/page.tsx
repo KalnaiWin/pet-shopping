@@ -1,6 +1,6 @@
+import FilterForm from "@/components/_components/filter-form";
 import { Pagination } from "@/components/_components/pagination";
 import DeleteProduct from "@/components/admin/product/delete-product";
-import ProductNamelFilterForm from "@/components/admin/product/filter-name";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -95,7 +95,8 @@ export default async function page({ searchParams }: PageProps) {
             </CardDescription>
           </div>
           <div className="w-1/3">
-            <ProductNamelFilterForm initialValue={productNameFilter}/>
+            {/* <ProductNamelFilterForm initialValue={productNameFilter}/> */}
+            <FilterForm initialValue={productNameFilter} nameId="productName" title="Product"/>
           </div>
         </CardHeader>
         <CardContent>
@@ -123,7 +124,7 @@ export default async function page({ searchParams }: PageProps) {
                     />
                   </TableCell>
                   <TableCell className="font-semibold max-w-[200px] truncate">{item.name}</TableCell>
-                  <TableCell>{item.price.toLocaleString()} VND</TableCell>
+                  <TableCell>{item.maxPrice.toLocaleString()} VND</TableCell>
                   <TableCell className="font-medium">
                     {item.status === true ? (
                       <p className="text-blue-500">

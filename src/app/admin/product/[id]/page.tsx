@@ -3,6 +3,10 @@ import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import React from "react";
 
+interface EditFormProps {
+  params: Promise<{ id: string }>;
+}
+
 async function getData(productId: string) {
   const data = await prisma.products.findUnique({
     where: {
@@ -16,15 +20,17 @@ async function getData(productId: string) {
 
   return {
     ...data,
-    price: Number(data.price),       // bigint → number
-    maxPrice: Number(data.price),       // bigint → number
+    price: Number(data.price), // bigint → number
+    maxPrice: Number(data.maxPrice), // bigint → number
     discount: Number(data.discount), // bigint → number
     // delivery: data.delivery ,
-    stock: Number(data.stock), 
+    stock: Number(data.stock),
   };
 }
 
-export default async function EditPage({ params }: { params: { id: string } }) {
-  const data = await getData(params.id);
+export default async function EditPage({ params }: EditFormProps) {
+  const resolvedParams = await params;
+  const { id } = resolvedParams ?? {};
+  const data = await getData(id);
   return <EditForm data={data} />;
 }

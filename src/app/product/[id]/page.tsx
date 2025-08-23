@@ -12,7 +12,6 @@ import {
 import { prisma } from "@/lib/prisma";
 import { slug } from "@/lib/utils";
 import { ShoppingBag, ShoppingCart, Truck } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import React from "react";
@@ -82,15 +81,18 @@ export default async function Page({ params }: PageProps) {
             </div>
             <div className="py-5 px-8 bg-[#f8f8f8] my-4 flex gap-5 items-end">
               <div className="text-3xl font-bold flex gap-3">
-                <div className="relative">
-                  <span className="absolute top-0 -left-3 underline text-[20px]">
-                    đ
-                  </span>{" "}
-                  {discountPrice.toLocaleString()}
-                </div>
-                <div>
-                  -
-                </div>
+                {product.price && (
+                  <div className="flex gap-3">
+                    <div className="relative">
+                      <span className="absolute top-0 -left-3 underline text-[20px]">
+                        đ
+                      </span>{" "}
+                      {discountPrice.toLocaleString()}
+                    </div>
+                    <div>-</div>
+                  </div>
+                )}
+
                 <div className="relative ml-3">
                   <span className="absolute top-0 -left-3 underline text-[20px]">
                     đ
@@ -101,13 +103,14 @@ export default async function Page({ params }: PageProps) {
               <div className="font-semibold py-1 px-2 rounded-sm opacity-50 relative">
                 <div className="absolute w-full bg-gray-900 h-0.5 top-4 left-0"></div>
                 <div className="flex gap-3 items-center">
-                  <div className="relative">
-                    <span className="absolute top-0.5 -left-1.5 underline text-[10px]">
-                      đ
-                    </span>
-                    {product.price.toLocaleString()}
-                  </div>
-
+                  {product.price && (
+                    <div className="relative">
+                      <span className="absolute top-0.5 -left-1.5 underline text-[10px]">
+                        đ
+                      </span>
+                      {product.price.toLocaleString()}
+                    </div>
+                  )}
                   <div className="relative ml-3">
                     <span className="absolute top-0.5 -left-1.5 underline text-[10px]">
                       đ

@@ -6,8 +6,6 @@ import { redirect } from "next/navigation";
 import { parseWithZod } from "@conform-to/zod";
 import { bannerSchema, productsSchema } from "@/lib/zodSchema";
 import { prisma } from "@/lib/prisma";
-import { revalidatePath } from "next/cache";
-import { isRedirectError } from "next/dist/client/components/redirect-error";
 
 // npm i zod
 // npm install @conform-to/react @conform-to/zod zod
@@ -44,7 +42,7 @@ export async function CreateProductAction(
     data: {
       name: submission.value.name,
       description: submission.value.description,
-      price: submission.value.price,
+      price: submission.value.price ?? null,
       maxPrice: submission.value.maxPrice,
       delivery: submission.value.delivery,
       status: submission.value.status,
@@ -95,7 +93,7 @@ export async function EditProductAction(
     data: {
       name: submission.value.name,
       description: submission.value.description,
-      price: submission.value.price,
+      price: submission.value.price ?? null,
       maxPrice: submission.value.maxPrice,
       delivery: submission.value.delivery,
       status: submission.value.status,

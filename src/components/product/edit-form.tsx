@@ -65,7 +65,7 @@ interface iAppProps {
     id: string;
     name: string;
     description: string;
-    price: number;
+    price?: number | null;
     maxPrice: number;
     discount: number;
     status: boolean;
@@ -143,15 +143,15 @@ export default function EditForm({ data }: iAppProps) {
                 <Label>Price</Label>
                 <Input
                   key={fields.price.key}
-                  defaultValue={data.price}
+                  defaultValue={data.price ? String(data.price) : ""}
                   name="price"
                   type="number"
-                  placeholder="1,000 VND"
+                  placeholder="1,000 VND (leave empty if not applicable)"
                 />
                 <p className="text-red-500">{fields.price.errors}</p>
               </div>
               <div className="flex flex-col gap-3 w-3/5">
-                <Label>to Price</Label>
+                <Label>Max Price</Label>
                 <Input
                   key={fields.maxPrice.key}
                   defaultValue={data.maxPrice}
@@ -276,7 +276,9 @@ export default function EditForm({ data }: iAppProps) {
                     <SelectItem value="PATE">PATE</SelectItem>
                     <SelectItem value="Seed">Seed</SelectItem>
                     <SelectItem value="ToiletSand">Toilet Sand</SelectItem>
-                    <SelectItem value="Vitamin">Vitamin</SelectItem>
+                    <SelectItem value="VitaminNutrition">
+                      Vitamin Nutrition
+                    </SelectItem>
                     <SelectItem value="Toys">Toys</SelectItem>
                     <SelectItem value="Milk">Milk</SelectItem>
                     <SelectItem value="HygieneBeauty">

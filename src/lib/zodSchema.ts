@@ -3,7 +3,9 @@ import * as z from "zod";
 export const productsSchema = z.object({
   name: z.string().min(1, "Name is required"),
   description: z.string().min(1, "Description is required"),
-  price: z.coerce.number().min(1, "Price must be at least 1"),
+  price: z
+    .union([z.coerce.number().min(1, "Price must be at least 1"), z.null()])
+    .optional(),
   maxPrice: z.coerce.number().min(1, "Price must be at least 1"),
   discount: z.coerce.number().min(0).optional(),
   status: z.boolean().default(false),
