@@ -8,7 +8,6 @@ import {
 } from "@/components/ui/table";
 import { prisma } from "@/lib/prisma";
 import { Prisma } from "@/generated/prisma";
-import EmailFilterForm from "@/components/admin/account/filter-email";
 import { SortDatetime } from "@/components/admin/account/sort-datetime";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";

@@ -95,7 +95,6 @@ export default async function page({ searchParams }: PageProps) {
             </CardDescription>
           </div>
           <div className="w-1/3">
-            {/* <ProductNamelFilterForm initialValue={productNameFilter}/> */}
             <FilterForm initialValue={productNameFilter} nameId="productName" title="Product"/>
           </div>
         </CardHeader>
