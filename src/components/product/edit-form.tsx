@@ -79,7 +79,7 @@ interface iAppProps {
   };
 }
 
-export default function EditForm({ data }: iAppProps) {
+export default function EditFormProduct({ data }: iAppProps) {
   const [images, setImages] = useState<string[]>(data.images);
 
   const [lastResult, action] = useActionState(EditProductAction, undefined);

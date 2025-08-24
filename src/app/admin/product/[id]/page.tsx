@@ -1,4 +1,4 @@
-import EditForm from "@/components/product/edit-form";
+import EditFormProduct from "@/components/product/edit-form";
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import React from "react";
@@ -32,5 +32,5 @@ export default async function EditPage({ params }: EditFormProps) {
   const resolvedParams = await params;
   const { id } = resolvedParams ?? {};
   const data = await getData(id);
-  return <EditForm data={data} />;
+  return <EditFormProduct data={data} />;
 }
