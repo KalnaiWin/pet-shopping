@@ -14,6 +14,14 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
 import { postSchema } from "@/lib/zodSchema";
 import { UploadDropzone } from "@/utils/uploadthing";
 import { useForm } from "@conform-to/react";
@@ -78,6 +86,39 @@ export default function page() {
                 placeholder="Enter the content"
               />
               <p className="text-red-500">{fields.content.errors}</p>
+            </div>
+            <div className="flex gap-10">
+              <div className="flex flex-col gap-3">
+                <Label>Important Pin</Label>
+                <Switch
+                  key={fields.status.key}
+                  name="status"
+                  defaultChecked={fields.status.initialValue === "true"}
+                />
+                <p className="text-red-500">{fields.status.errors}</p>
+              </div>
+              <div className="flex flex-col gap-3">
+                <div className="flex flex-col gap-3">
+                  <Label>Topic</Label>
+                  <Select
+                    key={fields.topic.key}
+                    name="topic"
+                    defaultValue={fields.topic.initialValue}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select topic" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="New">New</SelectItem>
+                      <SelectItem value="Issue">Issue</SelectItem>
+                      <SelectItem value="Discuss">Discuss</SelectItem>
+                      <SelectItem value="Guide">Guide</SelectItem>
+                      <SelectItem value="Empty">Empty</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <p className="text-red-500">{fields.topic.errors}</p>
+                </div>
+              </div>
             </div>
             <div className="flex flex-col gap-3">
               <Label>Images</Label>

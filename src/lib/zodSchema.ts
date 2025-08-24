@@ -87,6 +87,8 @@ export const postSchema = z.object({
     .pipe(z.array(z.string()).min(1, "There must be at least one image")),
   title: z.string().min(1, "Title is required"),
   content: z.string().min(1, "Content is required"),
+  status: z.boolean().default(false),
+  topic: z.enum(["New", "Issue", "Discuss", "Guide", "Empty"]),
 });
 
 export const commentSchema = z.object({

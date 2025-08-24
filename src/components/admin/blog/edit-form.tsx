@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { EditPostAction } from "@/actions/blog/action";
 import { EditProductAction } from "@/actions/product/action";
@@ -14,6 +14,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { postSchema } from "@/lib/zodSchema";
 import { UploadDropzone } from "@/utils/uploadthing";
@@ -24,10 +26,14 @@ import { XIcon } from "lucide-react";
 import Image from "next/image";
 import React, { useActionState, useState } from "react";
 
+type Topic = "New" | "Issue" | "Discuss" | "Guide" | "Empty";
+
 interface PageProps {
   data: {
     id: string;
     title: string;
+    status: boolean;
+    topic: Topic;
     images: string[];
     content: string;
   };
@@ -91,6 +97,39 @@ export default function EditFormBlog({ data }: PageProps) {
                 placeholder="Post Content . . ."
               />
               <p className="text-red-500">{fields.content.errors}</p>
+            </div>
+            <div className="flex gap-10">
+              <div className="flex flex-col gap-3">
+                <Label>Important Pin</Label>
+                <Switch
+                  key={fields.status.key}
+                  name="status"
+                  defaultChecked={data.status}
+                />
+                <p className="text-red-500">{fields.status.errors}</p>
+              </div>
+              <div className="flex flex-col gap-3">
+                <div className="flex flex-col gap-3">
+                  <Label>Topic</Label>
+                  <Select
+                    key={fields.topic.key}
+                    name="topic"
+                    defaultValue={data.topic}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select topic" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="New">New</SelectItem>
+                      <SelectItem value="Issue">Issue</SelectItem>
+                      <SelectItem value="Discuss">Discuss</SelectItem>
+                      <SelectItem value="Guide">Guide</SelectItem>
+                      <SelectItem value="Empty">Empty</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <p className="text-red-500">{fields.topic.errors}</p>
+                </div>
+              </div>
             </div>
             <div className="flex flex-col gap-3">
               <Label>Images</Label>

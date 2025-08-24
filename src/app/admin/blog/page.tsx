@@ -2,6 +2,7 @@ import { DeletePostAction } from "@/actions/blog/action";
 import DeleteForm from "@/components/_components/delete-alert";
 import FilterForm from "@/components/_components/filter-form";
 import { Pagination } from "@/components/_components/pagination";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -29,6 +30,7 @@ import {
 import { Prisma } from "@/generated/prisma";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { TopicOption } from "@/lib/utils";
 import {
   MoreHorizontalIcon,
   NewspaperIcon,
@@ -109,7 +111,7 @@ export default async function page({ searchParams }: PageProps) {
             </div>
             <div className="font-bold flex gap-2">
               {" "}
-              <NewspaperIcon /> Total users:{" "}
+              <NewspaperIcon /> Total posts:{" "}
               <span className="text-red-500">{totalCount}</span>
             </div>
           </div>
@@ -120,6 +122,7 @@ export default async function page({ searchParams }: PageProps) {
               <TableRow>
                 <TableHead>Image</TableHead>
                 <TableHead>Title</TableHead>
+                <TableHead>Topic</TableHead>
                 <TableHead>Date</TableHead>
                 <TableHead className="text-end">Action</TableHead>
               </TableRow>
@@ -137,6 +140,11 @@ export default async function page({ searchParams }: PageProps) {
                   </TableCell>
                   <TableCell>{post.title}</TableCell>
                   <TableCell>
+                    <Badge className={`${TopicOption(post.topic)} size-12`} >
+                      {post.topic}
+                    </Badge>
+                  </TableCell>
+                  <TableCell>
                     {new Intl.DateTimeFormat("en-US").format(post.createdAt)}
                   </TableCell>
                   <TableCell className="text-end">
@@ -153,7 +161,11 @@ export default async function page({ searchParams }: PageProps) {
                           <Link href={`/admin/blog/${post.id}`}>Edit</Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem asChild>
-                          <DeleteForm nameId={post.id} name="postName" action={DeletePostAction} />
+                          <DeleteForm
+                            nameId={post.id}
+                            name="postName"
+                            action={DeletePostAction}
+                          />
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>

@@ -30,6 +30,8 @@ export async function CreatedPostAction(
   await prisma.post.create({
     data: {
       images: submission.value.images,
+      status: submission.value.status,
+      topic: submission.value.topic,
       title: submission.value.title,
       content: submission.value.content,
       userId: session.user.id,
@@ -83,6 +85,8 @@ export async function EditPostAction(prevState: unknown, formData: FormData) {
     },
     data: {
       images: submission.value.images,
+      status: submission.value.status,
+      topic: submission.value.topic,
       title: submission.value.title,
       content: submission.value.content,
       userId: session.user.id,
