@@ -20,7 +20,7 @@ model Post {
   updatedAt DateTime @updatedAt
 
   title   String
-  image   String?
+  images  String[]
   content String
 
   userId   String

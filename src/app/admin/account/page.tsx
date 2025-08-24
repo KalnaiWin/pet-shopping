@@ -34,6 +34,8 @@ export default async function Page({ searchParams }: PageProps) {
     headers: await headers(),
   });
 
+  if (!session?.user) redirect("/auth/login");
+
   if (session?.user.role !== "ADMIN") redirect("/");
 
   // Await searchParams once and use the resolved values everywhere

@@ -1,6 +1,5 @@
 "use client";
 
-import { DeleteProductAction } from "@/actions/product/action";
 import SubmitButton from "@/components/_components/submit-button";
 import {
   AlertDialog,
@@ -15,7 +14,13 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Input } from "@/components/ui/input";
 
-export default function DeleteProduct({ productId }: { productId: string }) {
+interface DeleteFormProps {
+  nameId: string;
+  name: string;
+  action: (formData: FormData) => Promise<void>;
+}
+
+export default function DeleteForm({ nameId, name, action }: DeleteFormProps) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -25,18 +30,20 @@ export default function DeleteProduct({ productId }: { productId: string }) {
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle className="text-red-500">Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogTitle className="text-red-500">
+            Are you absolutely sure?
+          </AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your
-            product and remove your data from our servers.
+            This action cannot be undone. This will permanently delete your{" "}
+            {name} and remove your data from our servers.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction asChild>
-            <form action={DeleteProductAction}>
-              <Input type="hidden" name="productId" value={productId} />
-              <SubmitButton text="Continue" /> 
+            <form action={action}>
+              <Input type="hidden" name={name} value={nameId} />
+              <SubmitButton text="Continue" />
             </form>
           </AlertDialogAction>
         </AlertDialogFooter>

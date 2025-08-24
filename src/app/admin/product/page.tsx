@@ -1,6 +1,7 @@
+import { DeleteProductAction } from "@/actions/product/action";
+import DeleteForm from "@/components/_components/delete-alert";
 import FilterForm from "@/components/_components/filter-form";
 import { Pagination } from "@/components/_components/pagination";
-import DeleteProduct from "@/components/admin/product/delete-product";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -150,7 +151,7 @@ export default async function page({ searchParams }: PageProps) {
                           <Link href={`/admin/product/${item.id}`}>Edit</Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem asChild>
-                          <DeleteProduct productId={item.id} />
+                          <DeleteForm nameId={item.id} name="productId" action={DeleteProductAction}/>
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>

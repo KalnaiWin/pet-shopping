@@ -73,3 +73,27 @@ export const bannerSchema = z.object({
   ]),
   imageString: z.string(),
 });
+
+export const postSchema = z.object({
+  images: z
+    .string()
+    .transform((val) => {
+      try {
+        return JSON.parse(val);
+      } catch {
+        return [];
+      }
+    })
+    .pipe(z.array(z.string()).min(1, "There must be at least one image")),
+  title: z.string().min(1, "Title is required"),
+  content: z.string().min(1, "Content is required"),
+});
+
+export const commentSchema = z.object({
+  content: z.string().min(1, "Comment cannot be empty"),
+  postId: z.string().uuid("Invalid post ID"),
+});
+
+export const likeSchema = z.object({
+  postId: z.string().uuid("Invalid post ID"),
+});

@@ -19,9 +19,10 @@ import {
 } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
 import { MoreHorizontalIcon } from "lucide-react";
-import DeleteBanner from "../admin/product/delete-banner";
 import { Input } from "../ui/input";
 import { useState } from "react";
+import DeleteForm from "../_components/delete-alert";
+import { DeleteBannerAction } from "@/actions/product/action";
 
 export default function BannerForm({ data }: { data: any[] }) {
   const [items, setItems] = useState(data);
@@ -93,7 +94,7 @@ export default function BannerForm({ data }: { data: any[] }) {
                   <DropdownMenuLabel>Action</DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem asChild>
-                    <DeleteBanner bannerId={item.id} />
+                    <DeleteForm nameId={item.id} name="bannerId" action={DeleteBannerAction} />
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
