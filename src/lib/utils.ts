@@ -125,3 +125,13 @@ export const TopicOption = (name: string) => {
   else if (name === "Guide") return "bg-[#00294a] text-[#b6deff]";
   else return "bg-black text-white";
 };
+
+export const extractNumber = (input: string): string => {
+  return input.replace(/[^0-9]/g, "");
+}
+
+export const textAfterNumber = (input: string): string => {
+  const match = input.match(/\d+(.*)/);
+  return match ? match[1].trim() : "";
+}
+
