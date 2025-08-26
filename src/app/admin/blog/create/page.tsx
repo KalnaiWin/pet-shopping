@@ -22,6 +22,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
+import { Textarea } from "@/components/ui/textarea";
 import { postSchema } from "@/lib/zodSchema";
 import { UploadDropzone } from "@/utils/uploadthing";
 import { useForm } from "@conform-to/react";
@@ -79,7 +80,7 @@ export default function page() {
             </div>
             <div className="flex flex-col gap-3">
               <Label>Content</Label>
-              <Input
+              <Textarea
                 key={fields.content.key}
                 name="content"
                 defaultValue={fields.content.initialValue}

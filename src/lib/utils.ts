@@ -121,7 +121,7 @@ export const getDataCategory = (category: string) => {
 export const TopicOption = (name: string) => {
   if (name === "New") return "bg-[#b7ffac] text-[#083c00]";
   else if (name === "Issue") return "bg-[#ffb1b1] text-[#5c0000]";
-  else if (name === "Discuss") return "bg-[#e1e2ff] text-[#000361]";
+  else if (name === "Discuss") return "bg-[#0051ff] text-[#dcf7ff]";
   else if (name === "Guide") return "bg-[#00294a] text-[#b6deff]";
-  else return "";
+  else return "bg-black text-white";
 };

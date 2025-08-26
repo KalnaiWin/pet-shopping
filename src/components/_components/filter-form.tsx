@@ -3,7 +3,7 @@
 import { Input } from "@/components/ui/input";
 import { useRouter, useSearchParams } from "next/navigation";
 
-interface ProductNamelFilterFormProps {
+interface NamelFilterFormProps {
   nameId: string;
   title: string;
   initialValue?: string;
@@ -13,7 +13,7 @@ export default function FilterForm({
   initialValue = "",
   title,
   nameId,
-}: ProductNamelFilterFormProps) {
+}: NamelFilterFormProps) {
   const router = useRouter();
   const searchParams = useSearchParams(); // giá trị hiện tại của query string
   // (searchParams là một ReadonlyURLSearchParams phản ánh window.location.search hiện tại)
