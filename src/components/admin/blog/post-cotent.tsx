@@ -7,12 +7,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { User } from "@/generated/prisma";
 import { extractNumber, textAfterNumber } from "@/lib/utils";
 import { MessageCircle, ThumbsDown, ThumbsUp } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import FormComment from "./form-comment";
 
 interface PostContentProps {
   post: {
@@ -169,6 +169,43 @@ export function PostCotent({ post }: PostContentProps) {
               <MessageCircle className="text-blue-500" size={30} />
               <p className="text-xl font-semibold">{post.comments.length}</p>
             </div>
+          </div>
+          <div className="my-10">
+            <FormComment postId={post.id} />
+          </div>
+          <div className="w-full h-0.5 bg-gray-400"></div>
+          <div className="w-full mt-10">
+            {post.comments.map((comment) => {
+              return (
+                <div key={comment.id} className="mb-10 flex flex-col gap-2">
+                  <div className="flex gap-2 items-center">
+                    <Image
+                      src={
+                        comment.user.image
+                          ? comment.user.image
+                          : "/assets/default.png"
+                      }
+                      alt="Profile Image"
+                      width={40}
+                      height={40}
+                    />
+                    <div className="flex flex-col">
+                      <p className={`italic text-md opacity-80`}>
+                        {comment.user.name}
+                      </p>
+                      <p className="opacity-50">
+                        {new Intl.DateTimeFormat("en-US").format(
+                          comment.createdAt
+                        )}
+                      </p>
+                    </div>
+                  </div>
+                  <span className="whitespace-pre-line bg-blue-200 rounded-sm p-2 font-bold">
+                    {comment.content}
+                  </span>
+                </div>
+              );
+            })}
           </div>
         </div>
       </CardContent>

@@ -2,7 +2,7 @@
 
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { postSchema } from "@/lib/zodSchema";
+import { commentSchema, postSchema } from "@/lib/zodSchema";
 import { parseWithZod } from "@conform-to/zod";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
@@ -92,6 +92,61 @@ export async function EditPostAction(prevState: unknown, formData: FormData) {
       userId: session.user.id,
     },
   });
-
   redirect("/admin/blog");
+}
+
+export async function AddCommentAction(prevState: unknown, formData: FormData) {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session) {
+    return redirect("/");
+  }
+
+  const submission = parseWithZod(formData, {
+    schema: commentSchema,
+  });
+
+  if (submission.status !== "success") {
+    return submission.reply();
+  }
+
+  await prisma.comment.create({
+    data: {
+      content: submission.value.content,
+      postId: submission.value.postId,
+      userId: session.user.id,
+    },
+  });
+  return submission.reply({ resetForm: true });
+}
+
+export async function DeleteCommentAction(
+  prevState: unknown,
+  formData: FormData
+) {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session || session.user.role !== "ADMIN") {
+    return redirect("/");
+  }
+
+  const submission = parseWithZod(formData, {
+    schema: commentSchema,
+  });
+
+  if (submission.status !== "success") {
+    return submission.reply();
+  }
+
+  const commentName = formData.get("commentName") as string;
+
+  await prisma.comment.delete({
+    where: {
+      id: commentName,
+    },
+  });
 }
