@@ -59,7 +59,7 @@ export default async function Page({ searchParams, params }: PageProps) {
         </div>
       ) : (
         <div className="w-full">
-          <div className="grid grid-cols-4 w-full ml-3.5">
+          <div className="grid grid-cols-4 w-full">
             {allProducts.map((product) => {
               const price =
                 Number(product.price) -
