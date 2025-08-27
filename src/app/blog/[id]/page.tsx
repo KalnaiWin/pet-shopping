@@ -30,6 +30,11 @@ export default async function page({ params }: PageProps) {
           user: true,
         },
       },
+      dislikes: {
+        include: {
+          user: true,
+        },
+      },
     },
   });
 

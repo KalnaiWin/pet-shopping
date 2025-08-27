@@ -47,6 +47,14 @@ interface PostContentProps {
         image: string | null;
       };
     }[];
+    dislikes: {
+      id: string;
+      user: {
+        id: string;
+        name: string;
+        image: string | null;
+      };
+    }[];
   };
   isAuthor: boolean;
 }
@@ -55,7 +63,7 @@ export function PostCotent({ post }: PostContentProps) {
   const [isToggle, setIsToggle] = useState(true);
 
   return (
-    <Card>
+    <Card className="mb-20">
       <CardHeader>
         <CardTitle>
           <div className="flex gap-2">
@@ -150,11 +158,11 @@ export function PostCotent({ post }: PostContentProps) {
             <div className="flex items-center gap-10">
               <span className="flex gap-2 items-center">
                 <ThumbsUp className="text-blue-500" size={30} />
-                <p className="text-xl font-semibold">{post.comments.length}</p>
+                <p className="text-xl font-semibold">{post.likes.length}</p>
               </span>
               <span className="flex gap-2 items-center">
                 <ThumbsDown className="text-red-500" size={30} />
-                <p className="text-xl font-semibold">{post.likes.length}</p>
+                <p className="text-xl font-semibold">{post.dislikes.length}</p>
               </span>
             </div>
             <div className="flex gap-2 items-center">
