@@ -3,6 +3,7 @@ import BodyPage from "@/components/blog/body-page";
 import HeaderBlog from "@/components/blog/header-blog";
 import { Prisma } from "@/generated/prisma";
 import { prisma } from "@/lib/prisma";
+import { PostWithCounts } from "@/lib/types/define";
 import React from "react";
 
 interface PageProps {
@@ -26,10 +27,18 @@ export default async function page({ searchParams }: PageProps) {
       }
     : {};
 
-  const allPosts = await prisma.post.findMany({
+  const allPosts: PostWithCounts[] = await prisma.post.findMany({
     where: whereClause,
     skip: (currentPage - 1) * pageSize,
     take: pageSize,
+    include: {
+      _count: {
+        select: {
+          comments: true,
+          likes: true,
+        },
+      },
+    },
   });
 
   const totalCount = await prisma.post.count({});
@@ -38,7 +47,7 @@ export default async function page({ searchParams }: PageProps) {
 
   return (
     <div className="w-full mt-20">
-      <HeaderBlog initialValue={postNameFilter} nameId="postName"/>
+      <HeaderBlog initialValue={postNameFilter} nameId="postName" />
       <BodyPage allPosts={allPosts} />
       <div className="flex justify-center">
         <Pagination currentPage={currentPage} totalPages={totalPages} />

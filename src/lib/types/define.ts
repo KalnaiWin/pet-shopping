@@ -1,4 +1,4 @@
-import { Category } from "@/generated/prisma";
+import { Category, Prisma } from "@/generated/prisma";
 
 export const CATEGORIES = [
   { value: "ProductsForCat", label: "Products for cat" },
@@ -23,3 +23,14 @@ export const categoryMap: Record<string, Category> = {
   Other: Category.Other,
   Discount: Category.Discount,
 };
+
+export type PostWithCounts = Prisma.PostGetPayload<{
+  include: {
+    _count: {
+      select: {
+        comments: true;
+        likes: true;
+      };
+    };
+  };
+}>;

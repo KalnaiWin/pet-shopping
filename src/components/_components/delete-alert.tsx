@@ -17,7 +17,7 @@ import { Input } from "@/components/ui/input";
 interface DeleteFormProps {
   nameId: string;
   name: string;
-  action: (formData: FormData) => Promise<void>;
+  action: (formData: FormData) => Promise<any> | Promise<void>;
 }
 
 export default function DeleteForm({ nameId, name, action }: DeleteFormProps) {
