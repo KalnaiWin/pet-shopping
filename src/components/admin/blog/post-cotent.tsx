@@ -18,13 +18,15 @@ import { DeleteCommentAction } from "@/actions/blog/action";
 import { useSession } from "@/lib/auth-client";
 import ReactionBlog from "./reaction-blog";
 import { PostWithRelations } from "@/lib/types/define";
+import { Pagination } from "@/components/_components/pagination";
 
 interface PostContentProps {
   post: PostWithRelations;
-  isAuthor: boolean;
+  currentPage: number;
+  totalPages: number;
 }
 
-export function PostCotent({ post }: PostContentProps) {
+export function PostCotent({ post, currentPage, totalPages }: PostContentProps) {
   const likes = post.reactions.filter((r) => r.type === "LIKE").length;
   const dislikes = post.reactions.filter((r) => r.type === "DISLIKE").length;
 
@@ -212,6 +214,7 @@ export function PostCotent({ post }: PostContentProps) {
                 </div>
               );
             })}
+            <Pagination currentPage={currentPage} totalPages={totalPages} />
           </div>
         </div>
       </CardContent>

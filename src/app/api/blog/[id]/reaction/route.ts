@@ -21,7 +21,7 @@ export async function POST(
   const postId = id;
   const body = await req.json(); // Reads the JSON body from request.
 
-  const parsed = reactionSchema.safeParse(body);
+  const parsed = reactionSchema.safeParse(body); // validate
   if (!parsed.success) {
     return NextResponse.json({ error: parsed.error.format() }, { status: 400 });
   }
@@ -57,5 +57,14 @@ export async function POST(
   const likes = counts.find((c) => c.type === "LIKE")?._count ?? 0;
   const dislikes = counts.find((c) => c.type === "DISLIKE")?._count ?? 0;
 
-  return NextResponse.json({ likes, dislikes });
+  const userReaction = await prisma.reaction.findFirst({
+    where: { postId, userId, commentId: null },
+    select: { type: true },
+  });
+
+  return NextResponse.json({
+    likes,
+    dislikes,
+    userReaction: userReaction?.type ?? null,
+  });
 }

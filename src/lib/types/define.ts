@@ -52,11 +52,12 @@ export type PostCounts = Prisma.PostGetPayload<{
 export type PostWithRelations = Prisma.PostGetPayload<{
   include: {
     user: true;
-    comments: { include: { user: true } };
+    comments: {
+      include: { user: true };
+    };
     reactions: { include: { user: true } };
     _count: {
       select: { comments: true; reactions: true };
     };
   };
 }>;
-

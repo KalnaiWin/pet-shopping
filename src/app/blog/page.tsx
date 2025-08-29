@@ -3,7 +3,6 @@ import BodyPage from "@/components/blog/body-page";
 import HeaderBlog from "@/components/blog/header-blog";
 import { Prisma } from "@/generated/prisma";
 import { prisma } from "@/lib/prisma";
-import { PostWithCounts } from "@/lib/types/define";
 import React from "react";
 
 interface PageProps {

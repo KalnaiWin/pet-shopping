@@ -11,9 +11,11 @@ export default function NavBar() {
   const { data: session, isPending } = useSession();
   const router = useRouter();
 
+  const isBlogPhotoPage = /^\/blog\/[^\/]+\/photo$/.test(pathname);
+
   const allowed =
     pathname === "/" ||
-    pathname.startsWith("/blog") ||
+    (pathname.startsWith("/blog") && !isBlogPhotoPage) ||
     pathname.startsWith("/product") ||
     pathname.startsWith("/contact");
 
