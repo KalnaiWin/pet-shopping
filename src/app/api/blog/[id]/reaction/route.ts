@@ -19,7 +19,7 @@ export async function POST(
 
   const { id } = await context.params;
   const postId = id;
-  const body = await req.json();
+  const body = await req.json(); // Reads the JSON body from request.
 
   const parsed = reactionSchema.safeParse(body);
   if (!parsed.success) {

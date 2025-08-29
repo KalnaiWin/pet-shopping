@@ -25,6 +25,9 @@ interface PostContentProps {
 }
 
 export function PostCotent({ post }: PostContentProps) {
+  const likes = post.reactions.filter((r) => r.type === "LIKE").length;
+  const dislikes = post.reactions.filter((r) => r.type === "DISLIKE").length;
+
   const { data: session } = useSession();
 
   const [isToggle, setIsToggle] = useState(true);
@@ -135,8 +138,8 @@ export function PostCotent({ post }: PostContentProps) {
             <div className="flex items-center gap-10">
               <ReactionBlog
                 postId={post.id}
-                initialLikes={post._count.reactions}
-                initialDislikes={post._count.reactions}
+                initialLikes={likes}
+                initialDislikes={dislikes}
               />
             </div>
             <div className="flex gap-2 items-center">
