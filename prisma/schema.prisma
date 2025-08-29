@@ -25,12 +25,11 @@ model Post {
   status  Boolean // Pin important
   topic   Topic
 
-  userId   String
-  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   comments Comment[]
-  likes    Like[]
-  dislikes Dislike[]
+  reactions Reaction[]
 
   @@map("posts")
 }
@@ -52,21 +51,21 @@ model Comment {
   postId String
   post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
 
-  userId String
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  likes    Like[]
-  dislikes Dislike[]
+  userId   String
+  user     User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  reactions Reaction[]
 
   @@map("comments")
 }
 
-model Like {
+model Reaction {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
 
-  postId    String?
-  post      Post?    @relation(fields: [postId], references: [id], onDelete: Cascade)
+  type ReactionType
+
+  postId String?
+  post   Post?   @relation(fields: [postId], references: [id], onDelete: Cascade)
 
   commentId String?
   comment   Comment? @relation(fields: [commentId], references: [id], onDelete: Cascade)
@@ -74,25 +73,13 @@ model Like {
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([userId, postId, commentId])
-  @@map("likes")
+  @@unique([userId, postId, commentId]) // 1 user chỉ 1 reaction cho 1 post/comment
+  @@map("reactions")
 }
 
-model Dislike {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-
-  postId    String?
-  post      Post?    @relation(fields: [postId], references: [id], onDelete: Cascade)
-
-  commentId String?
-  comment   Comment? @relation(fields: [commentId], references: [id], onDelete: Cascade)
-
-  userId String
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([userId, postId, commentId])
-  @@map("dislikes")
+enum ReactionType {
+  LIKE
+  DISLIKE
 }
 
 model User {
@@ -112,13 +99,11 @@ model User {
   sessions Session[]
   accounts Account[]
   posts    Post[]
-  likes    Like[]
-  dislikes Dislike[]
   comments Comment[]
+  Reaction Reaction[]
 
   @@map("users")
 }
-
 
 enum Role {
   USER

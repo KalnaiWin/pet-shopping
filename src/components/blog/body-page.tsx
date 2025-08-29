@@ -8,13 +8,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { PostWithCounts } from "@/lib/types/define";
+import { PostCounts } from "@/lib/types/define";
 import { TopicOption } from "@/lib/utils";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
 
-export default function BodyPage({ allPosts }: { allPosts: PostWithCounts[] }) {
+export default function BodyPage({ allPosts }: { allPosts: PostCounts[] }) {
   const router = useRouter();
 
   return (
@@ -71,7 +71,7 @@ export default function BodyPage({ allPosts }: { allPosts: PostWithCounts[] }) {
               <TableCell>
                 <div className="flex gap-5">
                   <div>{post._count.comments} comments </div> |
-                  <div>{post._count.likes} likes </div>
+                  <div>{post._count.reactions} reactions </div>
                 </div>
               </TableCell>
               <TableCell className="text-end">

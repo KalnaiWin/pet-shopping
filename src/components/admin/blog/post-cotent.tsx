@@ -14,53 +14,13 @@ import Link from "next/link";
 import { useState } from "react";
 import FormComment from "./form-comment";
 import DeleteForm from "@/components/_components/delete-alert";
-import { DeleteCommentAction, ToggleDisLikeAction, ToggleLikeAction } from "@/actions/blog/action";
+import { DeleteCommentAction } from "@/actions/blog/action";
 import { useSession } from "@/lib/auth-client";
-import ReactionButton from "./reaction-button";
-import CountLike from "./reaction-button";
+import ReactionBlog from "./reaction-blog";
+import { PostWithRelations } from "@/lib/types/define";
 
 interface PostContentProps {
-  post: {
-    id: string;
-    title: string;
-    content: string;
-    images: string[];
-    createdAt: Date;
-    updatedAt: Date;
-    status: Boolean;
-    topic: string;
-    user: {
-      id: string;
-      name: string;
-      image: string | null;
-    };
-    comments: {
-      id: string;
-      content: string;
-      createdAt: Date;
-      user: {
-        id: string;
-        name: string;
-        image: string | null;
-      };
-    }[];
-    likes: {
-      id: string;
-      user: {
-        id: string;
-        name: string;
-        image: string | null;
-      };
-    }[];
-    dislikes: {
-      id: string;
-      user: {
-        id: string;
-        name: string;
-        image: string | null;
-      };
-    }[];
-  };
+  post: PostWithRelations;
   isAuthor: boolean;
 }
 
@@ -78,14 +38,6 @@ export function PostCotent({ post }: PostContentProps) {
       [id]: !prev[id],
     }));
   };
-
-  const alreadyLiked = session?.user
-  ? post.likes.some((like) => like.user.id === session.user.id)
-  : false;
-
-const alreadyDisliked = session?.user
-  ? post.dislikes.some((dislike) => dislike.user.id === session.user.id)
-  : false;
 
   return (
     <Card className="mb-20">
@@ -181,19 +133,11 @@ const alreadyDisliked = session?.user
 
           <div className="mt-10 flex w-full justify-between">
             <div className="flex items-center gap-10">
-              <span className="flex gap-2 items-center">
-                <CountLike
-                  postId={post.id}
-                  commentId={""}
-                  FirstLike={alreadyLiked}
-                  AlreadyLike={post.likes.length}
-                />
-                {/* <p className="text-xl font-semibold">{post.likes.length}</p> */}
-              </span>
-              <span className="flex gap-2 items-center">
-                
-                <p className="text-xl font-semibold">{post.dislikes.length}</p>
-              </span>
+              <ReactionBlog
+                postId={post.id}
+                initialLikes={post._count.reactions}
+                initialDislikes={post._count.reactions}
+              />
             </div>
             <div className="flex gap-2 items-center">
               <MessageCircle className="text-blue-500" size={30} />

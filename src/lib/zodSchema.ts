@@ -96,6 +96,7 @@ export const commentSchema = z.object({
   postId: z.string().uuid("Invalid post ID"),
 });
 
-export const likeSchema = z.object({
+export const reactionSchema = z.object({
   postId: z.string().uuid("Invalid post ID"),
+  type: z.enum(["LIKE", "DISLIKE"]),
 });

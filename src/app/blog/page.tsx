@@ -27,7 +27,7 @@ export default async function page({ searchParams }: PageProps) {
       }
     : {};
 
-  const allPosts: PostWithCounts[] = await prisma.post.findMany({
+  const allPosts = await prisma.post.findMany({
     where: whereClause,
     skip: (currentPage - 1) * pageSize,
     take: pageSize,
@@ -35,7 +35,7 @@ export default async function page({ searchParams }: PageProps) {
       _count: {
         select: {
           comments: true,
-          likes: true,
+          reactions: true,
         },
       },
     },

@@ -26,11 +26,37 @@ export const categoryMap: Record<string, Category> = {
 
 export type PostWithCounts = Prisma.PostGetPayload<{
   include: {
+    user: true;
+    comments: { include: { user: true } };
+    reactions: { include: { user: true } };
     _count: {
       select: {
         comments: true;
-        likes: true;
+        reactions: true;
       };
     };
   };
 }>;
+
+export type PostCounts = Prisma.PostGetPayload<{
+  include: {
+    _count: {
+      select: {
+        comments: true;
+        reactions: true;
+      };
+    };
+  };
+}>;
+
+export type PostWithRelations = Prisma.PostGetPayload<{
+  include: {
+    user: true;
+    comments: { include: { user: true } };
+    reactions: { include: { user: true } };
+    _count: {
+      select: { comments: true; reactions: true };
+    };
+  };
+}>;
+
