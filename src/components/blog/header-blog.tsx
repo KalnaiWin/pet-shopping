@@ -1,22 +1,10 @@
 "use client";
 
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { TopicOption } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { relative } from "path";
 import React from "react";
 import FilterForm from "../_components/filter-form";
 
@@ -81,31 +69,6 @@ export default function HeaderBlog({ initialValue, nameId }: HeaderBlogProps) {
                 );
               })}
             </div>
-            {/* <Button className="flex items-center gap-1 bg-white shadow-md hover:bg-[#f2f8ff] absolute -right-5"></Button> */}
-            <Select>
-              <SelectTrigger className="w-[100px]">
-                <div className="flex gap-2 opacity-50 items-center">
-                  <p className="font-medium text-black ">Sort</p>
-                  <div>
-                    <Image
-                      src={"/assets/sort.png"}
-                      alt="Sort"
-                      width={20}
-                      height={20}
-                      className="object-cover"
-                    />
-                  </div>
-                </div>
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel></SelectLabel>
-                  <SelectItem value="current">Current</SelectItem>
-                  <SelectItem value="hot">Hot</SelectItem>
-                  <SelectItem value="old">Old</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
           </div>
           <div className="w-1/3 relative">
             <FilterForm

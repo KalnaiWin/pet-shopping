@@ -1,11 +1,8 @@
 import { Pagination } from "@/components/_components/pagination";
-import PixelText from "@/components/_components/pixel-text";
-import PixelTransition from "@/components/animation/PixelTransition/PixelTransition";
 import { Badge } from "@/components/ui/badge";
 import { Category } from "@/generated/prisma";
 import { prisma } from "@/lib/prisma";
 import { badges, badgesCategory, getDataCategory, slug } from "@/lib/utils";
-import { divide } from "effect/Duration";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -39,7 +36,7 @@ export default async function Page({ searchParams, params }: PageProps) {
   // 🟢 Convert string param into enum safely
   const categoryEnum = toCategory(fomated ?? "");
   if (!categoryEnum) {
-    return <div>EMpty</div>;
+    return <div>Empty</div>;
   }
 
   const totalCount = await prisma.products.count({
