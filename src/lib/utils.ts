@@ -135,3 +135,10 @@ export const textAfterNumber = (input: string): string => {
   return match ? match[1].trim() : "";
 }
 
+export const DescriptionBlog = (text: string) => {
+  if(text === "New") return "A notitfication about our latest products";
+  else if(text === "Issue") return "Apologie for problems we made";
+  else if(text === "Guide") return "Following these steps to have a better services";
+  else if(text === "Discuss") return "How do you think about this";
+  else return "Just a random post";
+}

@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export async function HeroPage() {
+  
   const allProductsBanner = await prisma.banner.findMany({
     orderBy: { order: "asc" },
   });
