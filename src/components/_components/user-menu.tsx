@@ -30,15 +30,15 @@ export default function UserMenu({ user }: UserMenuProps) {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant={"ghost"} className="relative h-8 w-8 rounded-full">
-          <Avatar className="h-8 w-8">
-            <AvatarFallback>{getInitials(user?.name) || "User"}</AvatarFallback>
+          <Avatar className="h-8 w-8 border-3 border-blue-500">
+            <AvatarFallback className="text-blue-500">{getInitials(user?.name) || "Guest"}</AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent side="bottom" align="start" className="w-56 mr-5">
         <div className="flex items-center justify-start gap-2 p-2">
           <div className="flex flex-col space-y-1 leading-none">
-            <p className="font-bold">{user.name}</p>
+            <p className="font-bold">{user.name }</p>
             <p className="text-sm text-muted-foreground">{user?.email}</p>
           </div>
         </div>

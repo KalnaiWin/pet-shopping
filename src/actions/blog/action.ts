@@ -125,7 +125,6 @@ export async function AddCommentAction(prevState: unknown, formData: FormData) {
   const postId = formData.get("postId") as string;
 
   revalidatePath(`/blog/${postId}`);
-  redirect(`/blog/${postId}`);
 }
 
 export async function DeleteCommentAction(formData: FormData) {

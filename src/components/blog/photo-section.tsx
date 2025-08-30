@@ -9,6 +9,8 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Image from "next/image";
+import { XIcon } from "lucide-react";
+import Link from "next/link";
 
 export default function PhotoSection({
   allImages,
@@ -20,7 +22,11 @@ export default function PhotoSection({
   return (
     <div className="w-full bg-black relative h-screen flex justify-center items-center">
       <div className="absolute top-2 left-2">
-        <ReturnButton label="Return" href={`/blog/${postId}`} className={"bg-amber-50 text-black hover:bg-amber-100"} />
+        <button className="hover:bg-gray-500 rounded-full p-1">
+          <Link href={`/blog/${postId}`}>
+            <XIcon className="text-white size-8" />
+          </Link>
+        </button>
       </div>
       <Carousel className="relative">
         <CarouselContent>

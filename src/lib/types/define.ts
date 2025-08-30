@@ -61,3 +61,25 @@ export type PostWithRelations = Prisma.PostGetPayload<{
     };
   };
 }>;
+
+export type PostWithInformation = Prisma.PostGetPayload<{
+  select: {
+    images: true;
+    user: true;
+    title: true;
+    content: true;
+    status: true;
+    topic: true;
+    comments: {
+      include: {
+        user: true;
+      };
+    };
+    reactions: {
+      include: {
+        user: true;
+      };
+    };
+    createdAt: true;
+  };
+}>;

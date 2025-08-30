@@ -8,11 +8,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { extractNumber, textAfterNumber } from "@/lib/utils";
-import { MessageCircle, ThumbsDown, ThumbsUp } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import FormComment from "./form-comment";
+import FormComment from "../admin/blog/form-comment";
 import DeleteForm from "@/components/_components/delete-alert";
 import { DeleteCommentAction } from "@/actions/blog/action";
 import { useSession } from "@/lib/auth-client";
@@ -26,7 +26,11 @@ interface PostContentProps {
   totalPages: number;
 }
 
-export function PostCotent({ post, currentPage, totalPages }: PostContentProps) {
+export function PostCotent({
+  post,
+  currentPage,
+  totalPages,
+}: PostContentProps) {
   const likes = post.reactions.filter((r) => r.type === "LIKE").length;
   const dislikes = post.reactions.filter((r) => r.type === "DISLIKE").length;
 
@@ -59,6 +63,13 @@ export function PostCotent({ post, currentPage, totalPages }: PostContentProps) 
           <div className="flex gap-2">
             <p>By {post.user.name} - </p>
             <p>{new Intl.DateTimeFormat("en-US").format(post.createdAt)}</p>
+            <Link
+              href={`/blog/topic/${post.topic}`}
+              className="underline text-blue-600"
+            >
+              #{post.topic}
+            </Link>
+            {/* <Link href={`/blog/topic/${post.topic}`} className="underline text-blue-600">#{post.}</Link> */}
           </div>
         </CardDescription>
       </CardHeader>
@@ -214,7 +225,9 @@ export function PostCotent({ post, currentPage, totalPages }: PostContentProps) 
                 </div>
               );
             })}
-            <Pagination currentPage={currentPage} totalPages={totalPages} />
+            <div className="w-full flex justify-center">
+              <Pagination currentPage={currentPage} totalPages={totalPages} />
+            </div>{" "}
           </div>
         </div>
       </CardContent>

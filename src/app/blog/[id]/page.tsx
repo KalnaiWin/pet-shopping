@@ -1,4 +1,4 @@
-import { PostCotent } from "@/components/admin/blog/post-cotent";
+import { PostCotent } from "@/components/blog/post-cotent";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { PostWithRelations } from "@/lib/types/define";
