@@ -24,7 +24,7 @@ export default function ProductImagesSelector({
         />
       </div>
 
-      <div className="flex gap-2 mt-4 w-full justify-between">
+      <div className="flex gap-2 mt-4 w-full justify-start">
         {arrayImages.map((image, idx) => (
           <button
             key={idx}

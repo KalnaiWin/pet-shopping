@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { DescriptionBlog, TopicOption } from "@/lib/utils";
-import { Circle, ExternalLinkIcon, Link2 } from "lucide-react";
+import { ExternalLinkIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
