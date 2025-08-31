@@ -7,11 +7,16 @@ import { useState } from "react";
 import Image from "next/image";
 import DeleteForm from "../_components/delete-alert";
 import { DeleteCommentAction } from "@/actions/blog/action";
+import { Pagination } from "../_components/pagination";
 
 export default function CommentProduct({
   allProducts,
+  currentPage,
+  totalPages,
 }: {
   allProducts: ProductsCommentInfo;
+  currentPage: number;
+  totalPages: number;
 }) {
   const { data: session } = useSession();
 
@@ -93,9 +98,9 @@ export default function CommentProduct({
             </div>
           );
         })}
-        {/* <div className="w-full flex justify-center">
-            <Pagination currentPage={currentPage} totalPages={totalPages} />
-          </div>{" "} */}
+        <div className="w-full flex justify-center">
+          <Pagination currentPage={currentPage} totalPages={totalPages} />
+        </div>{" "}
       </div>
     </div>
   );

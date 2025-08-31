@@ -113,5 +113,10 @@ export type ProductsCommentInfo = Prisma.ProductsGetPayload<{
         };
       };
     };
+    _count: {
+      select: {
+        comments: true;
+      };
+    };
   };
 }>;

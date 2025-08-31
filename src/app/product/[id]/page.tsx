@@ -2,22 +2,30 @@ import ToggleButton from "@/components/_components/toogle-show-button";
 import QuantityButton from "@/components/admin/product/quantity-button";
 import CommentProduct from "@/components/product/comment-product";
 import ProductImagesSelector from "@/components/product/product-images.-selector";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { prisma } from "@/lib/prisma";
 import { ProductsCommentInfo } from "@/lib/types/define";
-import { slug } from "@/lib/utils";
+import { badges, badgesCategory, slug } from "@/lib/utils";
 import { ShoppingBag, ShoppingCart, Truck } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import React from "react";
 
 interface PageProps {
   params: Promise<{ id: string }>;
+  searchParams: { page?: string };
 }
 
-export default async function Page({ params }: PageProps) {
+export default async function Page({ params, searchParams }: PageProps) {
+  const resolvedSearchParams = await searchParams;
   const { id } = await params;
+  const { page } = resolvedSearchParams ?? {};
+  const currentPage = parseInt(page ?? "1", 10);
+
+  const pageSize = 5;
 
   const product: ProductsCommentInfo | null = await prisma.products.findUnique({
     where: { id },
@@ -49,12 +57,29 @@ export default async function Page({ params }: PageProps) {
           },
         },
       },
+      _count: {
+        select: {
+          comments: true,
+        },
+      },
     },
+  });
+
+  const productCategory = product?.category;
+
+  const RecommendProduct = await prisma.products.findMany({
+    where: {
+      category: productCategory,
+    },
+    take: 5,
   });
 
   if (!product) {
     notFound();
   }
+
+  const totalCount = product._count.comments ?? 0;
+  const totalPages = Math.ceil(totalCount / pageSize);
 
   const arrayImages = product.images;
 
@@ -247,7 +272,75 @@ export default async function Page({ params }: PageProps) {
               title="Description Product"
             />
           </div>
-          <CommentProduct allProducts={product} />
+          <CommentProduct
+            currentPage={currentPage}
+            totalPages={totalPages}
+            allProducts={product}
+          />
+          <div className=" w-full my-10">
+            <div className="my-5 flex w-full justify-between">
+              <h1 className="text-2xl font-bold">Recommend for you</h1>
+              <Link href={`/product/category/${slug(product.category)}`} className="underline">
+                View All
+              </Link>
+            </div>
+            <div className="grid grid-cols-5 w-full">
+              {RecommendProduct.map((product) => {
+                const price =
+                  Number(product.maxPrice) -
+                  (Number(product.maxPrice) * Number(product.discount)) / 100;
+                return (
+                  <div
+                    key={product.id}
+                    className="border-2 shadow-md w-18/19 rounded-sm h-[340px]"
+                  >
+                    <Link href={`/product/${product.id}`} className="">
+                      <Image
+                        src={product.images[0]}
+                        alt="Image Product"
+                        width={500}
+                        height={500}
+                        className="object-cover rounded-sm"
+                      />
+                    </Link>
+                    <div className="p-2">
+                      <div className="flex flex-col gap-3">
+                        <p className="text-sm font-bold line-clamp-1">
+                          {product.name}
+                        </p>
+                        <div className="flex gap-3 line-clamp-1">
+                          <Link href={`/product/brand/${product.brand}`}>
+                            <Badge className={`${badges(product.brand)}`}>
+                              {product.brand}
+                            </Badge>
+                          </Link>
+                          <Link
+                            href={`/product/category/${slug(product.category)}`}
+                          >
+                            <Badge
+                              className={`${badgesCategory(product.category)}`}
+                            >
+                              {product.category}
+                            </Badge>
+                          </Link>
+                        </div>
+                        <div className="font-medium text-[#ff5500] w-full flex gap-2">
+                          {price.toLocaleString()} VND
+                          {product.discount ? (
+                            <div className="bg-[#ff5500] text-white p-1 rounded-sm text-[11px]">
+                              -{product.discount}%
+                            </div>
+                          ) : (
+                            ""
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </div>
     </div>
