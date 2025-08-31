@@ -18,7 +18,7 @@ export default async function ProductPage() {
         <h1 className="text-3xl font-bold">Products</h1>
         <div className="flex w-full justify-between">
           <p className="opacity-40 text-md mb-10">
-            "Not the best but the most amazing". Choose products suited for your
+            "Not the best but the most suitable". Choose products suited for your
             pets.
           </p>
           <Link href={"/product"} className="underline hover:font-bold transition-all">

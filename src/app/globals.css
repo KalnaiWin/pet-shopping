@@ -9,7 +9,6 @@
   font-family: "Roboto Flex", sans-serif;
 }
 
-
 .sr-only {
   position: absolute;
   width: 1px;
@@ -139,5 +138,21 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+.animate-marque {
+  animation: marquee 25s linear infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
   }
 }
