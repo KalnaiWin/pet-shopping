@@ -1,8 +1,6 @@
 import { PostCotent } from "@/components/blog/post-cotent";
-import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { PostWithRelations } from "@/lib/types/define";
-import { headers } from "next/headers";
 import { notFound } from "next/navigation";
 import React from "react";
 

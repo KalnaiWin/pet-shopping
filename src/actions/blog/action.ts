@@ -114,17 +114,24 @@ export async function AddCommentAction(prevState: unknown, formData: FormData) {
     return submission.reply();
   }
 
+  const { content, postId, productsId } = submission.value;
+
   await prisma.comment.create({
     data: {
-      content: submission.value.content,
-      postId: submission.value.postId,
+      content,
       userId: session.user.id,
+      ...(postId && { postId }),
+      ...(productsId && { productsId }),
     },
   });
 
-  const postId = formData.get("postId") as string;
+  const nameReturn = postId || productsId;
 
-  revalidatePath(`/blog/${postId}`);
+  if (postId) {
+    revalidatePath(`/blog/${nameReturn}`);
+  } else if (productsId) {
+    revalidatePath(`/product/${nameReturn}`);
+  }
 }
 
 export async function DeleteCommentAction(formData: FormData) {
@@ -164,5 +171,3 @@ export async function DeleteCommentAction(formData: FormData) {
 
   revalidatePath(`/blog/${postId}`);
 }
-
-

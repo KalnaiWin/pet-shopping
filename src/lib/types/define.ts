@@ -83,3 +83,35 @@ export type PostWithInformation = Prisma.PostGetPayload<{
     createdAt: true;
   };
 }>;
+
+export type ProductsCommentInfo = Prisma.ProductsGetPayload<{
+  select: {
+    id: true;
+    name: true;
+    description: true;
+    category: true;
+    brand: true;
+    price: true;
+    maxPrice: true;
+    images: true;
+    expired: true;
+    discount: true;
+    delivery: true;
+    stock: true;
+    origin: true;
+    comments: {
+      select: {
+        id: true;
+        content: true;
+        createdAt: true;
+        user: {
+          select: {
+            id: true;
+            name: true;
+            image: true;
+          };
+        };
+      };
+    };
+  };
+}>;

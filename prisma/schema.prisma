@@ -28,7 +28,7 @@ model Post {
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  comments Comment[]
+  comments  Comment[]
   reactions Reaction[]
 
   @@map("posts")
@@ -48,12 +48,14 @@ model Comment {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  postId String
-  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId String?
+  post   Post?   @relation(fields: [postId], references: [id], onDelete: Cascade) // Add ? here
 
-  userId   String
-  user     User       @relation(fields: [userId], references: [id], onDelete: Cascade)
-  reactions Reaction[]
+  userId     String
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  reactions  Reaction[]
+  productsId String?
+  Products   Products?  @relation(fields: [productsId], references: [id])
 
   @@map("comments")
 }
@@ -187,6 +189,8 @@ model Products {
   status      Boolean
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  comments Comment[]
 
   @@map("products")
 }

@@ -1,15 +1,11 @@
 import ToggleButton from "@/components/_components/toogle-show-button";
 import QuantityButton from "@/components/admin/product/quantity-button";
+import CommentProduct from "@/components/product/comment-product";
 import ProductImagesSelector from "@/components/product/product-images.-selector";
 import { Button } from "@/components/ui/button";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { prisma } from "@/lib/prisma";
+import { ProductsCommentInfo } from "@/lib/types/define";
 import { slug } from "@/lib/utils";
 import { ShoppingBag, ShoppingCart, Truck } from "lucide-react";
 import Link from "next/link";
@@ -23,7 +19,7 @@ interface PageProps {
 export default async function Page({ params }: PageProps) {
   const { id } = await params;
 
-  const product = await prisma.products.findUnique({
+  const product: ProductsCommentInfo | null = await prisma.products.findUnique({
     where: { id },
     select: {
       id: true,
@@ -39,6 +35,20 @@ export default async function Page({ params }: PageProps) {
       delivery: true,
       stock: true,
       origin: true,
+      comments: {
+        select: {
+          id: true,
+          content: true,
+          createdAt: true,
+          user: {
+            select: {
+              id: true,
+              name: true,
+              image: true,
+            },
+          },
+        },
+      },
     },
   });
 
@@ -166,75 +176,78 @@ export default async function Page({ params }: PageProps) {
           </div>
         </div>
         {/* DETAIL */}
-        <div className="flex flex-col my-10 mx-20">
-          <p className="text-3xl font-bold py-5 px-4 bg-[#f8f8f8]">
-            Detail Product
-          </p>
-          <Table className="border-separate mt-5">
-            <TableBody>
-              <TableRow>
-                <TableCell className="border border-r-0 border-b-0 p-5">
-                  Category
-                </TableCell>
-                <TableCell className="border border-l-0 border-b-0 p-5">
-                  <Link
-                    href={`/product/category/${slug(product.category)}`}
-                    className="text-blue-500"
-                  >
-                    {product.category}
-                  </Link>
-                </TableCell>
-              </TableRow>
-              <TableRow className="">
-                <TableCell className="border border-r-0 border-b-0 p-5">
-                  Total in Warehouse
-                </TableCell>
-                <TableCell className="border border-l-0 border-b-0 p-5">
-                  {product.stock}
-                </TableCell>
-              </TableRow>
-              <TableRow className="">
-                <TableCell className="border border-r-0 border-b-0 p-5">
-                  Brand
-                </TableCell>
-                <TableCell className="border border-l-0 border-b-0 p-5">
-                  <Link
-                    href={`/product/brand/${product.brand}`}
-                    className="text-blue-500"
-                  >
-                    {product.brand}
-                  </Link>
-                </TableCell>
-              </TableRow>
-              <TableRow className="">
-                <TableCell className="border border-r-0 border-b-0 p-5">
-                  Origin
-                </TableCell>
-                <TableCell className="border border-l-0 border-b-0 p-5">
-                  {product.origin}
-                </TableCell>
-              </TableRow>
-              <TableRow className="">
-                {product.expired !== "null" && (
-                  <>
-                    <TableCell className="border border-r-0 border-b-0 p-5">
-                      Expired
-                    </TableCell>
-                    <TableCell className="border border-l-0 border-b-0 p-5">
-                      {product.expired}
-                    </TableCell>
-                  </>
-                )}
-              </TableRow>
-            </TableBody>
-          </Table>
-        </div>
-        {/* DESCRIPTION */}
-        <div className="mx-20 my-10">
-          <ToggleButton
-            text={product.description}
-            title="Description Product"
-          />
+        <div className="mx-20">
+          <div className="flex flex-col my-10">
+            <p className="text-3xl font-bold py-5 px-4 bg-[#f8f8f8]">
+              Detail Product
+            </p>
+            <Table className="border-separate mt-5">
+              <TableBody>
+                <TableRow>
+                  <TableCell className="border border-r-0 border-b-0 p-5">
+                    Category
+                  </TableCell>
+                  <TableCell className="border border-l-0 border-b-0 p-5">
+                    <Link
+                      href={`/product/category/${slug(product.category)}`}
+                      className="text-blue-500"
+                    >
+                      {product.category}
+                    </Link>
+                  </TableCell>
+                </TableRow>
+                <TableRow className="">
+                  <TableCell className="border border-r-0 border-b-0 p-5">
+                    Total in Warehouse
+                  </TableCell>
+                  <TableCell className="border border-l-0 border-b-0 p-5">
+                    {product.stock}
+                  </TableCell>
+                </TableRow>
+                <TableRow className="">
+                  <TableCell className="border border-r-0 border-b-0 p-5">
+                    Brand
+                  </TableCell>
+                  <TableCell className="border border-l-0 border-b-0 p-5">
+                    <Link
+                      href={`/product/brand/${product.brand}`}
+                      className="text-blue-500"
+                    >
+                      {product.brand}
+                    </Link>
+                  </TableCell>
+                </TableRow>
+                <TableRow className="">
+                  <TableCell className="border border-r-0 border-b-0 p-5">
+                    Origin
+                  </TableCell>
+                  <TableCell className="border border-l-0 border-b-0 p-5">
+                    {product.origin}
+                  </TableCell>
+                </TableRow>
+                <TableRow className="">
+                  {product.expired !== "null" && (
+                    <>
+                      <TableCell className="border border-r-0 border-b-0 p-5">
+                        Expired
+                      </TableCell>
+                      <TableCell className="border border-l-0 border-b-0 p-5">
+                        {product.expired}
+                      </TableCell>
+                    </>
+                  )}
+                </TableRow>
+              </TableBody>
+            </Table>
+          </div>
+          {/* DESCRIPTION */}
+          <div className="my-10">
+            <ToggleButton
+              text={product.description}
+              title="Description Product"
+            />
+          </div>
+          <CommentProduct allProducts={product} />
         </div>
       </div>
     </div>

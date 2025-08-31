@@ -14,7 +14,13 @@ import Image from "next/image";
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 
-export default function FormComment({ postId }: { postId: string }) {
+export default function FormComment({
+  postId,
+  name,
+}: {
+  postId: string;
+  name: string;
+}) {
   const { data: session } = useSession();
   const { pending } = useFormStatus();
 
@@ -55,7 +61,7 @@ export default function FormComment({ postId }: { postId: string }) {
             {session?.user.name}
           </p>
         </div>
-        <Input type="hidden" name="postId" value={postId} />
+        <Input type="hidden" name={name} value={postId} />
         <div className="relative">
           <Textarea
             key={fields.content.key}
@@ -71,7 +77,7 @@ export default function FormComment({ postId }: { postId: string }) {
               </button>
             ) : (
               <button type="submit" className="cursor-pointer absolute">
-                <Send className="size-5"/>
+                <Send className="size-5" />
               </button>
             )}
           </div>

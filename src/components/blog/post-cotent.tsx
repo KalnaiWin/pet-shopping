@@ -161,7 +161,7 @@ export function PostCotent({
             </div>
           </div>
           <div className="my-10">
-            <FormComment postId={post.id} />
+            <FormComment postId={post.id} name="postId" />
           </div>
           <div className="w-full h-0.5 bg-gray-400"></div>
           <div className="w-full mt-10">

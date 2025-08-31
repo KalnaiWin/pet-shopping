@@ -93,7 +93,20 @@ export const postSchema = z.object({
 
 export const commentSchema = z.object({
   content: z.string().min(1, "Comment cannot be empty"),
-  postId: z.string().uuid("Invalid post ID"),
+  postId: z
+    .string()
+    .optional()
+    .refine(
+      (val) => !val || z.string().uuid().safeParse(val).success,
+      "Invalid post ID"
+    ),
+  productsId: z
+    .string()
+    .optional()
+    .refine(
+      (val) => !val || z.string().uuid().safeParse(val).success,
+      "Invalid product ID"
+    ),
 });
 
 export const reactionSchema = z.object({
