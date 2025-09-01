@@ -120,3 +120,10 @@ export type ProductsCommentInfo = Prisma.ProductsGetPayload<{
     };
   };
 }>;
+
+export type FormDataProps = {
+  name: string;
+  email: string;
+  phone: string;
+  message: string;
+};

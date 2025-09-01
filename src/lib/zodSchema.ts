@@ -113,3 +113,10 @@ export const reactionSchema = z.object({
   postId: z.string().uuid("Invalid post ID"),
   type: z.enum(["LIKE", "DISLIKE"]),
 });
+
+export const mailFormSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  email: z.string().min(1, "Invalid email address"),
+  phone: z.string().min(1, "Phone number is required"),
+  message: z.string().min(1, "Message is required"),
+});
