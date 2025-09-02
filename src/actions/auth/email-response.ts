@@ -21,7 +21,8 @@ export async function sendEmail(formData: FormDataProps) {
         Name: ${formData.name}
         Email: ${formData.email}
         Phone: ${formData.phone}
-        Message: ${formData.message}
+        Message: 
+          ${formData.message}
       `,
     };
 

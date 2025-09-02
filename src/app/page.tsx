@@ -1,5 +1,6 @@
 import { BlogPage } from "@/components/home/blog-page";
 import BrandPage from "@/components/home/brand-page";
+import ContactPage from "@/components/home/contact-page";
 import FooterPage from "@/components/home/footer-page";
 import { HeroPage } from "@/components/home/hero-page";
 import HomePage from "@/components/home/home-page";
@@ -13,6 +14,7 @@ export default function Home() {
       <BlogPage/>
       <ProductPage/>
       <BrandPage/>
+      <ContactPage/>
       <FooterPage/>
     </div>
   );

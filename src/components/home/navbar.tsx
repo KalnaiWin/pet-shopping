@@ -27,6 +27,7 @@ export default function NavBar() {
     { href: "/", label: "Home" },
     { href: "/blog", label: "Blog" },
     { href: "/product", label: "Product" },
+    { href: "/chat", label: "Chat" },
     { href: "/contact", label: "Contact" },
   ];
 

@@ -156,3 +156,69 @@
     transform: translateX(0%);
   }
 }
+
+.center-absolute {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.gif-circle {
+  animation: gifCircle 5s ease infinite;
+  transition: all;
+}
+
+.gif-border {
+  animation: gifBorder 5s ease infinite;
+  transition: all;
+}
+
+@keyframes gifCircle {
+  0% {
+    rotate: 0deg;
+  }
+  25% {
+    rotate: 10deg;
+  }
+  /* 50% {
+    rotate: 0deg;
+  } */
+  75% {
+    rotate: -10deg;
+  }
+  100% {
+    rotate: 0deg;
+  }
+}
+
+@keyframes gifBorder {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0);
+  }
+  25% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(0.7);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  75% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(0.7);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+  }
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  height: 8px !important;
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #ffffff3b;
+}
