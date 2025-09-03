@@ -1,15 +1,11 @@
-import Chat from "@/components/chat/ChatBox/chat";
-import ChatLists from "@/components/chat/ChatList/chat-list";
+// src/app/chat/page.tsx
 import { prisma } from "@/lib/prisma";
 import { AdminAdvisers } from "@/lib/types/define";
-import { divide } from "effect/Duration";
-import React from "react";
+import ChatPage from "@/components/chat/chat-page";
 
-export default async function page() {
-  const allAdmin: AdminAdvisers[] | null = await prisma.user.findMany({
-    where: {
-      role: "ADMIN",
-    },
+export default async function Page() {
+  const allAdmin: AdminAdvisers[] = await prisma.user.findMany({
+    where: { role: "ADMIN" },
     select: {
       id: true,
       name: true,
@@ -20,21 +16,5 @@ export default async function page() {
     },
   });
 
-  if (!allAdmin) {
-    return <div></div>;
-  }
-
-  return (
-    <>
-      <div className="flex h-screen w-screen max-h-screen max-w-full overflow-hidden bg-[#091a23]">
-        <div className="w-2/5 border-r-[0.5px] border-gray-400">
-          <ChatLists allAdmin={allAdmin} />
-        </div>
-        <div className="w-full">
-          {/* <EmptyPage /> */}
-          <Chat />
-        </div>
-      </div>
-    </>
-  );
+  return <ChatPage allAdmin={allAdmin}/>;
 }

@@ -169,7 +169,7 @@
 }
 
 .gif-border {
-  animation: gifBorder 5s ease infinite;
+  animation: gifBorder 5s ease-in infinite;
   transition: all;
 }
 
