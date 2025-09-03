@@ -222,3 +222,7 @@
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background: #ffffff3b;
 }
+
+.clip-path-slant {
+  clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
+}

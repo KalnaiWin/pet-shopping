@@ -51,7 +51,7 @@ export default function AdminNavbar({
     <div className="w-full flex flex-col items-start justify-between h-full">
       <div>
         <Link href={"/"} className="flex items-center gap-2">
-          <img src="/images/logo.png" alt="Logo" />
+          <Image src="/images/logo.png" alt="Logo" width={42} height={42}/>
           <p className="text-3xl font-bold">Tiddy Pet</p>
         </Link>
         <div className="mt-10 space-y-2 w-full">
