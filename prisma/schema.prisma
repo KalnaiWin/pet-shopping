@@ -98,11 +98,13 @@ model User {
   banReason     String?
   banExpires    DateTime?
 
-  sessions Session[]
-  accounts Account[]
-  posts    Post[]
-  comments Comment[]
-  Reaction Reaction[]
+  sessions         Session[]
+  accounts         Account[]
+  posts            Post[]
+  comments         Comment[]
+  Reaction         Reaction[]
+  sentMessages     Message[]  @relation("SentMessages")
+  receivedMessages Message[]  @relation("ReceivedMessages")
 
   @@map("users")
 }
@@ -224,4 +226,17 @@ enum Category {
   HygieneBeauty
   Other
   Discount
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  text      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  senderId   String
+  receiverId String
+
+  sender   User @relation("SentMessages", fields: [senderId], references: [id])
+  receiver User @relation("ReceivedMessages", fields: [receiverId], references: [id])
 }

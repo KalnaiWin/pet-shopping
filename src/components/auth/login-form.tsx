@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import { signInAction } from "@/actions/auth/sign-in.action";
 import SignInOathButton from "./sign-in-aoth-button";
 import { useSession } from "@/lib/auth-client";
+import Image from "next/image";
 
 export default function LoginForm() {
   const { data: session, refetch } = useSession();
@@ -52,7 +53,7 @@ export default function LoginForm() {
       onSubmit={handleSubmit}
     >
       <div className="flex items-center gap-3">
-        <img src="/images/logo.png" alt="" />
+        <Image src="/images/logo.png" alt="Logo" width={42} height={42} />
         <p className="text-3xl font-bold">Tiddy Pet</p>
       </div>
       <h1 className="text-xl font-semibold">Start Your Shopping Journey</h1>

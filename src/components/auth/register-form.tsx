@@ -10,6 +10,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { signUpAction } from "@/actions/auth/sign-up.action";
 import SignInOathButton from "./sign-in-aoth-button";
+import Image from "next/image";
 
 export default function RegisterForm() {
   const [valueName, setValueName] = useState("");
@@ -50,7 +51,7 @@ export default function RegisterForm() {
       className="w-[400px] h-[550px] flex flex-col items-center gap-2 bg-white rounded-xl shadow-[0_0_15px_rgba(0,0,0,0.8)] p-5"
     >
       <div className="flex items-center gap-3">
-        <img src="/images/logo.png" alt="" />
+        <Image src="/images/logo.png" alt="Logo" width={42} height={42} />
         <p className="text-3xl font-bold">Tiddy Pet</p>
       </div>
       <h1 className="text-xl font-semibold">Start Your Shopping Journey</h1>

@@ -20,9 +20,7 @@ export default function HeaderChat() {
         {session?.user ? (
           <div className="flex items-center gap-2">
             <Image
-              src={
-                session?.user.image ? session.user.image : "/assets/default.png"
-              }
+              src={session.user.image || "/assets/default.png"}
               alt="UserImage"
               width={30}
               height={30}

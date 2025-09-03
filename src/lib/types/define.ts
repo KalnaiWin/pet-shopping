@@ -127,3 +127,14 @@ export type FormDataProps = {
   phone: string;
   message: string;
 };
+
+export type AdminAdvisers = Prisma.UserGetPayload<{
+  select: {
+    id: true;
+    name: true;
+    email: true;
+    image: true;
+    createdAt: true;
+    updatedAt: true;
+  };
+}>;
