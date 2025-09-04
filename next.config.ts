@@ -8,8 +8,11 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "utfs.io",
-        port: "",
-        pathname: "/**",
+      },
+      // you can also keep the previous one:
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
       },
     ],
   },

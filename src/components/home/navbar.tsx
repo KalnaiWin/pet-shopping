@@ -5,11 +5,13 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import UserMenu from "../_components/user-menu";
 import { Button } from "../ui/button";
+import { useEffect, useState } from "react";
 
 export default function NavBar() {
   const pathname = usePathname();
   const { data: session, isPending } = useSession();
   const router = useRouter();
+  const [total, setTotal] = useState(0);
 
   const isBlogPhotoPage = /^\/blog\/[^\/]+\/photo$/.test(pathname);
 
@@ -30,6 +32,13 @@ export default function NavBar() {
     { href: "/chat", label: "Chat" },
     { href: "/contact", label: "Contact" },
   ];
+
+  useEffect(() => {
+    // fetch cart total from API
+    fetch("/api/cart/total")
+      .then((res) => res.json())
+      .then((data) => setTotal(data.total));
+  }, []);
 
   return (
     <nav className="fixed top-0 w-full px-30 py-5">
@@ -62,7 +71,7 @@ export default function NavBar() {
           )}
           <div>
             {isPending ? null : session?.user ? (
-              <UserMenu user={session.user} />
+              <UserMenu user={session.user} total={total} />
             ) : (
               <Button
                 className="cursor-pointer bg-amber-900"

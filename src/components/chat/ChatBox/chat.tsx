@@ -15,12 +15,15 @@ export default function Chat({ admin }: { admin: AdminAdvisers }) {
     <div>
       <div className="h-16 px-4 py-3 flex justify-between items-center bg-[#182a34]">
         <div className="flex items-center justify-center gap-6">
-          <Image
-            src={admin.image || "/assets/default.png"}
-            alt="Profile Image"
-            width={35}
-            height={35}
-          />
+          <div className="rounded-full ">
+            <Image
+              src={admin.image || "/assets/default.png"}
+              alt="Profile Image"
+              width={35}
+              height={35}
+              className="rounded-full object-cover"
+            />
+          </div>
           <div className="flex flex-col">
             <p className="text-white">{admin.name}</p>
             <p className="text-white/40">Online / Offline</p>

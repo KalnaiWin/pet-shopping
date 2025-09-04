@@ -84,35 +84,35 @@ enum ReactionType {
   DISLIKE
 }
 
-model User {
-  id        String   @id @default(uuid())
-  createdAt DateTime
-  updatedAt DateTime
+  model User {
+    id        String   @id @default(uuid())
+    createdAt DateTime
+    updatedAt DateTime
 
-  name          String
-  email         String    @unique
-  image         String?
-  emailVerified Boolean
-  role          Role      @default(USER)
-  banned        Boolean?
-  banReason     String?
-  banExpires    DateTime?
+    name          String
+    email         String    @unique
+    image         String?
+    emailVerified Boolean
+    role          Role      @default(USER)
+    banned        Boolean?
+    banReason     String?
+    banExpires    DateTime?
 
-  sessions         Session[]
-  accounts         Account[]
-  posts            Post[]
-  comments         Comment[]
-  Reaction         Reaction[]
-  sentMessages     Message[]  @relation("SentMessages")
-  receivedMessages Message[]  @relation("ReceivedMessages")
+    sessions         Session[]
+    accounts         Account[]
+    posts            Post[]
+    comments         Comment[]
+    Reaction         Reaction[]
+    sentMessages     Message[]  @relation("SentMessages")
+    receivedMessages Message[]  @relation("ReceivedMessages")
 
-  @@map("users")
-}
+    @@map("users")
+  }
 
-enum Role {
-  USER
-  ADMIN
-}
+  enum Role {
+    USER
+    ADMIN
+  }
 
 model Session {
   id        String   @id @default(uuid())

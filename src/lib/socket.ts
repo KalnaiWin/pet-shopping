@@ -1,13 +1,13 @@
 // lib/socket.ts
-import { io, Socket } from "socket.io-client";
+import { Server as NetServer } from "http";
+import { NextApiResponse } from "next";
+import { Server as ServerIO } from "socket.io";
+import { Socket } from "socket.io-client";
 
-let socket: Socket;
-
-export const initSocket = () => {
-  if (!socket) {
-    socket = io({
-      path: "/api/socket/io",
-    });
-  }
-  return socket;
+export type NextApiResponseServerIO = NextApiResponse & {
+  socket: Socket & {
+    server: NetServer & {
+      io: ServerIO;
+    };
+  };
 };

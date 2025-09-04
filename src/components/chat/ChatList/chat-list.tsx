@@ -35,13 +35,13 @@ export default function ChatLists({
                 className="flex w-full px-5 py-3 items-center hover:bg-[#0b2e40] cursor-pointer"
                 onClick={() => onSelectAdmin(admin)} // 👈 set selected admin
               >
-                <div className="flex w-full items-center gap-2">
+                <div className="flex w-full items-center gap-2 rounded-full overflow-hidden">
                   <Image
                     src={admin.image ? admin.image : "/assets/default.png"}
                     alt="Admin Image"
                     width={40}
                     height={40}
-                    className="object-cover"
+                    className="object-cover rounded-full"
                   />
                   <div className="flex flex-col">
                     <div className="flex items-center gap-2">

@@ -138,3 +138,16 @@ export type AdminAdvisers = Prisma.UserGetPayload<{
     updatedAt: true;
   };
 }>;
+
+export type Cart = {
+  userId: string;
+  items: Array<{
+    id: string;
+    name: string;
+    price: number;
+    maxPrice: number;
+    images: string;
+    discount: number;
+    quantity: number;
+  }>;
+};

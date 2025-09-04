@@ -1,7 +1,9 @@
+import { AddItemCartAction } from "@/actions/cart/action";
 import ToggleButton from "@/components/_components/toogle-show-button";
 import QuantityButton from "@/components/admin/product/quantity-button";
 import CommentProduct from "@/components/product/comment-product";
 import ProductImagesSelector from "@/components/product/product-images.-selector";
+import SubmitCart from "@/components/product/submit-cart";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
@@ -89,6 +91,8 @@ export default async function Page({ params, searchParams }: PageProps) {
   const discountMaxPrice =
     Number(product.maxPrice) -
     Math.ceil((Number(product.maxPrice) * Number(product.discount)) / 100);
+
+  const addProductCart = AddItemCartAction.bind(null, product.id);
 
   return (
     <div className="w-full pr-10">
@@ -191,12 +195,9 @@ export default async function Page({ params, searchParams }: PageProps) {
                 Buy Now
               </Button>
               {/* Ad to cart */}
-              <Button className="p-7 text-2xl bg-[#ff5100] font-light hover:bg-[#ae3700]">
-                <span>
-                  <ShoppingBag />
-                </span>{" "}
-                Add to Cart
-              </Button>
+              <form action={addProductCart}>
+                <SubmitCart />
+              </form>
             </div>
           </div>
         </div>
@@ -280,7 +281,10 @@ export default async function Page({ params, searchParams }: PageProps) {
           <div className=" w-full my-10">
             <div className="my-5 flex w-full justify-between">
               <h1 className="text-2xl font-bold">Recommend for you</h1>
-              <Link href={`/product/category/${slug(product.category)}`} className="underline">
+              <Link
+                href={`/product/category/${slug(product.category)}`}
+                className="underline"
+              >
                 View All
               </Link>
             </div>

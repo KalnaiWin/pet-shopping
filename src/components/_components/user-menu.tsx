@@ -1,5 +1,3 @@
-"use client";
-
 import { User } from "better-auth";
 import {
   DropdownMenu,
@@ -23,22 +21,25 @@ import SignOutButton from "../auth/sign-out";
 
 interface UserMenuProps {
   user: User;
+  total: number;
 }
 
-export default function UserMenu({ user }: UserMenuProps) {
+export default function UserMenu({ user, total }: UserMenuProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant={"ghost"} className="relative h-8 w-8 rounded-full">
           <Avatar className="h-8 w-8 border-3 border-blue-500">
-            <AvatarFallback className="text-blue-500">{getInitials(user?.name) || "Guest"}</AvatarFallback>
+            <AvatarFallback className="text-blue-500">
+              {getInitials(user?.name) || "Guest"}
+            </AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent side="bottom" align="start" className="w-56 mr-5">
         <div className="flex items-center justify-start gap-2 p-2">
           <div className="flex flex-col space-y-1 leading-none">
-            <p className="font-bold">{user.name }</p>
+            <p className="font-bold">{user.name}</p>
             <p className="text-sm text-muted-foreground">{user?.email}</p>
           </div>
         </div>
@@ -59,6 +60,7 @@ export default function UserMenu({ user }: UserMenuProps) {
           <Link href="/cart">
             <ShoppingBag className="mr-2 h-4 w-4" />
             <span>Cart</span>
+            <span>({total})</span>
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem className="cursor-pointer" asChild>
