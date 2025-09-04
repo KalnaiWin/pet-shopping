@@ -21,10 +21,9 @@ import SignOutButton from "../auth/sign-out";
 
 interface UserMenuProps {
   user: User;
-  total: number;
 }
 
-export default function UserMenu({ user, total }: UserMenuProps) {
+export default function UserMenu({ user }: UserMenuProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -60,7 +59,6 @@ export default function UserMenu({ user, total }: UserMenuProps) {
           <Link href="/cart">
             <ShoppingBag className="mr-2 h-4 w-4" />
             <span>Cart</span>
-            <span>({total})</span>
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem className="cursor-pointer" asChild>
