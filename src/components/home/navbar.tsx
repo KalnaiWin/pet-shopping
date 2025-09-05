@@ -5,7 +5,6 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import UserMenu from "../_components/user-menu";
 import { Button } from "../ui/button";
-import { useEffect, useState } from "react";
 
 export default function NavBar() {
   const pathname = usePathname();
@@ -29,7 +28,7 @@ export default function NavBar() {
     { href: "/", label: "Home" },
     { href: "/blog", label: "Blog" },
     { href: "/product", label: "Product" },
-    { href: "/chat", label: "Chat" },
+    // { href: "/chat", label: "Chat" },
     { href: "/contact", label: "Contact" },
   ];
 
@@ -64,7 +63,7 @@ export default function NavBar() {
           )}
           <div>
             {isPending ? null : session?.user ? (
-              <UserMenu user={session.user}/>
+              <UserMenu user={session.user} />
             ) : (
               <Button
                 className="cursor-pointer bg-amber-900"

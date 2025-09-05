@@ -78,6 +78,7 @@ export default function ContactPage() {
               <ArrowRight className="size-5" />
             </Link>
           </div>
+          <div className="absolute center-absolute bg-white py-2 px-5 rounded-md font-bold z-20">On BETA ( Tesing )</div>
         </div>
         <div className="relative flex bg-[#760057] items-start justify-between gap-6 p-6 overflow-hidden rounded-md">
           <div className="absolute top-0 -right-40 w-2/3 h-full bg-[#c60091] clip-path-slant hidden md:block z-10" />

@@ -78,5 +78,28 @@ export async function AddItemCartAction(productId: string) {
 
   await redis.set(`cart-${session.user.id}`, myCart);
 
-  revalidatePath("/", "layout"); // refresh page 
+  revalidatePath("/", "layout"); // refresh page
+}
+
+export async function DeleteCartItemAction(formData: FormData) {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session) redirect("/");
+
+  const productId = formData.get("productId");
+
+  let cart: Cart | null = await redis.get(`cart-${session.user.id}`);
+
+  if (cart && cart.items) {
+    const updateCart: Cart = {
+      userId: session.user.id,
+      items: cart.items.filter((item) => item.id !== productId),
+    };
+
+    await redis.set(`cart-${session.user.id}`, updateCart);
+  }
+
+  revalidatePath("/", "layout");
 }

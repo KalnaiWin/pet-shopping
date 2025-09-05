@@ -10,7 +10,7 @@ import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { prisma } from "@/lib/prisma";
 import { ProductsCommentInfo } from "@/lib/types/define";
 import { badges, badgesCategory, slug } from "@/lib/utils";
-import { ShoppingBag, ShoppingCart, Truck } from "lucide-react";
+import {  ShoppingCart, Truck } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -76,7 +76,7 @@ export default async function Page({ params, searchParams }: PageProps) {
     take: 5,
   });
 
-  if (!product) {
+  if (!product || !product.id) {
     notFound();
   }
 
@@ -93,6 +93,7 @@ export default async function Page({ params, searchParams }: PageProps) {
     Math.ceil((Number(product.maxPrice) * Number(product.discount)) / 100);
 
   const addProductCart = AddItemCartAction.bind(null, product.id);
+
 
   return (
     <div className="w-full pr-10">
@@ -195,9 +196,9 @@ export default async function Page({ params, searchParams }: PageProps) {
                 Buy Now
               </Button>
               {/* Ad to cart */}
-              <form action={addProductCart}>
-                <SubmitCart />
-              </form>
+              {/* <form action={addProductCart}> */}
+              <SubmitCart productId={product.id} />
+              {/* </form> */}
             </div>
           </div>
         </div>
