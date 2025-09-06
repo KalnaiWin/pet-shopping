@@ -19,15 +19,13 @@ export async function CheckOut() {
 
   let cart: Cart | null = await redis.get(`cart-${user.id}`);
 
-  const VND_TO_CAD = 25000;
-
   const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] =
     cart?.items.map((item) => {
-      const priceInCAD = item.maxPrice * (item.discount / 100) / VND_TO_CAD;
-      let unitAmount = Math.round(priceInCAD * 100);
+      const priceInVND = item.maxPrice * (item.discount / 100);
+      let unitAmount = Math.round(priceInVND);
       return {
         price_data: {
-          currency: "usd",
+          currency: "vnd",
           unit_amount: unitAmount,
           product_data: {
             name: item.name,
@@ -44,6 +42,9 @@ export async function CheckOut() {
       line_items: lineItems,
       success_url: "http://localhost:3000/payment/success",
       cancel_url: "http://localhost:3000/payment/cancel",
+      metadata: {
+        userId: user.id,
+      },
     });
 
     return redirect(sess.url as string);

@@ -25,6 +25,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { redirect, useRouter } from "next/navigation";
 import React from "react";
+import SubmitButton from "../_components/submit-button";
 
 interface CartPage {
   cart: Cart | null;
@@ -32,20 +33,16 @@ interface CartPage {
   totalProduct: number;
 }
 
-export default function CartPage({
-  cart,
-  totalPrice,
-  totalProduct,
-}: CartPage) {
+export default function CartPage({ cart, totalPrice, totalProduct }: CartPage) {
   const router = useRouter();
 
   return (
     <div className="w-full px-25">
-      {cart?.items.length === 0 ? (
+      {!cart || !cart.items ? (
         <div className="w-full h-screen flex justify-center items-center">
           <div className="flex flex-col gap-5 justify-center items-center py-10 px-5 border rounded-md">
-            <div className="w-32 h-32 flex items-center justify-center rounded-full bg-green-200">
-              <ShoppingBag size={64} className="text-green-900" />
+            <div className="w-32 h-32 flex items-center justify-center rounded-full bg-blue-200">
+              <ShoppingBag size={64} className="text-blue-900" />
             </div>{" "}
             <h1 className="font-bold text-3xl text-center">
               You haven't had anything in your cart
@@ -55,7 +52,7 @@ export default function CartPage({
               Let's get some at shopping section.
             </p>
             <Button
-              className="bg-green-700 text-white hover:bg-green-900"
+              className="bg-blue-700 text-white hover:bg-blue-900"
               asChild
             >
               <Link href={"/product"}>Check it out</Link>
@@ -86,12 +83,12 @@ export default function CartPage({
                   </p>
                 </div>
                 <form action={CheckOut}>
-                  <Button
-                    size={"lg"}
-                    className="w-full bg-blue-500 hover:bg-blue-400"
-                  >
-                    Check Out
-                  </Button>
+                  <div className="w-full">
+                    <SubmitButton
+                      text="Check Out"
+                      className="w-full bg-blue-500 hover:bg-blue-700"
+                    />
+                  </div>
                 </form>
               </div>
             </div>
