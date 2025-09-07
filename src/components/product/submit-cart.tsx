@@ -1,17 +1,23 @@
+// AddToCartButton.tsx
 "use client";
-
 import { AddItemCartAction } from "@/actions/cart/action";
 import { useTransition } from "react";
 import { toast } from "sonner";
 
-export default function AddToCartButton({ productId }: { productId: string }) {
+export default function AddToCartButton({
+  productId,
+  quantity,
+}: {
+  productId: string;
+  quantity: number;
+}) {
   const [isPending, startTransition] = useTransition();
 
   const handleClick = () => {
     startTransition(async () => {
       try {
-        await AddItemCartAction(productId);
-        toast.success("Added to cart!");
+        await AddItemCartAction(productId, quantity);
+        toast.success(`Added ${quantity} to cart!`);
       } catch (err) {
         toast.error("Failed to add to cart");
       }

@@ -1,17 +1,16 @@
+// QuantityButton.tsx
 "use client";
-
 import { useState } from "react";
 
-export default function QuantityButton() {
-  const [quantity, setQuantity] = useState(1);
-
-  const increase = () => {
-    setQuantity((q) => q + 1);
-  };
-
-  const decrease = () => {
-    setQuantity((q) => (q > 1 ? q - 1 : 1));
-  };
+export default function QuantityButton({
+  quantity,
+  setQuantity,
+}: {
+  quantity: number;
+  setQuantity: React.Dispatch<React.SetStateAction<number>>;
+}) {
+  const increase = () => setQuantity((q) => q + 1);
+  const decrease = () => setQuantity((q) => (q > 1 ? q - 1 : 1));
 
   return (
     <div className="flex w-fit gap-1">

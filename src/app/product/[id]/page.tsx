@@ -1,6 +1,6 @@
 import { AddItemCartAction } from "@/actions/cart/action";
 import ToggleButton from "@/components/_components/toogle-show-button";
-import QuantityButton from "@/components/admin/product/quantity-button";
+import QuantityButton from "@/components/product/quantity-button";
 import CommentProduct from "@/components/product/comment-product";
 import ProductImagesSelector from "@/components/product/product-images.-selector";
 import SubmitCart from "@/components/product/submit-cart";
@@ -15,6 +15,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import React from "react";
+import ProductActions from "@/components/product/add-amount";
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -180,27 +181,7 @@ export default async function Page({ params, searchParams }: PageProps) {
                 </div>
               </div>
             </div>
-            <div className="my-10 flex items-center gap-5">
-              <p>Amount</p>
-              <div>
-                <QuantityButton />
-              </div>
-            </div>
-            <div className="flex transition-all gap-5">
-              {/* Buy */}
-              {/* <Button className="p-7 text-2xl text-[#ff5100] font-light border border-[#ff5100] bg-[#ffd2bd] hover:bg-[#ffe8dd]">
-                <span className="text-[#ff5100]">
-                  <ShoppingCart />
-                </span>
-                Buy Now
-              </Button> */}
-              {/* Ad to cart */}
-              {/* <form action={addProductCart}> */}
-              <div className="w-1/3">
-                <SubmitCart productId={product.id} />
-              </div>
-              {/* </form> */}
-            </div>
+            <ProductActions productId={product.id} />
           </div>
         </div>
         {/* DETAIL */}

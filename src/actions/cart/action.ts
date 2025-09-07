@@ -8,7 +8,7 @@ import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
-export async function AddItemCartAction(productId: string) {
+export async function AddItemCartAction(productId: string, quantity: number) {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
@@ -48,7 +48,7 @@ export async function AddItemCartAction(productId: string) {
           maxPrice: Number(selectedProduct.maxPrice ?? 0),
           images: selectedProduct.images[0],
           discount: Number(selectedProduct.discount ?? 0),
-          quantity: 1,
+          quantity: quantity,
         },
       ],
     };
@@ -71,7 +71,7 @@ export async function AddItemCartAction(productId: string) {
         price: Number(selectedProduct.price ?? 0),
         maxPrice: Number(selectedProduct.maxPrice ?? 0),
         discount: Number(selectedProduct.discount ?? 0),
-        quantity: 1,
+        quantity: quantity,
       });
     }
   }
