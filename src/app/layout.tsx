@@ -42,7 +42,7 @@ export default function RootLayout({
            */
           routerConfig={extractRouterConfig(ourFileRouter)}
         />
-        <div className="relative z-20">
+        <div className="relative z-21">
           <NavBar />
         </div>
         <main>{children}</main>

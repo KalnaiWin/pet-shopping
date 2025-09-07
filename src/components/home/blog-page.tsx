@@ -17,7 +17,7 @@ export async function BlogPage() {
   });
 
   return (
-    <div className="w-full px-25 py-10 my-5">
+    <div className="w-full py-10 my-5 md:px-30 px-5">
       <div className="flex flex-col">
         <h1 className="text-3xl font-bold">Latest Blogs</h1>
         <p className="opacity-40 text-md mb-10">
@@ -26,10 +26,10 @@ export async function BlogPage() {
         </p>
       </div>
 
-      <div className="grid grid-cols-3 gap-4 w-full">
+      <div className="grid md:grid-cols-3 grid-cols-2 gap-4 w-full">
         {allBlogs.map((post) => (
           <div className="bg-white shadow-xl rounded-md" key={post.id}>
-            <div className="w-full h-52 overflow-hidden relative">
+            <div className="w-full md:h-52 h-30 overflow-hidden relative">
               <Image
                 src={post.images[0]}
                 alt="Image Blog"
@@ -38,11 +38,11 @@ export async function BlogPage() {
               />
               <div className="absolute top-1 left-1">
                 <div
-                  className={`p-5 rounded-full size-16 flex justify-center items-center ${TopicOption(
+                  className={`p-6 rounded-full md:size-16 size-10 flex justify-center items-center ${TopicOption(
                     post.topic
                   )}`}
                 >
-                  <p className="text-sm font-extrabold">{post.topic}</p>
+                  <p className="text-sm md:font-extrabold">{post.topic}</p>
                 </div>
               </div>
             </div>

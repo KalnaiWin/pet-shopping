@@ -9,13 +9,13 @@ import ProductPage from "@/components/home/product-page";
 export default function Home() {
   return (
     <div className="w-full h-screen">
-      <HomePage/>
-      <HeroPage/>
-      <BlogPage/>
-      <ProductPage/>
-      <BrandPage/>
-      <ContactPage/>
-      <FooterPage/>
+      <HomePage />
+      <HeroPage />
+      <BlogPage />
+      <ProductPage />
+      <BrandPage />
+      <ContactPage />
+      <FooterPage />
     </div>
   );
 }

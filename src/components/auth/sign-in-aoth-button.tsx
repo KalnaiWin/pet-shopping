@@ -21,7 +21,7 @@ export default function SignInOathButton({
 
     await signIn.social({
         provider,
-        callbackURL: "/profile",
+        callbackURL: "/",
         errorCallbackURL: "/auth/login/error",
         fetchOptions: {
             onRequest: () => {
