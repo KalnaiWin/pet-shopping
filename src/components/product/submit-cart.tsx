@@ -22,7 +22,7 @@ export default function AddToCartButton({ productId }: { productId: string }) {
     <button
       onClick={handleClick}
       disabled={isPending}
-      className="p-2 px-5 text-2xl rounded-md text-white bg-[#ff5100] font-light hover:bg-[#ae3700]"
+      className="p-2 px-5 text-2xl rounded-md text-white bg-[#ff5100] font-light hover:bg-[#ae3700] w-full"
     >
       {isPending ? "Adding…" : "Add to cart"}
     </button>

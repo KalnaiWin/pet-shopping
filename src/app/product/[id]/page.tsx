@@ -10,7 +10,7 @@ import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { prisma } from "@/lib/prisma";
 import { ProductsCommentInfo } from "@/lib/types/define";
 import { badges, badgesCategory, slug } from "@/lib/utils";
-import {  ShoppingCart, Truck } from "lucide-react";
+import { ShoppingCart, Truck } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -93,7 +93,6 @@ export default async function Page({ params, searchParams }: PageProps) {
     Math.ceil((Number(product.maxPrice) * Number(product.discount)) / 100);
 
   const addProductCart = AddItemCartAction.bind(null, product.id);
-
 
   return (
     <div className="w-full pr-10">
@@ -189,15 +188,17 @@ export default async function Page({ params, searchParams }: PageProps) {
             </div>
             <div className="flex transition-all gap-5">
               {/* Buy */}
-              <Button className="p-7 text-2xl text-[#ff5100] font-light border border-[#ff5100] bg-[#ffd2bd] hover:bg-[#ffe8dd]">
+              {/* <Button className="p-7 text-2xl text-[#ff5100] font-light border border-[#ff5100] bg-[#ffd2bd] hover:bg-[#ffe8dd]">
                 <span className="text-[#ff5100]">
                   <ShoppingCart />
                 </span>
                 Buy Now
-              </Button>
+              </Button> */}
               {/* Ad to cart */}
               {/* <form action={addProductCart}> */}
-              <SubmitCart productId={product.id} />
+              <div className="w-1/3">
+                <SubmitCart productId={product.id} />
+              </div>
               {/* </form> */}
             </div>
           </div>

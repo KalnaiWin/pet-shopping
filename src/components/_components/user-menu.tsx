@@ -61,12 +61,12 @@ export default function UserMenu({ user }: UserMenuProps) {
             <span>Cart</span>
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem className="cursor-pointer" asChild>
+        {/* <DropdownMenuItem className="cursor-pointer" asChild>
           <Link href="/favourite">
             <Heart className="mr-2 h-4 w-4" />
             <span>Favourite</span>
           </Link>
-        </DropdownMenuItem>
+        </DropdownMenuItem> */}
         <DropdownMenuItem className="cursor-pointer" asChild>
           <Link href="/contact">
             <Phone className="mr-2 h-4 w-4" />
