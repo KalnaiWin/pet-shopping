@@ -1,16 +1,12 @@
-import { AddItemCartAction } from "@/actions/cart/action";
 import ToggleButton from "@/components/_components/toogle-show-button";
-import QuantityButton from "@/components/product/quantity-button";
 import CommentProduct from "@/components/product/comment-product";
 import ProductImagesSelector from "@/components/product/product-images.-selector";
-import SubmitCart from "@/components/product/submit-cart";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { prisma } from "@/lib/prisma";
 import { ProductsCommentInfo } from "@/lib/types/define";
 import { badges, badgesCategory, slug } from "@/lib/utils";
-import { ShoppingCart, Truck } from "lucide-react";
+import { Truck } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -93,7 +89,7 @@ export default async function Page({ params, searchParams }: PageProps) {
     Number(product.maxPrice) -
     Math.ceil((Number(product.maxPrice) * Number(product.discount)) / 100);
 
-  const addProductCart = AddItemCartAction.bind(null, product.id);
+  // const addProductCart = AddItemCartAction.bind(null, product.id);
 
   return (
     <div className="w-full pr-10">

@@ -64,7 +64,7 @@ export default function BrandPage() {
               alt="company logo"
               width={120}
               height={120}
-              className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 xl:w-32 xl:h-32 object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+              className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 xl:w-32 xl:h-32 object-contain md:grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
             />
           </div>
         ))}
@@ -79,7 +79,7 @@ export default function BrandPage() {
               alt="company logo"
               width={120}
               height={120}
-              className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 xl:w-32 xl:h-32 object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+              className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 xl:w-32 xl:h-32 object-contain md:grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
             />
           </div>
         ))}
@@ -95,7 +95,7 @@ export default function BrandPage() {
               alt="company logo"
               width={120}
               height={120}
-              className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 xl:w-32 xl:h-32 object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+              className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 xl:w-32 xl:h-32 object-contain md:grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
             />
           </div>
         ))}
@@ -109,7 +109,7 @@ export default function BrandPage() {
               alt="company logo"
               width={120}
               height={120}
-              className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 xl:w-32 xl:h-32 object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+              className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 xl:w-32 xl:h-32 object-contain md:grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
             />
           </div>
         ))}

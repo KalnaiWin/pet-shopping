@@ -57,7 +57,7 @@ export async function AddItemCartAction(productId: string, quantity: number) {
     myCart.items = cart.items.map((item) => {
       if (item.id === productId) {
         itemFound = true;
-        item.quantity += 1;
+        item.quantity += quantity;
       }
 
       return item;
