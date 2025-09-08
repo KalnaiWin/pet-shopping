@@ -45,11 +45,11 @@ export default async function page({ params }: PageProps) {
   }
 
   return (
-    <div className="w-full flex relative">
-      <div className="w-2/3 flex flex-col">
+    <div className="w-full flex md:flex-row flex-col relative">
+      <div className="md:w-2/3 flex flex-col">
         <PhotoSection allImages={allImages.images ?? []} postId={id} />
       </div>
-      <div className="w-1/3">
+      <div className="md:w-1/3">
         <InfoSection postId={id} PostsInfo={allImages} />
       </div>
     </div>

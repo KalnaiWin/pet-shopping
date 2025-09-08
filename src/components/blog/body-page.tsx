@@ -18,14 +18,14 @@ export default function BodyPage({ allPosts }: { allPosts: PostCounts[] }) {
   const router = useRouter();
 
   return (
-    <div className="w-full px-30 my-5">
+    <div className="w-full md:px-30 px-5 my-5">
       <Table>
         <TableHeader>
           <TableRow className="opacity-50">
             <TableHead className="w-40 h-12">Image</TableHead>
             <TableHead>Title</TableHead>
-            <TableHead>Response</TableHead>
-            <TableHead className="text-end">Date</TableHead>
+            <TableHead className="hidden md:block">Response</TableHead>
+            <TableHead className="text-end hidden md:block">Date</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -44,7 +44,7 @@ export default function BodyPage({ allPosts }: { allPosts: PostCounts[] }) {
                     height={100}
                     className="object-cover"
                   />
-                  <div className="absolute -rotate-45 top-2 -left-12 w-[150px] bg-amber-400 text-center shadow-md">
+                  <div className="absolute -rotate-45 md:top-2 top-3 -left-12  w-[150px] bg-amber-400 text-center shadow-md">
                     <p
                       className={`text-xs font-bold text-bold  py-1 ${TopicOption(
                         post.topic
@@ -55,7 +55,7 @@ export default function BodyPage({ allPosts }: { allPosts: PostCounts[] }) {
                   </div>
                 </div>
                 {post.status === true ? (
-                  <div className="absolute -top-2 right-8">
+                  <div className="absolute -top-2 md:right-8 right-2">
                     <Image
                       src={"/assets/pin.png"}
                       alt="Pin"
@@ -67,14 +67,37 @@ export default function BodyPage({ allPosts }: { allPosts: PostCounts[] }) {
                   ""
                 )}
               </TableCell>
-              <TableCell>{post.title}</TableCell>
               <TableCell>
-                <div className="flex gap-5">
-                  <div>{post._count.comments} comments </div> |
-                  <div>{post._count.reactions} reactions </div>
+                <div className="flex flex-col gap-5">
+                  <p className="font-semibold">{post.title}</p>
+                  <div className="md:hidden flex flex-col">
+                    <div className="flex gap-5">
+                      <div className="text-green-700">
+                        {post._count.comments} comments{" "}
+                      </div>{" "}
+                      |
+                      <div className="text-blue-700">
+                        {post._count.reactions} reactions{" "}
+                      </div>
+                    </div>
+                    <p className="text-gray-600">
+                      {new Intl.DateTimeFormat("en-US").format(post.createdAt)}
+                    </p>
+                  </div>
                 </div>
               </TableCell>
-              <TableCell className="text-end">
+              <TableCell className="hidden md:block">
+                <div className="flex gap-5">
+                  <div className="text-green-700">
+                    {post._count.comments} comments{" "}
+                  </div>{" "}
+                  |
+                  <div className="text-blue-700">
+                    {post._count.reactions} reactions{" "}
+                  </div>
+                </div>
+              </TableCell>
+              <TableCell className="text-end hidden md:block">
                 {new Intl.DateTimeFormat("en-US").format(post.createdAt)}
               </TableCell>
             </TableRow>

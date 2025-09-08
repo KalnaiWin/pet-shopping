@@ -22,8 +22,6 @@ export default function NavBar() {
 
   if (!allowed) return null;
 
-  const isAdmin = session?.user.role === "ADMIN";
-
   const navBarItems = [
     { href: "/", label: "Home" },
     { href: "/blog", label: "Blog" },
@@ -57,15 +55,6 @@ export default function NavBar() {
         </div>
 
         <div className="flex items-center gap-2 md:gap-5 flex-shrink-0">
-          {isAdmin && (
-            <Link
-              href={"/admin/dashboard"}
-              className="p-2 bg-black text-white rounded-sm font-semibold text-xs md:text-sm whitespace-nowrap"
-            >
-              <span className="hidden sm:inline">Admin Dashboard</span>
-              <span className="sm:hidden">Admin</span>
-            </Link>
-          )}
           <div className="flex-shrink-0">
             {isPending ? null : session?.user ? (
               <UserMenu user={session.user} />

@@ -20,11 +20,11 @@ export default function PhotoSection({
   postId: string;
 }) {
   return (
-    <div className="w-full bg-black relative h-screen flex justify-center items-center">
-      <div className="absolute top-2 left-2">
+    <div className="w-full bg-black relative md:h-screen flex justify-center items-center">
+      <div className="absolute top-2 left-2 z-20">
         <button className="hover:bg-gray-500 rounded-full p-1">
           <Link href={`/blog/${postId}`}>
-            <XIcon className="text-white size-8" />
+            <XIcon className="md:text-white size-8" />
           </Link>
         </button>
       </div>
@@ -44,10 +44,10 @@ export default function PhotoSection({
             </CarouselItem>
           ))}
         </CarouselContent>
-        <div className="absolute left-30 top-75">
+        <div className="absolute md:left-30 left-50 md:top-75 top-120">
           <CarouselPrevious className="size-10" />
         </div>
-        <div className="absolute right-30 top-75">
+        <div className="absolute md:right-30 right-50 md:top-75 top-120">
           <CarouselNext className="size-10" />
         </div>
       </Carousel>

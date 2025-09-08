@@ -16,6 +16,7 @@ import {
   Phone,
   ShoppingBag,
   ShoppingCartIcon,
+  UserStar,
 } from "lucide-react";
 import SignOutButton from "../auth/sign-out";
 
@@ -43,6 +44,12 @@ export default function UserMenu({ user }: UserMenuProps) {
           </div>
         </div>
         <DropdownMenuSeparator />
+        <DropdownMenuItem className="cursor-pointer" asChild>
+          <Link href="/admin/dashboard">
+            <UserStar className="mr-2 h-4 w-4" />
+            <span>Admin</span>
+          </Link>
+        </DropdownMenuItem>
         <DropdownMenuItem className="cursor-pointer" asChild>
           <Link href="/blog">
             <Newspaper className="mr-2 h-4 w-4" />

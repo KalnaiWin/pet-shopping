@@ -47,7 +47,7 @@ export default async function page({ params, searchParams }: PageProps) {
   const post = allPosts as PostWithRelations;
 
   return (
-    <div className="w-full mt-30 px-30">
+    <div className="w-full md:mt-30 mt-20 md:px-30 px-5">
       <PostCotent
         post={post}
         currentPage={currentPage}

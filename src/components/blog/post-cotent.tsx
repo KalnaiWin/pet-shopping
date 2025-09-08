@@ -103,7 +103,7 @@ export function PostCotent({
           <div className="mt-10 w-full">
             <div className="relative">
               {post.images.length <= 3 ? (
-                <div className="flex gap-5 justify-center">
+                <div className="flex gap-5 justify-center overflow-hidden">
                   {post.images.map((image, idx) => (
                     <Image
                       src={image}
@@ -115,23 +115,11 @@ export function PostCotent({
                   ))}
                 </div>
               ) : (
-                <div className="relative">
+                <div className="relative overflow-hidden">
                   <div className="flex gap-5 justify-between">
-                    <Image
-                      src={post.images[0]}
-                      alt="Image"
-                      width={320}
-                      height={320}
-                    />
-                    <Image
-                      src={post.images[1]}
-                      alt="Image"
-                      width={320}
-                      height={320}
-                    />
                     <Link className="relative" href={`/blog/${post.id}/photo`}>
                       <Image
-                        src={post.images[2]}
+                        src={post.images[0]}
                         alt="Image"
                         width={320}
                         height={320}
@@ -141,6 +129,20 @@ export function PostCotent({
                         +{post.images.length - 3}
                       </p>
                     </Link>
+                    <Image
+                      src={post.images[1]}
+                      alt="Image"
+                      width={320}
+                      height={320}
+                      className="hidden md:block"
+                    />
+                    <Image
+                      src={post.images[2]}
+                      alt="Image"
+                      width={320}
+                      height={320}
+                      className="hidden md:block"
+                    />
                   </div>
                 </div>
               )}
