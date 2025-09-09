@@ -5,13 +5,15 @@ import { notFound } from "next/navigation";
 import React from "react";
 
 interface PageProps {
-  params: { id: string };
-  searchParams?: { page?: string };
+  params: Promise<{ id: string }>;
+  searchParams?: Promise<{ page?: string }>;
 }
 
 export default async function Page({ params, searchParams }: PageProps) {
-  const { id } = params;
-  const currentPage = parseInt(searchParams?.page ?? "1", 10);
+  const { id } = await params;
+
+  const resolvedSearchParams = searchParams ? await searchParams : {};
+  const currentPage = parseInt(resolvedSearchParams?.page ?? "1", 10);
 
   const pageSize = 5;
 
