@@ -15,6 +15,7 @@ export const auth = betterAuth({
     provider: "postgresql",
   }),
   socialProviders: {
+    secret: process.env.BETTER_AUTH_SECRET,
     google: {
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET_KEY as string,
