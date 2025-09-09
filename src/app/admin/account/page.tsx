@@ -101,8 +101,7 @@ export default async function Page({ searchParams }: PageProps) {
             />
           </div>
           <div className="font-bold flex gap-2">
-            {" "}
-            <Users2 /> Total users:{" "}
+            <Users2 /> Total users:
             <span className="text-red-500">{totalCount}</span>
           </div>
         </div>

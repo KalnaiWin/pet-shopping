@@ -23,7 +23,7 @@ import { Cart } from "@/lib/types/define";
 import { ShoppingBag } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import React from "react";
 import SubmitButton from "../_components/submit-button";
 

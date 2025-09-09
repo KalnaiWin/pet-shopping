@@ -27,7 +27,7 @@ import { parseWithZod } from "@conform-to/zod";
 import Image from "next/image";
 import React, { useActionState, useState } from "react";
 
-export default function page() {
+export default function Page() {
   const [image, setImage] = useState<string | undefined>(undefined);
   const [lastResult, action] = useActionState(CreateBannerAction, undefined);
   const [form, fields] = useForm({

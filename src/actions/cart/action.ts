@@ -15,7 +15,7 @@ export async function AddItemCartAction(productId: string, quantity: number) {
 
   if (!session) redirect("/");
 
-  let cart: Cart | null = await redis.get(`cart-${session.user.id}`);
+  const cart: Cart | null = await redis.get(`cart-${session.user.id}`);
 
   const selectedProduct = await prisma.products.findUnique({
     where: {
@@ -90,7 +90,7 @@ export async function DeleteCartItemAction(formData: FormData) {
 
   const productId = formData.get("productId");
 
-  let cart: Cart | null = await redis.get(`cart-${session.user.id}`);
+  const cart: Cart | null = await redis.get(`cart-${session.user.id}`);
 
   if (cart && cart.items) {
     const updateCart: Cart = {

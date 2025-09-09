@@ -17,12 +17,12 @@ export async function CheckOut() {
 
   if (!user) redirect("/");
 
-  let cart: Cart | null = await redis.get(`cart-${user.id}`);
+  const cart: Cart | null = await redis.get(`cart-${user.id}`);
 
   const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] =
     cart?.items.map((item) => {
       const priceInVND = item.maxPrice * (item.discount / 100);
-      let unitAmount = Math.round(priceInVND);
+      const unitAmount = Math.round(priceInVND);
       return {
         price_data: {
           currency: "vnd",
