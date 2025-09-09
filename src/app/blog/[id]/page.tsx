@@ -6,14 +6,12 @@ import React from "react";
 
 interface PageProps {
   params: { id: string };
-  searchParams: { page?: string };
+  searchParams?: { page?: string };
 }
 
-export default async function page({ params, searchParams }: PageProps) {
-  const resolvedSearchParams = searchParams;
-  const { page } = resolvedSearchParams ?? {};
+export default async function Page({ params, searchParams }: PageProps) {
   const { id } = params;
-  const currentPage = parseInt(page ?? "1", 10);
+  const currentPage = parseInt(searchParams?.page ?? "1", 10);
 
   const pageSize = 5;
 
@@ -37,7 +35,6 @@ export default async function page({ params, searchParams }: PageProps) {
   });
 
   const totalCount = allPosts?._count.comments ?? 0;
-
   const totalPages = Math.ceil(totalCount / pageSize);
 
   if (!allPosts) {
