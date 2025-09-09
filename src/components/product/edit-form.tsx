@@ -195,7 +195,7 @@ export default function EditFormProduct({ data }: iAppProps) {
               />
               <p className="text-red-500">{fields.status.errors}</p>
             </div>
-            <div className="flex gap-20">
+            <div className="flex md:gap-20 gap-2">
               <div className="flex flex-col gap-3">
                 <Label>Delivery Time</Label>
                 <Input
@@ -228,7 +228,7 @@ export default function EditFormProduct({ data }: iAppProps) {
               </div>
             </div>
 
-            <div className="flex gap-20">
+            <div className="flex md:gap-20 gap-3">
               <div className="flex flex-col gap-3">
                 <Label>Brand</Label>
                 <Select

@@ -12,18 +12,22 @@ import { getInitials } from "@/lib/utils";
 import Link from "next/link";
 import {
   Newspaper,
+  Package2,
   Phone,
+  ShipIcon,
   ShoppingBag,
   ShoppingCartIcon,
+  Users2,
   UserStar,
 } from "lucide-react";
 import SignOutButton from "../auth/sign-out";
+import Image from "next/image";
 
 interface UserMenuProps {
   user: User;
 }
 
-export default function UserMenu({ user }: UserMenuProps) {
+export default function AdminMenu({ user }: UserMenuProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -43,40 +47,59 @@ export default function UserMenu({ user }: UserMenuProps) {
           </div>
         </div>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="cursor-pointer" asChild>
-          <Link href="/admin/dashboard">
-            <UserStar className="mr-2 h-4 w-4" />
-            <span>Admin</span>
+        <DropdownMenuItem className="cursor-pointer">
+          <Link href="/admin/dashboard" className="flex gap-2 items-center">
+            <Image
+              src={"/assets/home.png"}
+              alt="Dashboard"
+              width={16}
+              height={16}
+            />
+            <span>Dashboard</span>
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem className="cursor-pointer" asChild>
-          <Link href="/blog">
-            <Newspaper className="mr-2 h-4 w-4" />
-            <span>Blog</span>
+        <DropdownMenuItem className="cursor-pointer">
+          <Link href="/admin/account" className="flex gap-2 items-center">
+            <Image
+              src={"/assets/group.png"}
+              alt="Users"
+              width={16}
+              height={16}
+            />
+            <span>Accounts</span>
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem className="cursor-pointer" asChild>
-          <Link href="/product">
-            <ShoppingCartIcon className="mr-2 h-4 w-4" />
-            <span>Shopping</span>
+        <DropdownMenuItem className="cursor-pointer">
+          <Link href="/admin/product" className="flex gap-2 items-center">
+            <Image
+              src={"/assets/canned-food.png"}
+              alt="Products"
+              width={16}
+              height={16}
+            />
+            <span>Products</span>
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem className="cursor-pointer" asChild>
-          <Link href="/cart">
-            <ShoppingBag className="mr-2 h-4 w-4" />
-            <span>Cart</span>
+        <DropdownMenuItem className="cursor-pointer">
+          <Link href="/admin/blog" className="flex gap-2 items-center">
+            <Image
+              src={"/assets/blog.png"}
+              alt="Blogs"
+              width={16}
+              height={16}
+            />
+            <span>Blogs</span>
           </Link>
         </DropdownMenuItem>
-        {/* <DropdownMenuItem className="cursor-pointer" asChild>
-          <Link href="/favourite">
-            <Heart className="mr-2 h-4 w-4" />
-            <span>Favourite</span>
-          </Link>
-        </DropdownMenuItem> */}
-        <DropdownMenuItem className="cursor-pointer" asChild>
-          <Link href="/contact">
-            <Phone className="mr-2 h-4 w-4" />
-            <span>Contact</span>
+        <DropdownMenuItem className="cursor-pointer">
+          <Link href="/admin/order" className="flex gap-2 items-center">
+            <Image
+              src={"/assets/booking.png"}
+              alt="Orders"
+              width={16}
+              height={16}
+            />
+            <span>Orders</span>
           </Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />

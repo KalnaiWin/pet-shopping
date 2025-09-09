@@ -88,14 +88,14 @@ export default async function page({ searchParams }: PageProps) {
         </Button>
       </div>
       <Card className="mt-5">
-        <CardHeader className="flex w-full justify-between items-center">
+        <CardHeader className="flex w-full md:flex-row flex-col justify-between items-center gap-2">
           <div>
             <CardTitle>Manage Products</CardTitle>
             <CardDescription>
               Manage all products, view, create and deit any time you want.
             </CardDescription>
           </div>
-          <div className="w-1/3">
+          <div className="md:w-1/3 w-full">
             <FilterForm initialValue={productNameFilter} nameId="productName" title="Product"/>
           </div>
         </CardHeader>

@@ -1,3 +1,4 @@
+import ReturnButton from "@/components/_components/return-button";
 import BannerForm from "@/components/product/banner-form";
 import {
   AlertDialog,
@@ -47,7 +48,10 @@ export default async function page() {
 
   return (
     <>
-      <div className="flex items-center justify-end">
+      <div className="flex items-center justify-between">
+        <div>
+          <ReturnButton label="Dashboard" href="/admin/dashboard" />
+        </div>
         {countBanner < 5 ? (
           <Button className="flex items-center gap-x-2" asChild>
             <Link href={"/admin/banner/create"}>

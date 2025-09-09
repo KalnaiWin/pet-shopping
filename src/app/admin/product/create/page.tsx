@@ -64,8 +64,8 @@ export default function page() {
       action={action}
     >
       <div className="flex items-center justify-between">
-        <ReturnButton href={"/admin/product"} label="Manage Products" />
-        <h1 className="text-2xl font-bold">Create a new product</h1>
+        <ReturnButton href={"/admin/product"} label="Manage Products"/>
+        <h1 className="md:text-2xl text-md font-bold">Create a new product</h1>
       </div>
       <Card className="mt-5 rounded-sm">
         <CardHeader>
@@ -156,7 +156,7 @@ export default function page() {
               />
               <p className="text-red-500">{fields.status.errors}</p>
             </div>
-            <div className="flex gap-20">
+            <div className="flex gap-2 md:gap-20">
               <div className="flex flex-col gap-3">
                 <Label>Delivery Time</Label>
                 <Input
@@ -189,7 +189,7 @@ export default function page() {
               </div>
             </div>
 
-            <div className="flex gap-20">
+            <div className="flex md:gap-20 gap-3">
               <div className="flex flex-col gap-3">
                 <Label>Brand</Label>
                 <Select

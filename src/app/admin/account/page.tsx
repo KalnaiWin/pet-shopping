@@ -19,6 +19,7 @@ import DeleteAccountButton, {
 import UserRoleSelection from "@/components/_components/user-role-selection";
 import { Users2 } from "lucide-react";
 import FilterForm from "@/components/_components/filter-form";
+import Image from "next/image";
 
 interface PageProps {
   searchParams?: Promise<{
@@ -134,20 +135,13 @@ export default async function Page({ searchParams }: PageProps) {
                   <TableCell>
                     <p>{user.id.slice(0, 8)}</p>
                   </TableCell>
-                  <TableCell className="flex items-center gap-2 mt-2">
-                    {/* <img
-                      src={
-                        user.image?.trim() ? user.image : "/assets/default.png"
-                      }
+                  <TableCell className="flex items-center gap-2 mt-2 line-clamp-1">
+                    <Image
+                      src={user.image ? user.image : "/assets/default.png"}
                       alt="User Logo"
                       width={30}
                       height={30}
-                    /> */}
-                    <img
-                      src={"/assets/default.png"}
-                      alt="User Logo"
-                      width={30}
-                      height={30}
+                      className="rounded-full"
                     />
                     <p>{user.name}</p>
                   </TableCell>

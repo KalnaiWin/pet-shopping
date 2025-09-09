@@ -35,7 +35,7 @@ export async function RecentSales() {
   const data = await getData();
 
   return (
-    <Card className="">
+    <Card className="h-full">
       <CardHeader>
         <CardTitle>Recent Sales</CardTitle>
         <CardDescription>Recent payment from users</CardDescription>

@@ -71,12 +71,13 @@ export default async function page() {
 
   return (
     <div className="w-full">
-      <div className="flex justify-between items-center">
+      <div className="flex md:flex-row flex-col justify-between items-center">
         <div className="flex flex-col justify-start">
-          <h1 className="text-3xl font-bold">
-            Welcome back admin, admin's name
+          <h1 className="text-2xl md:text-3xl font-bold">
+            Welcome back admin,{" "}
+            <span className="text-blue-500">{session.user.name}</span> !
           </h1>
-          <p className="opacity-50">
+          <p className="opacity-50 text-sm md:text-md">
             Add, delete, edit all products and blogs. Following user's actions.
           </p>
         </div>
@@ -86,8 +87,8 @@ export default async function page() {
       </div>
 
       {/*  */}
-      <div className="grid grid-cols-5 gap-2 my-5">
-        <div className="flex flex-col border items-start p-2 rounded-md shadow-md bg-white">
+      <div className="grid md:grid-cols-5 grid-cols-2 gap-2 my-5">
+        <div className="flex flex-col border items-start p-2 rounded-md shadow-md bg-white md:col-span-1 col-span-2">
           <div className="flex flex-col gap-3">
             <div className="flex w-full justify-between items-center">
               <h1 className="">Total Revenue</h1>
@@ -139,12 +140,12 @@ export default async function page() {
               <ShoppingBag className="text-blue-500" />
             </div>
             <p className="font-bold text-3xl line-clamp-1">{totalOrder}</p>
-            <p className="text-gray-500">Total sales on Tiddy Pet</p>
+            <p className="text-gray-500">Total sales on Tiddy</p>
           </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-2">
+      <div className="md:grid md:grid-cols-3 flex flex-col-reverse gap-2">
         <Card className="col-span-2">
           <CardHeader>
             <CardTitle>Transactions</CardTitle>
@@ -157,7 +158,9 @@ export default async function page() {
           </CardContent>
         </Card>
 
-        <RecentSales />
+        <div className="h-full">
+          <RecentSales />
+        </div>
       </div>
     </div>
   );

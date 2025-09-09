@@ -6,6 +6,8 @@ import { redirect } from "next/navigation";
 import { parseWithZod } from "@conform-to/zod";
 import { bannerSchema, productsSchema } from "@/lib/zodSchema";
 import { prisma } from "@/lib/prisma";
+import { revalidatePath } from "next/cache";
+import { toast } from "sonner";
 
 // npm i zod
 // npm install @conform-to/react @conform-to/zod zod
@@ -178,5 +180,5 @@ export async function DeleteBannerAction(formData: FormData) {
     },
   });
 
-  redirect("/admin/banner");
+  revalidatePath("/", "layout");
 }
