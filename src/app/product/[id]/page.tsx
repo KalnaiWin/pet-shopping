@@ -92,10 +92,10 @@ export default async function Page({ params, searchParams }: PageProps) {
   // const addProductCart = AddItemCartAction.bind(null, product.id);
 
   return (
-    <div className="w-full pr-10">
+    <div className="w-full md:pr-10">
       <div className="w-full">
         {/* PRODUCT INFO */}
-        <div className="flex w-full gap-10 bg-white p-2 shadow-md my-10">
+        <div className="flex md:flex-row flex-col w-full gap-10 bg-white p-2 shadow-md my-10">
           <div>
             <ProductImagesSelector
               product={product}
@@ -177,13 +177,13 @@ export default async function Page({ params, searchParams }: PageProps) {
                 </div>
               </div>
             </div>
-            <ProductActions productId={product.id} />
+            <ProductActions productId={product.id} className="w-full" />
           </div>
         </div>
         {/* DETAIL */}
-        <div className="mx-20">
+        <div className="md:mx-20 px-5">
           <div className="flex flex-col my-10">
-            <p className="text-3xl font-bold py-5 px-4 bg-[#f8f8f8]">
+            <p className="md:text-3xl text-2xl font-bold py-5 px-4 bg-[#f8f8f8]">
               Detail Product
             </p>
             <Table className="border-separate mt-5">
@@ -275,7 +275,7 @@ export default async function Page({ params, searchParams }: PageProps) {
                 return (
                   <div
                     key={product.id}
-                    className="border-2 shadow-md w-18/19 rounded-sm h-[340px]"
+                    className="border-2 shadow-md md:w-18/19 w-fit rounded-sm md:h-[340px] h-fit overscroll-auto"
                   >
                     <Link href={`/product/${product.id}`} className="">
                       <Image
@@ -307,10 +307,10 @@ export default async function Page({ params, searchParams }: PageProps) {
                             </Badge>
                           </Link>
                         </div>
-                        <div className="font-medium text-[#ff5500] w-full flex gap-2">
-                          {price.toLocaleString()} VND
+                        <div className="font-medium text-[#ff5500] w-full flex md:flex-row flex-col gap-2">
+                          <div>{price.toLocaleString()} VND</div>
                           {product.discount ? (
-                            <div className="bg-[#ff5500] text-white p-1 rounded-sm text-[11px]">
+                            <div className="bg-[#ff5500] text-center text-white p-1 rounded-sm text-[11px]">
                               -{product.discount}%
                             </div>
                           ) : (

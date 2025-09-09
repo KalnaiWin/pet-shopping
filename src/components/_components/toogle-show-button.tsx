@@ -10,11 +10,11 @@ export default function ToggleButton({ text, title }: { text: string, title: str
     <div className="">
       <div className="flex justify-between w-full items-center p-5 bg-[#f8f8f8]">
         <div className="">
-          <p className="text-3xl font-bold">{title}</p>
+          <p className="md:text-3xl text-2xl font-bold">{title}</p>
         </div>
         <button
           onClick={() => setIsToggle(!isToggle)}
-          className="px-4 py-2 bg-[#2f2f2f] text-white rounded transition-all"
+          className="md:px-4 md:py-2 bg-[#2f2f2f] text-white rounded transition-all p-2"
         >
           {isToggle ? (
             <span className="flex gap-2">

@@ -44,10 +44,10 @@ export default function PhotoSection({
             </CarouselItem>
           ))}
         </CarouselContent>
-        <div className="absolute md:left-30 left-50 md:top-75 top-120">
+        <div className="absolute left-30  top-75">
           <CarouselPrevious className="size-10" />
         </div>
-        <div className="absolute md:right-30 right-50 md:top-75 top-120">
+        <div className="absolute right-30 top-75">
           <CarouselNext className="size-10" />
         </div>
       </Carousel>

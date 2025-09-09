@@ -19,6 +19,13 @@ import { useSession } from "@/lib/auth-client";
 import ReactionBlog from "./reaction-blog";
 import { PostWithRelations } from "@/lib/types/define";
 import { Pagination } from "@/components/_components/pagination";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "../ui/carousel";
 
 interface PostContentProps {
   post: PostWithRelations;
@@ -101,7 +108,7 @@ export function PostCotent({
             )}
           </div>
           <div className="mt-10 w-full">
-            <div className="relative">
+            <div className="relative hidden md:block">
               {post.images.length <= 3 ? (
                 <div className="flex gap-5 justify-center overflow-hidden">
                   {post.images.map((image, idx) => (
@@ -146,6 +153,31 @@ export function PostCotent({
                   </div>
                 </div>
               )}
+            </div>
+            <div className="md:hidden block">
+              <Carousel className="relative">
+                <CarouselContent>
+                  {post.images.map((image, idx) => (
+                    <CarouselItem key={idx} className="flex justify-center">
+                      <div>
+                        <Image
+                          src={image}
+                          alt="Image"
+                          width={600}
+                          height={600}
+                          className="object-cover"
+                        />{" "}
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <div className="absolute top-40 left-10">
+                  <CarouselPrevious className="size-10 bg-blue-200" />
+                </div>
+                <div className="absolute top-40 right-10">
+                  <CarouselNext className="size-10 bg-blue-200" />
+                </div>
+              </Carousel>
             </div>
           </div>
 

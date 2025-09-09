@@ -40,13 +40,11 @@ const contactInfo = [
 export default function page() {
   return (
     <div className="w-full mt-25">
-      <div className="w-full flex gap-25 justify-center items-center h-full my-10 pr-30 pl-5">
-        <div className="flex flex-col w-1/2 gap-2">
-          <div className="">
-            <MapLocation />
-          </div>
+      <div className="w-full flex md:flex-row flex-col md:gap-25 justify-center items-center h-full my-10 md:pr-30 md:pl-5">
+        <div className="flex flex-col md:w-1/2">
+          <MapLocation />
         </div>
-        <div className="w-1/2 flex flex-col">
+        <div className="md:w-1/2 flex flex-col">
           <h1 className="font-bold text-4xl text-pink-800">
             Let's get in touch
           </h1>
@@ -58,17 +56,20 @@ export default function page() {
           </div>
         </div>
       </div>
-      <div className="px-25">
-        <div className="flex flex-col mt-20">
-          <h1 className="font-bold text-4xl text-pink-800">
+      <div className="md:px-25">
+        <div className="flex flex-col mt-20 text-center md:text-start">
+          <h1 className="font-bold md:text-4xl text-3xl text-pink-800">
             We'd love to hear from you
           </h1>
           <p className="opacity-50 mb-8 mt-2">
             Let's we know your problems, we are here for you
           </p>
-          <div className="flex w-full justify-between ">
+          <div className="flex md:flex-row flex-col items-center w-full justify-between gap-3">
             {contactInfo.map((info, idx) => (
-              <div key={idx} className="flex flex-col">
+              <div
+                key={idx}
+                className="flex flex-col md:items-start items-center"
+              >
                 <div className="">{info.icon}</div>
                 <h1 className="text-2xl font-semibold">{info.name}</h1>
                 <p className="text-gray-500">{info.description}</p>

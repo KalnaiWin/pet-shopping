@@ -29,8 +29,8 @@ export default async function page({ searchParams }: PageProps) {
   const totalPages = Math.ceil(totalCount / pageSize);
 
   return (
-    <div className="w-full">
-      <div className="grid grid-cols-4 w-full gap-1">
+    <div className="w-full md:px-0 px-5">
+      <div className="grid md:grid-cols-4 grid-cols-3 w-full gap-1">
         {allProducts.map((product) => {
           const price =
             Number(product.maxPrice) -
@@ -38,7 +38,7 @@ export default async function page({ searchParams }: PageProps) {
           return (
             <div
               key={product.id}
-              className="border-2 shadow-md w-18/19 rounded-sm h-[340px]"
+              className="border-2 shadow-md w-18/19 rounded-sm md:h-[340px] h-fit"
             >
               <Link href={`/product/${product.id}`} className="">
                 <Image
@@ -66,10 +66,10 @@ export default async function page({ searchParams }: PageProps) {
                       </Badge>
                     </Link>
                   </div>
-                  <div className="font-medium text-[#ff5500] w-full flex gap-2">
-                    {price.toLocaleString()} VND
+                  <div className="font-medium text-[14px] text-[#ff5500] w-full flex md:flex-row flex-col gap-2">
+                    <div>{price.toLocaleString()} VND</div>
                     {product.discount ? (
-                      <div className="bg-[#ff5500] text-white p-1 rounded-sm text-[11px]">
+                      <div className="bg-[#ff5500] flex justify-center items-center text-white p-1 rounded-sm text-[11px]">
                         -{product.discount}%
                       </div>
                     ) : (

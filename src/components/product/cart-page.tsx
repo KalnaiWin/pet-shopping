@@ -37,17 +37,17 @@ export default function CartPage({ cart, totalPrice, totalProduct }: CartPage) {
   const router = useRouter();
 
   return (
-    <div className="w-full px-25">
-      {!cart || !cart.items ? (
+    <div className="w-full md:px-25">
+      {cart?.items.length === 0 ? (
         <div className="w-full h-screen flex justify-center items-center">
           <div className="flex flex-col gap-5 justify-center items-center py-10 px-5 border rounded-md">
             <div className="w-32 h-32 flex items-center justify-center rounded-full bg-blue-200">
-              <ShoppingBag size={64} className="text-blue-900" />
+              <ShoppingBag className="text-blue-900 size-20" />
             </div>{" "}
-            <h1 className="font-bold text-3xl text-center">
+            <h1 className="font-bold text-2xl md:text-3xl text-center">
               You haven't had anything in your cart
             </h1>
-            <p className=" opacity-50 text-md text-center">
+            <p className=" opacity-50 text-sm md:text-md text-center">
               You currently don't have anything in your shopping cart right now.
               Let's get some at shopping section.
             </p>
@@ -62,7 +62,7 @@ export default function CartPage({ cart, totalPrice, totalProduct }: CartPage) {
       ) : (
         <Card className="mt-30">
           <CardHeader className="flex w-full justify-between items-center">
-            <div className="flex w-full justify-between">
+            <div className="flex w-full md:flex-row flex-col justify-between">
               <div>
                 <CardTitle>
                   <div className="flex gap-2 items-center">
@@ -76,7 +76,7 @@ export default function CartPage({ cart, totalPrice, totalProduct }: CartPage) {
                 </CardDescription>
               </div>
               <div className="flex flex-col">
-                <div className="flex gap-2">
+                <div className="flex gap-2 mb-2">
                   <p className="font-bold">Subtotal:</p>{" "}
                   <p className="text-red-500">
                     {totalPrice.toLocaleString()} VND

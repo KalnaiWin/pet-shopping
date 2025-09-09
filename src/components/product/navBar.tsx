@@ -16,13 +16,13 @@ export default function NavBarProduct() {
   if (isDetailPage) return null;
 
   return (
-    <div className="flex flex-col w-full mx-30">
-      <div className="flex items-center gap-3 mt-5">
-        <Menu />
+    <div className="flex flex-col w-full md:mx-30 px-5">
+      <div className="items-center gap-3 mt-5">
+        <Menu className="hidden md:block" />
         <p>Category</p>
       </div>
-      <div className="w-2/3 bg-[#646565] h-0.5 mt-5"></div>
-      <div className="flex flex-col gap-10 my-5">
+      <div className="md:w-2/3 w-full bg-[#646565] h-0.5 mt-5 hidden md:flex" />
+      <div className="md:flex md:flex-col md:gap-10 my-5 grid grid-cols-4 gap-3 underline">
         {navBarItems.map((item) => {
           const href =
             item.value === "all"
@@ -39,8 +39,8 @@ export default function NavBarProduct() {
               href={href}
               className={`transition-all ${
                 isActive
-                  ? "text-pink-500 font-semibold"
-                  : "text-gray-700 hover:text-pink-800 hover:font-bold"
+                  ? "text-pink-500 font-semibold text-[12px] md:bg-transparent rounded-sm p-1 md:block flex text-center md:text-start justify-center items-center bg-pink-200"
+                  : "text-gray-700 hover:text-pink-800 hover:font-bold text-[12px] md:bg-transparent rounded-sm p-1 md:block flex text-center md:text-start justify-center items-center bg-pink-300"
               }`}
             >
               {item.label}
