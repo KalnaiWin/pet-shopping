@@ -1,11 +1,8 @@
 import { Pagination } from "@/components/_components/pagination";
-import PixelText from "@/components/_components/pixel-text";
-import PixelTransition from "@/components/animation/PixelTransition/PixelTransition";
 import { Badge } from "@/components/ui/badge";
-import { Brands, Category } from "@/generated/prisma";
+import { Brands } from "@/generated/prisma";
 import { prisma } from "@/lib/prisma";
-import { badges, badgesCategory, getDataCategory, slug } from "@/lib/utils";
-import { divide } from "effect/Duration";
+import { badges, badgesCategory, slug } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";

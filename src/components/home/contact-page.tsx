@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight, Mail, MapPin, PhoneCall } from "lucide-react";
+import { ArrowRight, Mail, MapPin, PhoneCall } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -50,7 +50,7 @@ export default function ContactPage() {
       </div>
       <div className="flex flex-col gap-5 md:w-2/3 text-center">
         <h1 className="md:text-4xl text-3xl font-bold text-[#bd007e]">
-          Let's we help you
+          Lets we help you
         </h1>
         <div className="flex md:flex-row flex-col w-full justify-between">
           {contactInfo.map((info, idx) => (

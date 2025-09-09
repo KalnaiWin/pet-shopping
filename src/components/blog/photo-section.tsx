@@ -1,6 +1,5 @@
 "use client";
 
-import ReturnButton from "@/components/_components/return-button";
 import {
   Carousel,
   CarouselContent,

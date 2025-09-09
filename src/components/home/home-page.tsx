@@ -1,5 +1,6 @@
 import React from "react";
 import { GetStartedButton } from "../_components/get-started-button";
+import Image from "next/image";
 
 export default function HomePage() {
   return (
@@ -8,7 +9,7 @@ export default function HomePage() {
         <div className="absolute w-full h-screen top-0 left-0 z-10">
           <div className="absolute md:-top-5 top-20 left-4 md:left-10 w-[300px] md:w-[500px] h-[400px] md:h-[600px] rounded-br-[200px] md:rounded-br-[400px] rounded-tr-[60px] md:rounded-tr-[80px] blur-[100px] md:blur-[150px] bg-[#FBE6FF]"></div>
           <div className="absolute md:top-5 top-30 left-0 w-[150px] md:w-[200px] h-[80px] md:h-[100px] rounded-br-[200px] md:rounded-br-[400px] rounded-tr-[60px] md:rounded-tr-[80px] blur-[100px] md:blur-[150px] bg-[#FBE6FF]"></div>
-          <img
+          <Image
             src="/images/home.png"
             alt="HomePage"
             width={1400}

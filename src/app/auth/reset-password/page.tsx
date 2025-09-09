@@ -1,5 +1,4 @@
 import ReturnButton from "@/components/_components/return-button";
-import ForgetPasswordForm from "@/components/auth/forget-password-form";
 import ResetPasswordForm from "@/components/auth/reset-password";
 import { redirect } from "next/navigation";
 

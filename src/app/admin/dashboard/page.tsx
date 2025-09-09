@@ -78,7 +78,7 @@ export default async function page() {
             <span className="text-blue-500">{session.user.name}</span> !
           </h1>
           <p className="opacity-50 text-sm md:text-md">
-            Add, delete, edit all products and blogs. Following user's actions.
+            Add, delete, edit all products and blogs. Following users actions.
           </p>
         </div>
         <Button asChild>

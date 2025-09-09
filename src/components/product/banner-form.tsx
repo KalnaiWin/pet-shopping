@@ -23,20 +23,22 @@ import { Input } from "../ui/input";
 import { useState } from "react";
 import DeleteForm from "../_components/delete-alert";
 import { DeleteBannerAction } from "@/actions/product/action";
+import { Banner } from "@/generated/prisma";
 
-export default function BannerForm({ data }: { data: any[] }) {
+export default function BannerForm({ data }: { data: Banner[] }) {
   const [items, setItems] = useState(data);
 
   const handleOrderChange = (id: string, newValue: string) => {
     setItems((prev) =>
-      prev.map(( item ) => ( // find id then update order
-        item.id === id ? { ...item, order: Number(newValue) } : item
-        )
+      prev.map(
+        (
+          item // find id then update order
+        ) => (item.id === id ? { ...item, order: Number(newValue) } : item)
       )
     );
   };
 
-    /*
+  /*
     Gửi POST đến API bạn viết ở trên để lưu order vào DB.
     Sau khi server nhận, component sắp xếp lại items trong state theo order tăng dần để UI hiển thị đúng.
      */
@@ -94,7 +96,11 @@ export default function BannerForm({ data }: { data: any[] }) {
                   <DropdownMenuLabel>Action</DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem asChild>
-                    <DeleteForm nameId={item.id} name="bannerId" action={DeleteBannerAction} />
+                    <DeleteForm
+                      nameId={item.id}
+                      name="bannerId"
+                      action={DeleteBannerAction}
+                    />
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>

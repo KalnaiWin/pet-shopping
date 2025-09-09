@@ -6,7 +6,6 @@ import NavBar from "@/components/home/navbar";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "./api/uploadthing/core";
-import FooterPage from "@/components/home/footer-page";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

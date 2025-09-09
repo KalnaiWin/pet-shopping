@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import UserMenu from "../_components/user-menu";
 import { Button } from "../ui/button";
+import Image from "next/image";
 
 export default function NavBar() {
   const pathname = usePathname();
@@ -34,7 +35,7 @@ export default function NavBar() {
     <nav className="fixed top-0 w-full px-4 md:px-30 py-5 max-w-full overflow-hidden">
       <div className="flex w-full justify-between items-center max-w-full">
         <Link href={"/"} className="flex items-center gap-2 flex-shrink-0">
-          <img src="/images/logo.png" alt="Logo" width={30} height={30} />
+          <Image src="/images/logo.png" alt="Logo" width={30} height={30} />
           <p className="text-lg md:text-xl font-bold whitespace-nowrap">
             Tiddy Pet
           </p>

@@ -24,9 +24,19 @@ export const GetStartedButton = () => {
       <Button size={"lg"} className="bg-[#FF7FBF]" asChild>
         <Link href={href}>{action}</Link>
       </Button>
-      { 
-        session && <div className="font-semibold">It's nice to see you back, <span className={`${session.user.role === "ADMIN" ? "text-blue-500" : "text-green-500"}`}>{session.user.name}</span> ! 👋</div>
-      }
+      {session && (
+        <div className="font-semibold">
+          It is nice to see you back,{" "}
+          <span
+            className={`${
+              session.user.role === "ADMIN" ? "text-blue-500" : "text-green-500"
+            }`}
+          >
+            {session.user.name}
+          </span>{" "}
+          ! 👋
+        </div>
+      )}
     </div>
   );
 };

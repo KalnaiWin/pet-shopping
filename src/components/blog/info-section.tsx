@@ -142,7 +142,9 @@ export default function InfoSection({
                       <DeleteForm
                         nameId={comment.id}
                         name="commentName"
-                        action={DeleteCommentAction}
+                        action={async (fd) => {
+                          await DeleteCommentAction(fd);
+                        }}
                       />
                     )}
                   </div>
@@ -169,7 +171,7 @@ export default function InfoSection({
       </div>
 
       <div className="border-t p-2 sticky bottom-0">
-        <FormComment postId={postId} />
+        <FormComment postId={postId} name="" />
       </div>
     </div>
   );

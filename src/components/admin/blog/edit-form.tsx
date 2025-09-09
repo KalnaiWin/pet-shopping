@@ -1,7 +1,6 @@
 "use client";
 
 import { EditPostAction } from "@/actions/blog/action";
-import { EditProductAction } from "@/actions/product/action";
 import ReturnButton from "@/components/_components/return-button";
 import SubmitButton from "@/components/_components/submit-button";
 import { Button } from "@/components/ui/button";
@@ -14,7 +13,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { postSchema } from "@/lib/zodSchema";
@@ -138,7 +143,7 @@ export default function EditFormBlog({ data }: PageProps) {
                 value={JSON.stringify(images)}
                 key={fields.images.key}
                 name="images"
-                // defaultValue={fields.images.initialValue as any}
+                defaultValue={fields.images.initialValue}
               />
               {images.length > 0 ? (
                 <div className="flex gap-5">

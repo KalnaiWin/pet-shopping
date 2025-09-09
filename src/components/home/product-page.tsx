@@ -18,7 +18,7 @@ export default async function ProductPage() {
         <h1 className="text-2xl sm:text-3xl font-bold">Products</h1>
         <div className="flex flex-col sm:flex-row w-full sm:justify-between gap-3 sm:gap-0 mb-5 md:mb-0">
           <p className="opacity-40 text-sm sm:text-md mb-6 sm:mb-10 leading-relaxed">
-            "Not the best but the most suitable". Choose products suited for
+            Not the best but the most suitable option. Choose products suited for
             your pets.
           </p>
           <Link

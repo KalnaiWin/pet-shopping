@@ -31,7 +31,7 @@ import { XIcon } from "lucide-react";
 import Image from "next/image";
 import React, { useActionState, useState } from "react";
 
-export default function page() {
+export default function Page() {
   const [images, setImages] = useState<string[]>([]);
 
   const [lastResult, action] = useActionState(CreatedPostAction, undefined);
@@ -128,7 +128,7 @@ export default function page() {
                 value={JSON.stringify(images)}
                 key={fields.images.key}
                 name="images"
-                defaultValue={fields.images.initialValue as any}
+                defaultValue={fields.images.initialValue}
               />
               {images.length > 0 ? (
                 <div className="flex gap-5">

@@ -14,7 +14,7 @@ import { useSession } from "@/lib/auth-client";
 import Image from "next/image";
 
 export default function LoginForm() {
-  const { data: session, refetch } = useSession();
+  const { refetch } = useSession();
   const router = useRouter();
 
   const [valueEmail, setValueEmail] = useState("");
@@ -164,7 +164,7 @@ export default function LoginForm() {
         </button>
       </div>
       <div className="flex items-center gap-2 -ml-30 mt-3">
-        <p className="font-light italic text-sm">Don't have an account?</p>
+        <p className="font-light italic text-sm">Do not have an account?</p>
         <Link
           href={"/auth/register"}
           className="text-sm text-[#FF00F2] hover:underline"

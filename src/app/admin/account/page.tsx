@@ -89,7 +89,7 @@ export default async function Page({ searchParams }: PageProps) {
 
   return (
     <div className="w-full">
-      <h1 className="font-bold text-3xl mt-4">Manage accounts' user</h1>
+      <h1 className="font-bold text-3xl mt-4">Manage accounts user</h1>
       <p className="opacity-50 pt-3">Filter, sort, access detail user</p>
       <div className="mt-6">
         <div className="flex items-center justify-between">
@@ -190,7 +190,7 @@ export default async function Page({ searchParams }: PageProps) {
           </Table>
           {users.length === 0 && emailFilter && (
             <div className="text-center py-4 text-gray-500">
-              No users found matching "{emailFilter}"
+              No users found matching {emailFilter}
             </div>
           )}
         </div>

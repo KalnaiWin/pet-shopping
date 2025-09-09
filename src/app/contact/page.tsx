@@ -46,10 +46,10 @@ export default function page() {
         </div>
         <div className="md:w-1/2 flex flex-col">
           <h1 className="font-bold text-4xl text-pink-800">
-            Let's get in touch
+            Lets get in touch
           </h1>
           <p className="text-gray-500 mb-8 mt-2">
-            Let's we know your problems, we are here for you
+            Lets we know your problems, we are here for you
           </p>
           <div>
             <ResponseEmail />
@@ -59,10 +59,10 @@ export default function page() {
       <div className="md:px-25">
         <div className="flex flex-col mt-20 text-center md:text-start">
           <h1 className="font-bold md:text-4xl text-3xl text-pink-800">
-            We'd love to hear from you
+            We would love to hear from you
           </h1>
           <p className="opacity-50 mb-8 mt-2">
-            Let's we know your problems, we are here for you
+            Lets we know your problems, we are here for you
           </p>
           <div className="flex md:flex-row flex-col items-center w-full justify-between gap-3">
             {contactInfo.map((info, idx) => (

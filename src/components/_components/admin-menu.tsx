@@ -10,16 +10,6 @@ import { Button } from "../ui/button";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import { getInitials } from "@/lib/utils";
 import Link from "next/link";
-import {
-  Newspaper,
-  Package2,
-  Phone,
-  ShipIcon,
-  ShoppingBag,
-  ShoppingCartIcon,
-  Users2,
-  UserStar,
-} from "lucide-react";
 import SignOutButton from "../auth/sign-out";
 import Image from "next/image";
 

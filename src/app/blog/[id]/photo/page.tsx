@@ -1,6 +1,4 @@
-import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { headers } from "next/headers";
 import React from "react";
 import PhotoSection from "@/components/blog/photo-section";
 import InfoSection from "@/components/blog/info-section";
@@ -12,10 +10,6 @@ interface PageProps {
 
 export default async function page({ params }: PageProps) {
   const { id } = await params;
-
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
 
   const allImages: PostWithInformation | null = await prisma.post.findUnique({
     where: { id },

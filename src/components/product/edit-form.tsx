@@ -299,7 +299,7 @@ export default function EditFormProduct({ data }: iAppProps) {
                 value={JSON.stringify(images)}
                 key={fields.images.key}
                 name="images"
-                // defaultValue={fields.images.initialValue as any}
+                defaultValue={fields.images.initialValue}
               />
               {images.length > 0 ? (
                 <div className="flex gap-5">

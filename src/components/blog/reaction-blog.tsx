@@ -4,7 +4,6 @@ import { useState } from "react";
 
 interface ReactionBlogProps {
   postId: string;
-  commentId?: string;
   initialLikes: number;
   initialDislikes: number;
   initialUserReaction?: "LIKE" | "DISLIKE" | null;
@@ -12,7 +11,6 @@ interface ReactionBlogProps {
 
 export default function ReactionBlog({
   postId,
-  commentId,
   initialLikes,
   initialDislikes,
   initialUserReaction = null,
