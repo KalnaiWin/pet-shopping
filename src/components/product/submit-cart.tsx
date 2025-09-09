@@ -19,6 +19,7 @@ export default function AddToCartButton({
         await AddItemCartAction(productId, quantity);
         toast.success(`Added ${quantity} to cart!`);
       } catch (err) {
+        console.error(err);
         toast.error("Failed to add to cart");
       }
     });

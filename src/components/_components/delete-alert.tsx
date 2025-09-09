@@ -21,7 +21,7 @@ import { Input } from "@/components/ui/input";
 //   action: (formData: FormData) => void | Promise<void>;
 // }
 
-interface DeleteFormProps<T = any> {
+interface DeleteFormProps<T = unknown> {
   nameId: string;
   name: string;
   action: (formData: FormData) => Promise<T> | void | Promise<void>;
@@ -48,7 +48,13 @@ export default function DeleteForm({ nameId, name, action }: DeleteFormProps) {
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction asChild>
-            <form action={action}>
+            <form
+              onSubmit={async (e) => {
+                e.preventDefault();
+                const fd = new FormData(e.currentTarget);
+                await action(fd);
+              }}
+            >
               <Input type="hidden" name={name} value={nameId} />
               <SubmitButton text="Continue" />
             </form>

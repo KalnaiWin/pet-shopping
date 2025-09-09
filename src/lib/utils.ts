@@ -1,6 +1,5 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { prisma } from "./prisma";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -128,17 +127,18 @@ export const TopicOption = (name: string) => {
 
 export const extractNumber = (input: string): string => {
   return input.replace(/[^0-9]/g, "");
-}
+};
 
 export const textAfterNumber = (input: string): string => {
   const match = input.match(/\d+(.*)/);
   return match ? match[1].trim() : "";
-}
+};
 
 export const DescriptionBlog = (text: string) => {
-  if(text === "New") return "A notitfication about our latest products";
-  else if(text === "Issue") return "Apologie for problems we made";
-  else if(text === "Guide") return "Following these steps to have a better services";
-  else if(text === "Discuss") return "How do you think about this";
+  if (text === "New") return "A notitfication about our latest products";
+  else if (text === "Issue") return "Apologie for problems we made";
+  else if (text === "Guide")
+    return "Following these steps to have a better services";
+  else if (text === "Discuss") return "How do you think about this";
   else return "Just a random post";
-}
+};

@@ -9,9 +9,9 @@ import { useState } from "react";
 import ReactionBlog from "./reaction-blog";
 import { MessageCircle } from "lucide-react";
 import FormComment from "../admin/blog/form-comment";
-import DeleteForm from "../_components/delete-alert";
 import { DeleteCommentAction } from "@/actions/blog/action";
 import Link from "next/link";
+import DeleteForm from "../_components/delete-alert";
 
 export default function InfoSection({
   postId,
@@ -24,7 +24,7 @@ export default function InfoSection({
   const [expandedComments, setExpandedComments] = useState<{
     [id: string]: boolean;
   }>({});
-  
+
   const { data: session } = useSession();
 
   if (!PostsInfo) {
