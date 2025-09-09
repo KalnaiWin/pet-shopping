@@ -3,12 +3,13 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Products } from "@/generated/prisma";
+import { ProductsCommentInfo } from "@/lib/types/define";
 
 export default function ProductImagesSelector({
   product,
   arrayImages,
 }: {
-  product: Products;
+  product: ProductsCommentInfo;
   arrayImages: string[];
 }) {
   const [mainImage, setMainImage] = useState(product.images[0]);

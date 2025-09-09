@@ -6,7 +6,7 @@ import React from "react";
 
 interface PageProps {
   params: Promise<{ id: string }>;
-  searchParams?: Promise<{ page?: string }>;
+  searchParams: Promise<{ page?: string }>;
 }
 
 export default async function Page({ params, searchParams }: PageProps) {

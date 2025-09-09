@@ -15,7 +15,7 @@ import ProductActions from "@/components/product/add-amount";
 
 interface PageProps {
   params: Promise<{ id: string }>;
-  searchParams: { page?: string };
+  searchParams: Promise<{ page?: string }>;
 }
 
 export default async function Page({ params, searchParams }: PageProps) {
