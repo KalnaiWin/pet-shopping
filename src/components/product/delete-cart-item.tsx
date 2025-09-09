@@ -2,7 +2,6 @@
 
 import { XIcon } from "lucide-react";
 import { useFormStatus } from "react-dom";
-import { toast } from "sonner";
 
 export default function DeleteItemCart() {
   const { pending } = useFormStatus();

@@ -45,11 +45,11 @@ export default function CartPage({ cart, totalPrice, totalProduct }: CartPage) {
               <ShoppingBag className="text-blue-900 size-20" />
             </div>{" "}
             <h1 className="font-bold text-2xl md:text-3xl text-center">
-              You haven't had anything in your cart
+              You have not had anything in your cart
             </h1>
             <p className=" opacity-50 text-sm md:text-md text-center">
-              You currently don't have anything in your shopping cart right now.
-              Let's get some at shopping section.
+              You currently do not have anything in your shopping cart right
+              now. Lets get some at shopping section.
             </p>
             <Button
               className="bg-blue-700 text-white hover:bg-blue-900"

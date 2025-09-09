@@ -20,6 +20,11 @@ export default function InfoSection({
   postId: string;
   PostsInfo: PostWithInformation | null;
 }) {
+  const [isToggle, setIsToggle] = useState(true);
+  const [expandedComments, setExpandedComments] = useState<{
+    [id: string]: boolean;
+  }>({});
+  
   const { data: session } = useSession();
 
   if (!PostsInfo) {
@@ -29,11 +34,6 @@ export default function InfoSection({
   const dislikes = PostsInfo.reactions.filter(
     (r) => r.type === "DISLIKE"
   ).length;
-
-  const [isToggle, setIsToggle] = useState(true);
-  const [expandedComments, setExpandedComments] = useState<{
-    [id: string]: boolean;
-  }>({});
 
   const toggleComment = (id: string) => {
     setExpandedComments((prev) => ({

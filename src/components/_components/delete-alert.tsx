@@ -14,11 +14,17 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Input } from "@/components/ui/input";
 
-interface DeleteFormProps {
+// interface DeleteFormProps {
+//   nameId: string;
+//   name: string;
+//   // action: (formData: FormData) => Promise<any> | Promise<void>;
+//   action: (formData: FormData) => void | Promise<void>;
+// }
+
+interface DeleteFormProps<T = any> {
   nameId: string;
   name: string;
-  // action: (formData: FormData) => Promise<any> | Promise<void>;
-  action: (formData: FormData) => void | Promise<void>;
+  action: (formData: FormData) => Promise<T> | void | Promise<void>;
 }
 
 export default function DeleteForm({ nameId, name, action }: DeleteFormProps) {

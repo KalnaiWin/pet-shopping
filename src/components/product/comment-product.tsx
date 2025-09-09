@@ -20,7 +20,6 @@ export default function CommentProduct({
 }) {
   const { data: session } = useSession();
 
-  const [isToggle, setIsToggle] = useState(true);
   const [expandedComments, setExpandedComments] = useState<{
     [id: string]: boolean;
   }>({});

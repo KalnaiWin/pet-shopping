@@ -1,6 +1,6 @@
 import ToggleButton from "@/components/_components/toogle-show-button";
 import CommentProduct from "@/components/product/comment-product";
-import ProductImagesSelector from "@/components/product/product-images.-selector";
+import ProductImagesSelector from "@/components/product/product-images.selector";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { prisma } from "@/lib/prisma";
