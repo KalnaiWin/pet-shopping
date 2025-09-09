@@ -18,11 +18,11 @@ export const auth = betterAuth({
     secret: process.env.BETTER_AUTH_SECRET,
     google: {
       clientId: process.env.GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET_KEY as string,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     },
     github: {
       clientId: process.env.GITHUB_CLIENT_ID as string,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET_KEY as string,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
     },
   },
   emailAndPassword: {
