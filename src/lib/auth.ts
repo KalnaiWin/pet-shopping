@@ -119,6 +119,10 @@ export const auth = betterAuth({
       maxAge: 5 * 60,
     },
   },
+  cookie: {
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+  },
   account: {
     // not allow user sign in many ways just one way
     accountLinking: {
