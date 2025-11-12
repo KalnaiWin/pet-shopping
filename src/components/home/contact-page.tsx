@@ -13,7 +13,7 @@ const contactInfo = [
     ),
     name: "Location",
     description: "We can response in real time",
-    info: "1234/45, Le Hong Phong Street",
+    info: "1234/45, Lorm lrems hoios Street",
   },
   {
     icon: (
@@ -107,7 +107,7 @@ export default function ContactPage() {
           </div>
           <div className="z-20">
             <Link
-              href={"/chat"}
+              href={"/"}
               className="flex cursor-not-allowed bg-[#760057] text-white p-4 rounded-sm gap-2 relative items-center"
             >
               <span>Message</span>
