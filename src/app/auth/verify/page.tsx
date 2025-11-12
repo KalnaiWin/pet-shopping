@@ -10,7 +10,7 @@ export default async function page({ searchParams }: PageProps) {
   
     const error = (await searchParams).error;
 
-    if(!error) redirect("/profile");
+    if(!error) redirect("/");
 
   return (
     <div className="w-full h-screen flex justify-center items-center">
