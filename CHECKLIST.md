@@ -205,4 +205,10 @@
 - Cookie Cache
 - FINISH PART 7
 
-THANK YOU FOR WATCHING
+
+
+Stripe Set Up
+cd C:\Users\7670\Downloads\stripe_1.28.0_windows_x86_64
+.\stripe.exe login
+.\stripe.exe listen --forward-to http://localhost:3000/api/stripe
+.\stripe.exe listen --forward-to https://tiddy-pet.vercel.app/api/stripe
